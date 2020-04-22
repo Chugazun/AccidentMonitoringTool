@@ -36,6 +36,7 @@
             this.lblValue_1 = new System.Windows.Forms.Label();
             this.txtTotalValue = new System.Windows.Forms.TextBox();
             this.txtValue_1 = new System.Windows.Forms.TextBox();
+            this.lblNoResults = new System.Windows.Forms.Label();
             this.panDataMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,15 +121,29 @@
             this.txtValue_1.Size = new System.Drawing.Size(100, 20);
             this.txtValue_1.TabIndex = 0;
             // 
+            // lblNoResults
+            // 
+            this.lblNoResults.AutoSize = true;
+            this.lblNoResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoResults.ForeColor = System.Drawing.Color.Red;
+            this.lblNoResults.Location = new System.Drawing.Point(31, 276);
+            this.lblNoResults.Name = "lblNoResults";
+            this.lblNoResults.Size = new System.Drawing.Size(222, 16);
+            this.lblNoResults.TabIndex = 3;
+            this.lblNoResults.Text = "Nenhum Resultado Encontrado";
+            this.lblNoResults.Visible = false;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(285, 333);
+            this.Controls.Add(this.lblNoResults);
             this.Controls.Add(this.panDataMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "MainMenu";
             this.Text = "Menu Principal";
+            this.Load += new System.EventHandler(this.MainMenu_Load);
             this.panDataMenu.ResumeLayout(false);
             this.panDataMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -146,6 +161,7 @@
         private System.Windows.Forms.TextBox txtTotalValue;
         private System.Windows.Forms.TextBox txtValue_1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblNoResults;
     }
 }
 

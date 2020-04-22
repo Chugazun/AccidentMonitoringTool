@@ -1,6 +1,6 @@
 ﻿namespace Petrobras_AccidentsMonitoring_Tool
 {
-    partial class ChartScreen
+    partial class RatioChartScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -52,7 +52,7 @@
             series1.Name = "Series1";
             this.statChart.Series.Add(series1);
             this.statChart.Size = new System.Drawing.Size(399, 400);
-            this.statChart.TabIndex = 0;
+            this.statChart.TabIndex = 1;
             this.statChart.Text = "Gráfico";
             this.statChart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.statChart_MouseClick);
             // 
@@ -64,10 +64,11 @@
             this.lblTotal.Location = new System.Drawing.Point(49, 32);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(44, 13);
-            this.lblTotal.TabIndex = 1;
+            this.lblTotal.TabIndex = 2;
             this.lblTotal.Text = "Total: ";
+            this.lblTotal.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblTotal_MouseClick);
             // 
-            // ChartScreen
+            // RatioChartScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -76,9 +77,9 @@
             this.Controls.Add(this.statChart);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ChartScreen";
+            this.Name = "RatioChartScreen";
             this.Text = "Gráfico";
-            this.Load += new System.EventHandler(this.ChartScreen_Load);
+            this.Load += new System.EventHandler(this.RatioChartScreen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.statChart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

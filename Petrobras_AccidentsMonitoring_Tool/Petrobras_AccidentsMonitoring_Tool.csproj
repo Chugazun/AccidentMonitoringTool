@@ -33,8 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=5.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.5.1.0\lib\net45\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,6 +60,14 @@
     <Compile Include="ChartScreen.Designer.cs">
       <DependentUpon>ChartScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Accident.cs" />
+    <Compile Include="Entities\SearchModel.cs" />
+    <Compile Include="Entities\Stats.cs" />
+    <Compile Include="Enums\Months.cs" />
+    <Compile Include="Exceptions\AccidentClassException.cs" />
+    <Compile Include="Exceptions\ResultNotFoundException.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +76,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RatioChartScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RatioChartScreen.Designer.cs">
+      <DependentUpon>RatioChartScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Services\SearchService.cs" />
+    <Compile Include="Services\StatsCalculator.cs" />
+    <Compile Include="Utils\Utilities.cs" />
     <EmbeddedResource Include="ChartScreen.resx">
       <DependentUpon>ChartScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -76,6 +100,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RatioChartScreen.resx">
+      <DependentUpon>RatioChartScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -89,5 +117,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -84,6 +84,12 @@
     </Compile>
     <Compile Include="Services\SearchService.cs" />
     <Compile Include="Services\StatsCalculator.cs" />
+    <Compile Include="StatsSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsSelector.Designer.cs">
+      <DependentUpon>StatsSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Utilities.cs" />
     <EmbeddedResource Include="ChartScreen.resx">
       <DependentUpon>ChartScreen.cs</DependentUpon>
@@ -102,6 +108,9 @@
     </Compile>
     <EmbeddedResource Include="RatioChartScreen.resx">
       <DependentUpon>RatioChartScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatsSelector.resx">
+      <DependentUpon>StatsSelector.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

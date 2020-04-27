@@ -9,13 +9,32 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
     class StatsCalculator
     {
 
-        private static Dictionary<string, Func<List<Accident>, int>> functions;
+        private static Dictionary<string, Func<IEnumerable<Accident>, IEnumerable<IGrouping<string, Accident>>>> functions;
 
         static StatsCalculator()
         {
-            functions = new Dictionary<string, Func<List<Accident>, int>>();
-            //functions.Add("petrobras", GetByPetrobras);
-            //functions.Add("Contratados", GetByContratados);
+            functions = new Dictionary<string, Func<IEnumerable<Accident>, IEnumerable<IGrouping<string, Accident>>>>();
+            functions.Add("Total Geral", GetBySelfHired);
+            functions.Add("Setores", GetSectors);
+            functions.Add("Anos", GetByYears);
+            functions.Add("Meses", GetByMonths);
+            functions.Add("Dias da Semana", GetByWeekDay);
+            functions.Add("Horas", GetByHour);
+            functions.Add("Tipos de Lesão", GetByInjure);
+            functions.Add("Locais", GetByPlace);
+            functions.Add("Partes do Corpo", GetByBodyPart);
+            functions.Add("Níveis(Temp)", GetByGrade);
+            functions.Add("Classes", GetByClass);
+        }
+
+        public static Func<IEnumerable<Accident>, IEnumerable<IGrouping<string, Accident>>> GetFunction(string funcName)
+        {
+            return functions[funcName];
+        }
+
+        public static IEnumerable<string> GetKeys()
+        {
+            return functions.Keys.Select(k => k);
         }
 
         public static IEnumerable<Accident> TOR(IEnumerable<Accident> totalAccidents)
@@ -28,17 +47,19 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
             return totalAccidents.Where(a => a.Class != null && a.Class >= 2);
         }
 
-        public static IEnumerable<int> GetAmounts(List<Accident> totalAccidents, params string[] indexes)
-        {
-            foreach (string index in indexes)
-            {
-                Func<List<Accident>, int> resultFunction = functions[index];
+        #region unused GetAmounts Method
+        //public static IEnumerable<int> GetAmounts(List<Accident> totalAccidents, params string[] indexes)
+        //{
+        //    foreach (string index in indexes)
+        //    {
+        //        Func<List<Accident>, int> resultFunction = functions[index];
 
-                yield return resultFunction(totalAccidents);
-            }
-            yield return totalAccidents.Count;
-            //use "GetPercentages()" to get the percentages
-        }
+        //        yield return resultFunction(totalAccidents);
+        //    }
+        //    yield return totalAccidents.Count;
+        //    use "GetPercentages()" to get the percentages
+        //}
+        #endregion
 
         public static double GetPercentages(int total, int value)
         {
@@ -80,9 +101,9 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
             return totalAccidents.GroupBy(a => a.Date.Value.Month.ToString()).OrderByDescending(s => s.Key);
         }
 
-        public static IEnumerable<IGrouping<int, Accident>> GetByHour(IEnumerable<Accident> totalAccidents)
+        public static IEnumerable<IGrouping<string, Accident>> GetByHour(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.GroupBy(a => a.Time.Value.Hours).OrderByDescending(s => s.Count());
+            return totalAccidents.GroupBy(a => a.Time.Value.Hours.ToString()).OrderByDescending(s => s.Count());
         }
 
         public static IEnumerable<IGrouping<string, Accident>> GetByWeekDay(IEnumerable<Accident> totalAccidents)
@@ -95,9 +116,13 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
             return totalAccidents.GroupBy(a => a.Company).OrderByDescending(s => s.Count());
         }
 
-        public static IEnumerable<IGrouping<int, Accident>> GetByClass(IEnumerable<Accident> totalAccidents)
+        public static IEnumerable<IGrouping<string, Accident>> GetByClass(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.GroupBy(a => a.Class.Value).OrderByDescending(s => s.Count());
+            return totalAccidents.Select(a => new
+            {
+                ClassValue = "Classe " + a.Class,
+                SelectedAccident = a
+            }).GroupBy(x => x.ClassValue, x => x.SelectedAccident).OrderByDescending(s => s.Count());
         }
 
         public static IEnumerable<IGrouping<string, Accident>> GetByGrade(IEnumerable<Accident> totalAccidents)

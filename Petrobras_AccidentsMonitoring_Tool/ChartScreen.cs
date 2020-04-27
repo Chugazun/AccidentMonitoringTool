@@ -65,20 +65,10 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 DataPoint dp = statChart.Series[0].Points[hit.PointIndex];
                 Stats resultStats = new Stats(ResultGroup.ElementAt(hit.PointIndex).Key, ResultGroup.ElementAt(hit.PointIndex));
-                ChartScreen chartScreen = new ChartScreen()
-                {
-                    ResultGroup = StatsCalculator.GetSectors(resultStats.resultList),
-                    TotalValue = resultStats.resultList.Count(),
-                    Title = "Setor",
-                    StatTag = resultStats.StatTag
-                };
 
-                chartScreen.Show();
-            }
-            else
-            {
-                lblTotal.Text = "";
-            }
+                StatsSelector statsSelector = new StatsSelector(Title, resultStats);
+                statsSelector.Show();
+            }            
         }
     }
 }

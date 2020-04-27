@@ -69,7 +69,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 {
                     ResultGroup = StatsCalculator.GetBySelfHired(resultStats.resultList),
                     TotalValue = resultStats.resultList.Count(),
-                    Title = "Empresa",
+                    Title = "Total Geral",
                     StatTag = resultStats.StatTag
                 };
 

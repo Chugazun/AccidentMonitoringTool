@@ -65,6 +65,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
                     };
 
                     ratioChartScreen.Show();
+                    WindowState = FormWindowState.Minimized;
+                    
                 }
                 catch (ResultNotFoundException)
                 {

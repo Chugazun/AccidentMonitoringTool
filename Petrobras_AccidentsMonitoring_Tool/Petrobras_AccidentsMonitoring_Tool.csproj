@@ -60,6 +60,12 @@
     <Compile Include="ChartScreen.Designer.cs">
       <DependentUpon>ChartScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="DaysMonitoringScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DaysMonitoringScreen.Designer.cs">
+      <DependentUpon>DaysMonitoringScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Accident.cs" />
     <Compile Include="Entities\SearchModel.cs" />
     <Compile Include="Entities\Stats.cs" />
@@ -93,6 +99,9 @@
     <Compile Include="Utils\Utilities.cs" />
     <EmbeddedResource Include="ChartScreen.resx">
       <DependentUpon>ChartScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DaysMonitoringScreen.resx">
+      <DependentUpon>DaysMonitoringScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>

@@ -126,7 +126,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
                 EmployeeName = _sheet.Cells[row, 5].Text,
                 JobRole = _sheet.Cells[row, 7].Text,
                 Class = GetAccidentClass(row).HasValue ? GetAccidentClass(row).Value : (int?)null,
-                Date = new DateTime(int.Parse(_sheet.Cells[row, 21].Text), Utilities.ConvertMonth(Utilities.FindMonth(_sheet.Cells[row, 20].Text)), int.Parse(_sheet.Cells[row, 19].Text)),
+                Date = GetDate(row),
                 Time = time,
                 WeekDay = _sheet.Cells[row, 22].Text,
                 Place = _sheet.Cells[row, 24].Text,
@@ -135,7 +135,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
                 RTA = _sheet.Cells[row, 28].Text,
                 RPA = _sheet.Cells[row, 29].Text,
                 CAT = _sheet.Cells[row, 30].Text
-            };            
+            };
             return result;
         }
 
@@ -155,13 +155,12 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
                 Utilities.ConvertMonth(Utilities.FindMonth(_sheet.Cells[selectedRow, 20].Text)),
                 int.Parse(_sheet.Cells[selectedRow, 19].Text)
             );
-
             return aux;
         }
 
         private IEnumerable<int> GetYearInterval(string yearAsString)
         {
-            List<string> yearColumn = GetYears().ToList();
+            List<string> yearColumn = GetYearsColumn().ToList();
 
             yield return yearColumn.IndexOf(yearAsString) + 5;
             yield return yearColumn.LastIndexOf(yearAsString) + 5;
@@ -172,19 +171,50 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
             int year_1 = DateTime.Parse(dateString_1).Year;
             int year_2 = DateTime.Parse(dateString_2).Year;
 
-            List<string> yearColumn = GetYears().ToList();
+            List<string> yearColumn = GetYearsColumn().ToList();
 
             yield return yearColumn.IndexOf(year_1.ToString()) + 5;
             yield return yearColumn.LastIndexOf(year_2.ToString()) + 5;
         }
 
-        private IEnumerable<string> GetYears()
+        private IEnumerable<string> GetYearsColumn()
         {
             foreach (var cell in _sheet.Cells[5, 21, TotalEntries + 4, 21])
             {
                 yield return cell.Text;
             }
         }
+
+        public int GetDaysInterval(string target, int searchColumn)
+        {
+            int aux = -1;
+            DateTime? date = null;
+
+            var result = _sheet.Cells[5, searchColumn, TotalEntries + 4, searchColumn].Where(c => c.Text == target && GetAccidentClass(c.Start.Row).HasValue && GetAccidentClass(c.Start.Row).Value >= 2)
+                                                                                      .LastOrDefault();
+
+            if (result != null) date = GetDate(result.Start.Row);
+
+            //for (int i = TotalEntries + 4; i > 5; i--)
+            //{
+            //    if (_sheet.Cells[i, searchColumn].Text == target)
+            //    {
+            //        int? accidentClass = GetAccidentClass(i);
+            //        if (accidentClass.HasValue && accidentClass.Value >= 2)
+            //        {
+            //            date = GetDate(i);
+            //            break;
+            //        }
+            //    }
+            //}
+            if (!date.HasValue) return aux;
+
+            DateTime currentDay = DateTime.Now;
+            TimeSpan diff = currentDay.Subtract(date.Value);
+            aux = diff.Days - 1;
+            return aux;
+        }
+
         #region Unused ParseDate method
         //private DateTime ParseDate(string dateAsString, int yearNum)
         //{

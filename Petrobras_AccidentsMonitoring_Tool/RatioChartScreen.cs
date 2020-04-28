@@ -55,7 +55,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void lblTotal_MouseClick(object sender, MouseEventArgs e)
         {
-            
+
         }
 
         private void statChart_MouseClick(object sender, MouseEventArgs e)
@@ -63,17 +63,20 @@ namespace Petrobras_AccidentsMonitoring_Tool
             HitTestResult hit = statChart.HitTest(e.X, e.Y, ChartElementType.DataPoint);
             if (hit.PointIndex >= 0 && hit.Series != null)
             {
-                DataPoint dp = statChart.Series[0].Points[hit.PointIndex];
                 Stats resultStats = Stats[hit.PointIndex];
-                ChartScreen chartScreen = new ChartScreen()
-                {
-                    ResultGroup = StatsCalculator.GetBySelfHired(resultStats.resultList),
-                    TotalValue = resultStats.resultList.Count(),
-                    Title = "Total Geral",
-                    StatTag = resultStats.StatTag
-                };
 
-                chartScreen.Show();
+                StatsSelector statsSelector = new StatsSelector("Total de acidentes", resultStats);
+                statsSelector.Show();
+
+                //ChartScreen chartScreen = new ChartScreen()
+                //{
+                //    ResultGroup = StatsCalculator.GetBySelfHired(resultStats.resultList),
+                //    TotalValue = resultStats.resultList.Count(),
+                //    Title = "Total Geral",
+                //    StatTag = resultStats.StatTag
+                //};
+
+                //chartScreen.Show();
             }
             else
             {

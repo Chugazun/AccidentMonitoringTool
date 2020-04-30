@@ -1,15 +1,8 @@
 ﻿using Petrobras_AccidentMonitoring_Tool_Console.Entities;
 using Petrobras_AccidentMonitoring_Tool_Console.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.CheckedListBox;
 
 namespace Petrobras_AccidentsMonitoring_Tool
 {
@@ -40,7 +33,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnGenerateChart_Click(object sender, EventArgs e)
         {
             foreach (var checkedItem in chkBoxStats.CheckedItems)
             {

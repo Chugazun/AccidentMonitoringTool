@@ -30,7 +30,7 @@
         {
             this.chkBoxStats = new System.Windows.Forms.CheckedListBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGenerateChart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // chkBoxStats
@@ -50,14 +50,14 @@
             "Partes do Corpo",
             "Níveis (Temp)",
             "Classes"});
-            this.chkBoxStats.Location = new System.Drawing.Point(59, 65);
+            this.chkBoxStats.Location = new System.Drawing.Point(48, 65);
             this.chkBoxStats.Name = "chkBoxStats";
-            this.chkBoxStats.Size = new System.Drawing.Size(123, 170);
+            this.chkBoxStats.Size = new System.Drawing.Size(145, 170);
             this.chkBoxStats.TabIndex = 0;
             // 
             // lblTitle
             // 
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(0, 20);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(240, 23);
@@ -65,22 +65,22 @@
             this.lblTitle.Text = "Title";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // button1
+            // btnGenerateChart
             // 
-            this.button1.Location = new System.Drawing.Point(66, 255);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 28);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Gerar Gráfico(s)";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnGenerateChart.Location = new System.Drawing.Point(66, 296);
+            this.btnGenerateChart.Name = "btnGenerateChart";
+            this.btnGenerateChart.Size = new System.Drawing.Size(108, 28);
+            this.btnGenerateChart.TabIndex = 2;
+            this.btnGenerateChart.Text = "Gerar Gráfico(s)";
+            this.btnGenerateChart.UseVisualStyleBackColor = true;
+            this.btnGenerateChart.Click += new System.EventHandler(this.btnGenerateChart_Click);
             // 
             // StatsSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 308);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(240, 351);
+            this.Controls.Add(this.btnGenerateChart);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.chkBoxStats);
             this.MaximizeBox = false;
@@ -96,6 +96,6 @@
 
         private System.Windows.Forms.CheckedListBox chkBoxStats;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGenerateChart;
     }
 }

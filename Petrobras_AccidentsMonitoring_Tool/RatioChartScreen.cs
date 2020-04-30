@@ -67,16 +67,6 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
                 StatsSelector statsSelector = new StatsSelector("Total de acidentes", resultStats);
                 statsSelector.Show();
-
-                //ChartScreen chartScreen = new ChartScreen()
-                //{
-                //    ResultGroup = StatsCalculator.GetBySelfHired(resultStats.resultList),
-                //    TotalValue = resultStats.resultList.Count(),
-                //    Title = "Total Geral",
-                //    StatTag = resultStats.StatTag
-                //};
-
-                //chartScreen.Show();
             }
             else
             {

@@ -177,7 +177,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
             yield return yearColumn.LastIndexOf(year_2.ToString()) + 5;
         }
 
-        private IEnumerable<string> GetYearsColumn()
+        public IEnumerable<string> GetYearsColumn()
         {
             foreach (var cell in _sheet.Cells[5, 21, TotalEntries + 4, 21])
             {
@@ -190,7 +190,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
             int aux = -1;
             DateTime? date = null;
 
-            var result = _sheet.Cells[5, searchColumn, TotalEntries + 4, searchColumn].Where(c => c.Text == target && GetAccidentClass(c.Start.Row).HasValue && GetAccidentClass(c.Start.Row).Value >= 2)
+            var result = _sheet.Cells[5, searchColumn, TotalEntries + 4, searchColumn].Where(c => c.Text.Contains(target) && GetAccidentClass(c.Start.Row).HasValue && GetAccidentClass(c.Start.Row).Value >= 2)
                                                                                       .LastOrDefault();
 
             if (result != null) date = GetDate(result.Start.Row);

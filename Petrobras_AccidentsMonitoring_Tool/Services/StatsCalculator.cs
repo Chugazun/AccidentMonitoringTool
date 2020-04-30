@@ -15,6 +15,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
         {
             functions = new Dictionary<string, Func<IEnumerable<Accident>, IEnumerable<IGrouping<string, Accident>>>>();
             functions.Add("Total Geral", GetBySelfHired);
+            functions.Add("Empresa", GetByCompany);
             functions.Add("Setores", GetSectors);
             functions.Add("Anos", GetByYears);
             functions.Add("Meses", GetByMonths);

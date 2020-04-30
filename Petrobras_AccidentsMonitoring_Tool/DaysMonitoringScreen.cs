@@ -27,7 +27,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 var _sheet = project.Workbook.Worksheets[0];
                 SearchService searchService = new SearchService(_sheet);
 
-                string[] sectors = new string[] { "RNEST/OP/DC", "RNEST/OP/HDT", "RNEST/OP/TE", "RNEST/OP/UT" };
+                string[] sectors = new string[] { "RNEST", "RNEST/OP", "RNEST/MA", "RNEST/IE", "RNEST/PPO", "RNEST/SMS", "RNEST/ESTO" };
 
                 foreach (string sector in sectors)
                 {
@@ -35,7 +35,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
                     if (result != -1)
                     {
                         listAccidents.Items.Add($"- {sector}: {result} dias.");
-                    } else
+                    }
+                    else
                     {
                         listAccidents.Items.Add($"- {sector}: Nenhum acidente encontrado.");
                     }

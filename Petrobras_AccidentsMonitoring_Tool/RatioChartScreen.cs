@@ -15,8 +15,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
 {
     public partial class RatioChartScreen : Form
     {
-        public List<int> Values { get; set; }
         public List<Stats> Stats { get; set; }
+        public IEnumerable<IGrouping<string, Accident>> ResultGroup { get; set; }
         public int TotalValue { get; set; }
         public RatioChartScreen()
         {
@@ -29,6 +29,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
             statChart.Legends.Clear();
             statChart.ChartAreas.Clear();
             lblTotal.Text += TotalValue.ToString();
+            lblTotalPerType.Text = GetTotalStats();
 
             statChart.ChartAreas.Add(new ChartArea());
 
@@ -43,6 +44,9 @@ namespace Petrobras_AccidentsMonitoring_Tool
             statChart.Series.Add(seriesName);
 
             statChart.Series[seriesName].ChartType = SeriesChartType.Pie;
+
+            IEnumerable<Accident> tipicalAccidents = ResultGroup.FirstOrDefault(s => s.Key == "Típico");
+            Stats = new List<Stats>() { new Stats("TOR", StatsCalculator.TOR(tipicalAccidents)), new Stats("TAR", StatsCalculator.TAR(tipicalAccidents)) };
 
             for (int i = 0; i < Stats.Count; i++)
             {
@@ -72,6 +76,11 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 lblTotal.Text = "";
             }
+        }
+        private string GetTotalStats()
+        {
+            string result = $"- Típicos: {ResultGroup.FirstOrDefault(g => g.Key == "Típico").Count()}\n- Trajeto: {ResultGroup.FirstOrDefault(g => g.Key == "Trajeto").Count()}\n- Equiparados: {ResultGroup.FirstOrDefault(g => g.Key == "Equiparado").Count()}";
+            return result;
         }
     }
 }

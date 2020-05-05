@@ -53,9 +53,9 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 statChart.Series[seriesName].Points[i].Label = $"{item} ({(item / (double)TotalValue * 100).ToString("0.0")}%)";
                 statChart.Series[seriesName].Points[i].LegendText = ResultGroup.ElementAt(i).Key + ": " + item;
             }
-
-
-            //statChart.Series[seriesName]["PieLabelStyle"] = "Disabled";
+            statChart.Series[seriesName]["PieLabelStyle"] = "Outside";
+            statChart.ChartAreas[0].Area3DStyle.Enable3D = true;
+            statChart.ChartAreas[0].Area3DStyle.Inclination = 0;
         }
 
         private void statChart_MouseClick(object sender, MouseEventArgs e)
@@ -68,7 +68,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
                 StatsSelector statsSelector = new StatsSelector(Title, resultStats);
                 statsSelector.Show();
-            }            
+            }
         }
     }
 }

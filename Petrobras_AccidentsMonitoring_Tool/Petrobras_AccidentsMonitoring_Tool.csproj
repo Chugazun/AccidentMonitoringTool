@@ -69,6 +69,7 @@
     <Compile Include="Entities\Accident.cs" />
     <Compile Include="Entities\SearchModel.cs" />
     <Compile Include="Entities\Stats.cs" />
+    <Compile Include="Enums\AccidentType.cs" />
     <Compile Include="Enums\Months.cs" />
     <Compile Include="Exceptions\AccidentClassException.cs" />
     <Compile Include="Exceptions\ResultNotFoundException.cs" />

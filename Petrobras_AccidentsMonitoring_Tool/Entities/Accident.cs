@@ -1,5 +1,6 @@
 ﻿using Petrobras_AccidentMonitoring_Tool_Console.Exceptions;
 using Petrobras_AccidentMonitoring_Tool_Console.Extensions;
+using Petrobras_AccidentsMonitoring_Tool.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -35,6 +36,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Entities
         public string RTA { get => _rta; set => _rta = SetValue(value); }
         public string RPA { get => _rpa; set => _rpa = SetValue(value); }
         public string CAT { get => _cat; set => _cat = SetValue(value); }
+        public AccidentType AccidentType { get; set; }
 
         private string SetValue(string input) => !(input == "") ? input.ToLower().ToTitleCase().Trim() : "N/A";
     }

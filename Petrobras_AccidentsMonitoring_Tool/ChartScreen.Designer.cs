@@ -51,7 +51,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.statChart.Series.Add(series1);
-            this.statChart.Size = new System.Drawing.Size(399, 400);
+            this.statChart.Size = new System.Drawing.Size(430, 425);
             this.statChart.TabIndex = 0;
             this.statChart.Text = "Gráfico";
             this.statChart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.statChart_MouseClick);
@@ -61,7 +61,7 @@
             this.lblTotal.AutoSize = true;
             this.lblTotal.BackColor = System.Drawing.Color.White;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(49, 32);
+            this.lblTotal.Location = new System.Drawing.Point(13, 15);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(44, 13);
             this.lblTotal.TabIndex = 1;
@@ -71,7 +71,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 424);
+            this.ClientSize = new System.Drawing.Size(454, 449);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.statChart);
             this.MaximizeBox = false;

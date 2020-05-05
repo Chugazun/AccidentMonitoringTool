@@ -2,6 +2,7 @@
 using Petrobras_AccidentMonitoring_Tool_Console.Entities;
 using Petrobras_AccidentMonitoring_Tool_Console.Exceptions;
 using Petrobras_AccidentMonitoring_Tool_Console.Utils;
+using Petrobras_AccidentsMonitoring_Tool.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -136,6 +137,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
                 RPA = _sheet.Cells[row, 29].Text,
                 CAT = _sheet.Cells[row, 30].Text
             };
+            result.AccidentType = GetAccidentType(row, result.Class);
             return result;
         }
 
@@ -146,6 +148,22 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
                 if (_sheet.Cells[row, i].Text.ToLower() == "x") return i - 9;
             }
             return null;
+        }
+
+        private AccidentType GetAccidentType(int row, int? accidentClass)
+        {
+            if (accidentClass.HasValue)
+            {
+                return AccidentType.Típico;
+            }
+            else if (_sheet.Cells[row, 15].Text.ToLower() == "x" || _sheet.Cells[row, 16].Text.ToLower() == "x")
+            {
+                return AccidentType.Trajeto;
+            } else
+            {
+                return AccidentType.Equiparado;
+            }
+
         }
 
         private DateTime GetDate(int selectedRow)

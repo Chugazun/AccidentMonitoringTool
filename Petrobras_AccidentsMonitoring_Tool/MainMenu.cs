@@ -19,8 +19,10 @@ namespace Petrobras_AccidentsMonitoring_Tool
     {
         private ExcelWorksheet _sheet;
         private SearchService _search;
+        private Func<SearchModel> GetSearchDetails;
         private IEnumerable<string> _years;
         private bool isLoaded;
+
         public MainMenu()
         {
             InitializeComponent();
@@ -28,6 +30,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
+            radioPeriod.Checked = true;
             using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev4.xlsx")))
             {
                 _sheet = project.Workbook.Worksheets[0];
@@ -37,6 +40,12 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 comboInitialYear.SelectedIndex = 1;
                 comboFinalYear.Items.AddRange(_years.Prepend("").ToArray());
                 comboFinalYear.SelectedIndex = comboFinalYear.Items.Count - 1;
+                
+                comboYear.Items.AddRange(_years.ToArray());
+                comboYear.SelectedIndex = 0;
+
+                txtInitialYearAll.Text = _years.First();
+                txtFinalYearAll.Text = _years.Last();
                 isLoaded = true;
             }
         }
@@ -57,23 +66,18 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 _sheet = project.Workbook.Worksheets[0];
                 _search = new SearchService(_sheet);
-
-                SearchModel searchDetails = new SearchModel()
-                {
-                    InitialDate = comboInitialYear.SelectedItem.ToString() != "" ? DateTime.Parse(comboInitialYear.SelectedItem + "/01/01") : (DateTime?)null,
-                    FinalDate = comboFinalYear.SelectedItem.ToString() != "" ? DateTime.Parse(comboFinalYear.SelectedItem + "/12/31") : (DateTime?)null,
-                };
+                SearchModel _searchDetails = GetSearchDetails();
 
                 try
                 {
-                    IEnumerable<Accident> result = _search.AdvSearch(searchDetails);
+                    IEnumerable<Accident> result = _search.AdvSearch(_searchDetails);
 
-                    IEnumerable<Accident> torList = StatsCalculator.TOR(result);
-                    IEnumerable<Accident> tarList = StatsCalculator.TAR(result);
+                    
 
                     RatioChartScreen ratioChartScreen = new RatioChartScreen()
                     {
-                        Stats = new List<Stats>() { new Stats("TOR", torList), new Stats("TAR", tarList) },
+                        //Stats = new List<Stats>() { new Stats("TOR", torList), new Stats("TAR", tarList) },
+                        ResultGroup = StatsCalculator.GetByAccidentType(result),
                         TotalValue = result.Count()
                     };
 
@@ -127,25 +131,54 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         }
 
-        private void ComboBoxSelectionChanged(ComboBox box_1, ComboBox box_2)
+        private void radioPeriod_CheckedChanged(object sender, EventArgs e)
         {
-            string currentItem = box_2.SelectedItem != null ? box_2.SelectedItem.ToString() : "";
-            if (box_1.SelectedIndex > 1)
+            if (radioPeriod.Checked)
             {
-                if (box_2.SelectedItem.ToString() != "" && int.Parse(box_2.SelectedItem.ToString()) < int.Parse(box_1.SelectedItem.ToString()))
+                panDataMenuPeriod.Visible = true;
+                lblTitle.Text = "Escolha o Período";
+                GetSearchDetails = () => new SearchModel()
                 {
-                    box_2.SelectedIndex = 0;
-                }
-                box_2.Items.Clear();
-                box_2.Items.AddRange(_years.Where(y => int.Parse(y) >= int.Parse(box_1.SelectedItem.ToString())).Prepend("").ToArray());
-                box_2.SelectedItem = box_2.Items.Contains(currentItem) ? currentItem : "";
+                    InitialDate = comboInitialYear.SelectedIndex > 1 ? DateTime.Parse(comboInitialYear.SelectedItem.ToString() + "/01/01") : DateTime.Parse(_years.ElementAt(0) + "/01/01"),
+                    FinalDate = comboFinalYear.SelectedItem.ToString() != "" ? DateTime.Parse(comboFinalYear.SelectedItem.ToString() + "/12/31") : DateTime.Parse(_years.Last() + "/12/31")
+                };
             }
-            else if (box_2.Items.Count > 0)
+            else
             {
-                box_2.Items.Clear();
-                box_2.Items.AddRange(_years.Prepend("").ToArray());
-                box_2.SelectedItem = box_2.Items.Contains(currentItem) ? currentItem : "";
+                panDataMenuPeriod.Visible = false;
             }
+        }
+
+        private void radioYear_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioYear.Checked)
+            {
+                panDataMenuYear.Visible = true;
+                lblTitle.Text = "Escolha o Ano";
+                GetSearchDetails = () => new SearchModel()
+                {
+                    Year = int.Parse(comboYear.SelectedItem.ToString())
+                };
+            }
+            else
+            {
+                panDataMenuYear.Visible = false;
+            }
+        }
+
+        private void radioAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioAll.Checked)
+            {
+                panDataMenuAll.Visible = true;
+                lblTitle.Text = "Todo o Período";
+                GetSearchDetails = () => new SearchModel();
+            }
+            else
+            {
+                panDataMenuYear.Visible = false;
+            }
+
         }
     }
 }

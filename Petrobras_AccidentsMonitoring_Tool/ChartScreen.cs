@@ -49,9 +49,12 @@ namespace Petrobras_AccidentsMonitoring_Tool
             for (int i = 0; i < ResultGroup.Count(); i++)
             {
                 int item = ResultGroup.ElementAt(i).Count();
-                statChart.Series[seriesName].Points.AddXY(item, item);
-                statChart.Series[seriesName].Points[i].Label = $"{item} ({(item / (double)TotalValue * 100).ToString("0.0")}%)";
-                statChart.Series[seriesName].Points[i].LegendText = ResultGroup.ElementAt(i).Key + ": " + item;
+                if (item > 0)
+                {
+                    statChart.Series[seriesName].Points.AddXY(item, item);
+                    statChart.Series[seriesName].Points[i].Label = $"{item} ({(item / (double)TotalValue * 100).ToString("0.0")}%)";
+                    statChart.Series[seriesName].Points[i].LegendText = ResultGroup.ElementAt(i).Key + ": " + item;
+                }
             }
             statChart.Series[seriesName]["PieLabelStyle"] = "Outside";
             statChart.ChartAreas[0].Area3DStyle.Enable3D = true;

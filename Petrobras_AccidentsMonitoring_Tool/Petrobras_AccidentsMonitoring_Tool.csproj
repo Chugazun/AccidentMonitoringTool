@@ -75,11 +75,11 @@
     <Compile Include="Exceptions\ResultNotFoundException.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="MainMenu.cs">
+    <Compile Include="AccidentsMonitoringMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainMenu.Designer.cs">
-      <DependentUpon>MainMenu.cs</DependentUpon>
+    <Compile Include="AccidentsMonitoringMenu.Designer.cs">
+      <DependentUpon>AccidentsMonitoringMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +97,12 @@
     <Compile Include="StatsSelector.Designer.cs">
       <DependentUpon>StatsSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Utilities.cs" />
     <EmbeddedResource Include="ChartScreen.resx">
       <DependentUpon>ChartScreen.cs</DependentUpon>
@@ -104,8 +110,8 @@
     <EmbeddedResource Include="DaysMonitoringScreen.resx">
       <DependentUpon>DaysMonitoringScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainMenu.resx">
-      <DependentUpon>MainMenu.cs</DependentUpon>
+    <EmbeddedResource Include="AccidentsMonitoringMenu.resx">
+      <DependentUpon>AccidentsMonitoringMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StatsSelector.resx">
       <DependentUpon>StatsSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

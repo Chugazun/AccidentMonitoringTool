@@ -1,4 +1,5 @@
 ﻿using Petrobras_AccidentMonitoring_Tool_Console.Entities;
+using Petrobras_AccidentMonitoring_Tool_Console.Utils;
 using Petrobras_AccidentsMonitoring_Tool.Enums;
 using System;
 using System.Collections.Generic;
@@ -105,7 +106,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
 
         public static IEnumerable<IGrouping<string, Accident>> GetByMonths(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.GroupBy(a => a.Date.Value.Month.ToString()).OrderByDescending(s => s.Key);
+            return totalAccidents.GroupBy(a => Utilities.ConvertMonth(a.Date.Value.Month)).OrderBy(s => Utilities.ConvertMonth(s.Key));
         }
 
         public static IEnumerable<IGrouping<string, Accident>> GetByHour(IEnumerable<Accident> totalAccidents)

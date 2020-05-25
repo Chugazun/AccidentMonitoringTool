@@ -15,12 +15,19 @@ namespace Petrobras_AccidentsMonitoring_Tool
 {
     public partial class RatioChartScreen : Form
     {
+        private MainMenu _mainMenu;
         public List<Stats> Stats { get; set; }
         public IEnumerable<IGrouping<string, Accident>> ResultGroup { get; set; }
         public int TotalValue { get; set; }
+
         public RatioChartScreen()
         {
             InitializeComponent();
+        }
+
+        public RatioChartScreen(MainMenu mainMenu) : this()
+        {
+            _mainMenu = mainMenu;
         }
 
         private void RatioChartScreen_Load(object sender, EventArgs e)
@@ -48,19 +55,14 @@ namespace Petrobras_AccidentsMonitoring_Tool
             IEnumerable<Accident> tipicalAccidents = ResultGroup.FirstOrDefault(s => s.Key == "Típico");
             Stats = new List<Stats>() { new Stats("TOR", StatsCalculator.TOR(tipicalAccidents)), new Stats("TAR", StatsCalculator.TAR(tipicalAccidents)) };
 
-            for (int i = 0; i < Stats.Count; i++)
+            for (int i = 0; i < Stats.Where(s => s.resultList.Count() > 0).ToList().Count; i++)
             {
                 int item = Stats[i].resultList.Count();
                 statChart.Series[seriesName].Points.AddXY(item, item);
                 statChart.Series[seriesName].Points[i].Label = $"{item} ({(item / (double)TotalValue * 100).ToString("0.0")}%)";
                 statChart.Series[seriesName].Points[i].LegendText = Stats[i].StatTag + ": " + item;
             }
-        }
-
-        private void lblTotal_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
+        }        
 
         private void statChart_MouseClick(object sender, MouseEventArgs e)
         {
@@ -79,8 +81,27 @@ namespace Petrobras_AccidentsMonitoring_Tool
         }
         private string GetTotalStats()
         {
-            string result = $"- Típicos: {ResultGroup.FirstOrDefault(g => g.Key == "Típico").Count()}\n- Trajeto: {ResultGroup.FirstOrDefault(g => g.Key == "Trajeto").Count()}\n- Equiparados: {ResultGroup.FirstOrDefault(g => g.Key == "Equiparado").Count()}";
-            return result;
+            StringBuilder sb = new StringBuilder();
+            var selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Típico");
+            if (selectedGroup != null) sb.AppendLine($"- Típicos: {selectedGroup.Count()}");
+
+            selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Trajeto");
+            if (selectedGroup != null) sb.AppendLine($"- Trajeto: {selectedGroup.Count()}");
+
+            selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Equiparado");
+            if (selectedGroup != null) sb.AppendLine($"- Equiparados: {selectedGroup.Count()}");
+
+            //foreach (var type in ResultGroup)
+            //{
+            //    if(type != null) sb.AppendLine($"- {type.Key}: {type.Count()}");
+            //}
+
+            return sb.ToString();
+        }
+
+        private void RatioChartScreen_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _mainMenu.WindowState = FormWindowState.Normal;
         }
     }
 }

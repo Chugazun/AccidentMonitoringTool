@@ -67,7 +67,6 @@
             this.lblTotal.Size = new System.Drawing.Size(44, 13);
             this.lblTotal.TabIndex = 2;
             this.lblTotal.Text = "Total: ";
-            this.lblTotal.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblTotal_MouseClick);
             // 
             // lblTotalPerType
             // 
@@ -78,7 +77,6 @@
             this.lblTotalPerType.Name = "lblTotalPerType";
             this.lblTotalPerType.Size = new System.Drawing.Size(0, 13);
             this.lblTotalPerType.TabIndex = 2;
-            this.lblTotalPerType.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblTotal_MouseClick);
             // 
             // RatioChartScreen
             // 
@@ -92,6 +90,7 @@
             this.MinimizeBox = false;
             this.Name = "RatioChartScreen";
             this.Text = "Gráfico";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RatioChartScreen_FormClosed);
             this.Load += new System.EventHandler(this.RatioChartScreen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.statChart)).EndInit();
             this.ResumeLayout(false);

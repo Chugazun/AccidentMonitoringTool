@@ -52,7 +52,7 @@
             "Classes"});
             this.chkBoxStats.Location = new System.Drawing.Point(48, 65);
             this.chkBoxStats.Name = "chkBoxStats";
-            this.chkBoxStats.Size = new System.Drawing.Size(145, 170);
+            this.chkBoxStats.Size = new System.Drawing.Size(145, 204);
             this.chkBoxStats.TabIndex = 0;
             // 
             // lblTitle

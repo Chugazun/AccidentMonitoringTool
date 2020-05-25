@@ -20,18 +20,20 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private ExcelWorksheet _sheet;
         private SearchService _search;
         private Func<SearchModel> GetSearchDetails;
-        private IEnumerable<string> _years;
+        private IEnumerable<string> _years, _sectors;
         private bool isLoaded;
+        private int currentTag = 2;
 
         public MainMenu()
         {
             InitializeComponent();
         }
 
-        private void MainMenu_Load(object sender, EventArgs e)
+        private void Test_Load(object sender, EventArgs e)
         {
+            AdjustScreen();
             radioPeriod.Checked = true;
-            using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev4.xlsx")))
+            using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev6.xlsx")))
             {
                 _sheet = project.Workbook.Worksheets[0];
                 _search = new SearchService(_sheet);
@@ -40,29 +42,30 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 comboInitialYear.SelectedIndex = 1;
                 comboFinalYear.Items.AddRange(_years.Prepend("").ToArray());
                 comboFinalYear.SelectedIndex = comboFinalYear.Items.Count - 1;
-                
+
                 comboYear.Items.AddRange(_years.ToArray());
                 comboYear.SelectedIndex = 0;
 
                 txtInitialYearAll.Text = _years.First();
                 txtFinalYearAll.Text = _years.Last();
                 isLoaded = true;
+
+                GetSheetSectors(_search.GetSectorsColumn().GroupBy(c => c).Select(g => g.Key).OrderBy(s => s));
+                comboSector_1.Items.AddRange(_sectors.Prepend("RNEST").ToArray());
+                comboSector_1.SelectedIndex = 0;
             }
+        }
+
+        private void AdjustScreen()
+        {
+            lblCurrentTag.Text += currentTag;
+            panAccidents.Location = new Point(229, 63);
+            panAccidents.Size = new Size(278, 270);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            #region initial testings TO DELETE
-            //int value_1 = int.Parse(txtValue_1.Text);
-            //int value_2 = int.Parse(txtValue_2.Text);
-
-            //ChartScreen chartScreen = new ChartScreen();
-            //chartScreen.Values = new List<int>();
-            //chartScreen.Values.AddRange(new int[] { value_1, value_2 });
-            //chartScreen.TotalValue = int.Parse(txtTotalValue.Text);
-            //chartScreen.Show();
-            #endregion
-            using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev4.xlsx")))
+            using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev6.xlsx")))
             {
                 _sheet = project.Workbook.Worksheets[0];
                 _search = new SearchService(_sheet);
@@ -71,10 +74,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 try
                 {
                     IEnumerable<Accident> result = _search.AdvSearch(_searchDetails);
-
-                    
-
-                    RatioChartScreen ratioChartScreen = new RatioChartScreen()
+                    RatioChartScreen ratioChartScreen = new RatioChartScreen(this)
                     {
                         //Stats = new List<Stats>() { new Stats("TOR", torList), new Stats("TAR", tarList) },
                         ResultGroup = StatsCalculator.GetByAccidentType(result),
@@ -90,16 +90,6 @@ namespace Petrobras_AccidentsMonitoring_Tool
                     lblNoResults.Visible = true;
                 }
             }
-        }
-
-        private void GetSheetYears(IEnumerable<string> years)
-        {
-            List<string> aux = new List<string>();
-            foreach (string item in years)
-            {
-                aux.Add(item);
-            }
-            _years = aux;
         }
 
         private void comboInitialYear_SelectedIndexChanged(object sender, EventArgs e)
@@ -126,9 +116,24 @@ namespace Petrobras_AccidentsMonitoring_Tool
             }
         }
 
-        private void comboFinalYear_SelectedIndexChanged(object sender, EventArgs e)
+        private void GetSheetYears(IEnumerable<string> years)
         {
+            List<string> aux = new List<string>();
+            foreach (string item in years)
+            {
+                aux.Add(item);
+            }
+            _years = aux;
+        }
 
+        private void GetSheetSectors(IEnumerable<string> sectors)
+        {
+            List<string> aux = new List<string>();
+            foreach (string item in sectors)
+            {
+                aux.Add(item);
+            }
+            _sectors = aux;
         }
 
         private void radioPeriod_CheckedChanged(object sender, EventArgs e)
@@ -176,9 +181,97 @@ namespace Petrobras_AccidentsMonitoring_Tool
             }
             else
             {
-                panDataMenuYear.Visible = false;
+                panDataMenuAll.Visible = false;
             }
+        }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Point previousLocation = Controls.Find("lblSector_" + (currentTag - 1), true)[0].Location;
+            Label lblSector = new Label()
+            {
+                Name = "lblSector_" + currentTag,
+                Text = "Setor " + currentTag + ": ",
+                Font = lblSector_1.Font,
+                Location = new Point(previousLocation.X, previousLocation.Y + 30),
+                AutoSize = true,
+                Visible = true
+            };
+            panDays.Controls.Add(lblSector);
+
+            ComboBox comboSector = new ComboBox()
+            {
+                Name = "comboSector_" + currentTag,
+                Tag = "sector",
+                AutoCompleteMode = AutoCompleteMode.SuggestAppend,
+                AutoCompleteSource = AutoCompleteSource.ListItems,
+                Location = new Point(lblSector.Location.X + 60, lblSector.Location.Y - 2),
+                Size = new Size(121, 21),
+                Visible = true
+            };
+            comboSector.Items.AddRange(_sectors.Prepend("RNEST").ToArray());
+            panDays.Controls.Add(comboSector);
+            comboSector.BringToFront();
+
+            btnAdd.Location = new Point(210, btnAdd.Location.Y + 30);
+            if(currentTag - 1 != 1)
+            {
+                btnRemove.Location = new Point(245, btnAdd.Location.Y);
+            } else {
+                btnRemove.Visible = true;
+            }
+            currentTag++;
+            lblCurrentTag.Text = "Current Tag (DEBUG): " + currentTag;
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            Control lastComboBox = Controls.Find("comboSector_" + (currentTag - 1), true)[0];
+            Control lastLabel = Controls.Find("lblSector_" + (currentTag - 1), true)[0];
+            panDays.Controls.Remove(lastComboBox);
+            panDays.Controls.Remove(lastLabel);
+
+            btnAdd.Location = new Point(210, btnAdd.Location.Y - 30);
+            if(currentTag - 1 != 2)
+            {
+                btnRemove.Location = new Point(245, btnAdd.Location.Y);
+            } else
+            {
+                btnRemove.Visible = false;
+            }
+            currentTag--;
+            lblCurrentTag.Text = "Current Tag (DEBUG): " + currentTag;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string[] searchItems = panDays.Controls.OfType<ComboBox>().Where(c => c.Tag.ToString() == "sector")
+                                                                      .Select(cb => cb.SelectedItem.ToString())
+                                                                      .Reverse()
+                                                                      .ToArray();
+
+            DaysMonitoringScreen daysMonitoringScreen = new DaysMonitoringScreen(searchItems);
+            daysMonitoringScreen.Show();
+        }
+
+        private void btnDays_Click(object sender, EventArgs e)
+        {
+            panDays.Visible = true;
+            btnSearch.Visible = true;
+            panAccidents.Visible = false;
+            btnDays.BackColor = SystemColors.GradientInactiveCaption;
+            btnAccidents.BackColor = SystemColors.ControlLight;
+            lblToolName.Text = "Monitoramento de Dias";
+        }        
+
+        private void btnAccidents_Click(object sender, EventArgs e)
+        {
+            panAccidents.Visible = true;
+            panDays.Visible = false;
+            btnSearch.Visible = false;
+            btnAccidents.BackColor = SystemColors.GradientInactiveCaption;
+            btnDays.BackColor = SystemColors.ControlLight;
+            lblToolName.Text = "Monitoramento de Acidentes";
         }
     }
 }

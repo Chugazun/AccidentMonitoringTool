@@ -6,7 +6,6 @@ using Petrobras_AccidentsMonitoring_Tool.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Petrobras_AccidentMonitoring_Tool_Console.Services
 {
@@ -154,7 +153,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
         {
             if (accidentClass.HasValue)
             {
-                return AccidentType.Típico;
+                return AccidentType.Típicos;
             }
             else if (_sheet.Cells[row, 15].Text.ToLower() == "x" || _sheet.Cells[row, 16].Text.ToLower() == "x")
             {
@@ -162,7 +161,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
             }
             else
             {
-                return AccidentType.Equiparado;
+                return AccidentType.Equiparados;
             }
 
         }
@@ -212,12 +211,12 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
             }
         }
 
-        public int GetDaysInterval(string target, int searchColumn)
+        public int GetDaysInterval(string target, int searchColumn, int typeAsInt)
         {
             int aux = -1;
             DateTime? date = null;
 
-            var result = _sheet.Cells[5, searchColumn, TotalEntries + 4, searchColumn].Where(c => c.Text.Contains(target) && GetAccidentClass(c.Start.Row).HasValue && GetAccidentClass(c.Start.Row).Value >= 0)
+            var result = _sheet.Cells[5, searchColumn, TotalEntries + 4, searchColumn].Where(c => c.Text.Contains(target) && GetAccidentClass(c.Start.Row).HasValue && GetAccidentClass(c.Start.Row).Value >= typeAsInt)
                                                                                       .LastOrDefault();
 
             if (result != null) date = GetDate(result.Start.Row);

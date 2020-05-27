@@ -52,7 +52,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
             statChart.Series[seriesName].ChartType = SeriesChartType.Pie;
 
-            IEnumerable<Accident> tipicalAccidents = ResultGroup.FirstOrDefault(s => s.Key == "Típico");
+            IEnumerable<Accident> tipicalAccidents = ResultGroup.FirstOrDefault(s => s.Key == "Típicos");
             Stats = new List<Stats>() { new Stats("TOR", StatsCalculator.TOR(tipicalAccidents)), new Stats("TAR", StatsCalculator.TAR(tipicalAccidents)) };
 
             for (int i = 0; i < Stats.Where(s => s.resultList.Count() > 0).ToList().Count; i++)
@@ -82,19 +82,19 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private string GetTotalStats()
         {
             StringBuilder sb = new StringBuilder();
-            var selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Típico");
-            if (selectedGroup != null) sb.AppendLine($"- Típicos: {selectedGroup.Count()}");
+            //var selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Típicos");
+            //if (selectedGroup != null) sb.AppendLine($"- Típicos: {selectedGroup.Count()}");
 
-            selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Trajeto");
-            if (selectedGroup != null) sb.AppendLine($"- Trajeto: {selectedGroup.Count()}");
+            //selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Trajeto");
+            //if (selectedGroup != null) sb.AppendLine($"- Trajeto: {selectedGroup.Count()}");
 
-            selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Equiparado");
-            if (selectedGroup != null) sb.AppendLine($"- Equiparados: {selectedGroup.Count()}");
+            //selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Equiparados");
+            //if (selectedGroup != null) sb.AppendLine($"- Equiparados: {selectedGroup.Count()}");
 
-            //foreach (var type in ResultGroup)
-            //{
-            //    if(type != null) sb.AppendLine($"- {type.Key}: {type.Count()}");
-            //}
+            foreach (var type in ResultGroup)
+            {
+                if (type != null) sb.AppendLine($"- {type.Key}: {type.Count()}");
+            }
 
             return sb.ToString();
         }

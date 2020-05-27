@@ -54,6 +54,9 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 comboSector_1.Items.AddRange(_sectors.Prepend("RNEST").ToArray());
                 comboSector_1.SelectedIndex = 0;
             }
+
+            comboType.Items.AddRange(new string[] { "TAR", "TOR" });
+            comboType.SelectedIndex = 0;
         }
 
         private void AdjustScreen()
@@ -250,7 +253,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                                                                       .Reverse()
                                                                       .ToArray();
 
-            DaysMonitoringScreen daysMonitoringScreen = new DaysMonitoringScreen(searchItems);
+            DaysMonitoringScreen daysMonitoringScreen = new DaysMonitoringScreen(searchItems, comboType.SelectedItem.ToString());
             daysMonitoringScreen.Show();
         }
 

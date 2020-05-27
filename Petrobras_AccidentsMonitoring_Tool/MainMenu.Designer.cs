@@ -63,6 +63,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblCurrentTag = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.comboType = new System.Windows.Forms.ComboBox();
+            this.lblType = new System.Windows.Forms.Label();
             comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.panAccidents.SuspendLayout();
@@ -76,7 +78,7 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(81, 91);
+            comboBox1.Location = new System.Drawing.Point(81, 107);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new System.Drawing.Size(121, 21);
             comboBox1.TabIndex = 1;
@@ -370,9 +372,11 @@
             // 
             this.panDays.AutoScroll = true;
             this.panDays.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panDays.Controls.Add(this.comboType);
             this.panDays.Controls.Add(this.btnRemove);
             this.panDays.Controls.Add(this.btnAdd);
             this.panDays.Controls.Add(this.label2);
+            this.panDays.Controls.Add(this.lblType);
             this.panDays.Controls.Add(this.lblSector_1);
             this.panDays.Controls.Add(comboBox1);
             this.panDays.Controls.Add(this.comboSector_1);
@@ -386,7 +390,7 @@
             // btnRemove
             // 
             this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.Location = new System.Drawing.Point(245, 86);
+            this.btnRemove.Location = new System.Drawing.Point(245, 102);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(30, 30);
             this.btnRemove.TabIndex = 3;
@@ -398,7 +402,7 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(210, 56);
+            this.btnAdd.Location = new System.Drawing.Point(210, 72);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(30, 30);
             this.btnAdd.TabIndex = 3;
@@ -410,7 +414,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(21, 93);
+            this.label2.Location = new System.Drawing.Point(21, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 16);
             this.label2.TabIndex = 2;
@@ -422,7 +426,7 @@
             // 
             this.lblSector_1.AutoSize = true;
             this.lblSector_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSector_1.Location = new System.Drawing.Point(21, 63);
+            this.lblSector_1.Location = new System.Drawing.Point(21, 79);
             this.lblSector_1.Name = "lblSector_1";
             this.lblSector_1.Size = new System.Drawing.Size(53, 16);
             this.lblSector_1.TabIndex = 2;
@@ -434,7 +438,7 @@
             this.comboSector_1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboSector_1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboSector_1.FormattingEnabled = true;
-            this.comboSector_1.Location = new System.Drawing.Point(81, 61);
+            this.comboSector_1.Location = new System.Drawing.Point(81, 77);
             this.comboSector_1.Name = "comboSector_1";
             this.comboSector_1.Size = new System.Drawing.Size(121, 21);
             this.comboSector_1.TabIndex = 1;
@@ -469,6 +473,27 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Visible = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // comboType
+            // 
+            this.comboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboType.FormattingEnabled = true;
+            this.comboType.Location = new System.Drawing.Point(81, 47);
+            this.comboType.Name = "comboType";
+            this.comboType.Size = new System.Drawing.Size(50, 21);
+            this.comboType.TabIndex = 4;
+            this.comboType.Tag = "test";
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblType.Location = new System.Drawing.Point(35, 49);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(39, 16);
+            this.lblType.TabIndex = 2;
+            this.lblType.Tag = "";
+            this.lblType.Text = "Tipo:";
             // 
             // MainMenu
             // 
@@ -538,5 +563,7 @@
         private System.Windows.Forms.Label lblCurrentTag;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.ComboBox comboType;
+        private System.Windows.Forms.Label lblType;
     }
 }

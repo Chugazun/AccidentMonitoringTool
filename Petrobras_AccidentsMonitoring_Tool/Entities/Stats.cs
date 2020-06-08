@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Petrobras_AccidentMonitoring_Tool_Console.Entities
+namespace Petrobras_AccidentsMonitoring_Tool.Entities
 {
     public class Stats
     {

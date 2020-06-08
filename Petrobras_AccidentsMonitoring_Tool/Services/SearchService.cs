@@ -1,38 +1,19 @@
 ﻿using OfficeOpenXml;
-using Petrobras_AccidentMonitoring_Tool_Console.Entities;
-using Petrobras_AccidentMonitoring_Tool_Console.Exceptions;
-using Petrobras_AccidentMonitoring_Tool_Console.Utils;
+using Petrobras_AccidentsMonitoring_Tool.Entities;
+using Petrobras_AccidentsMonitoring_Tool.Exceptions;
+using Petrobras_AccidentsMonitoring_Tool.Utils;
 using Petrobras_AccidentsMonitoring_Tool.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Petrobras_AccidentMonitoring_Tool_Console.Services
+namespace Petrobras_AccidentsMonitoring_Tool.Services
 {
-    class SearchService
+    class SearchService : SheetService
     {
-        private readonly ExcelWorksheet _sheet;
-        public int TotalEntries { get; private set; }
-
-
-        public SearchService(ExcelWorksheet sheet)
+        public SearchService(ExcelWorksheet sheet) : base(sheet)
         {
-            _sheet = sheet;
-            SetTotalEntries();
-        }
 
-        private void SetTotalEntries()
-        {
-            int currentRow = 5;
-            do
-            {
-                TotalEntries++;
-            } while (_sheet.Cells[++currentRow, 21].Text != "");
-        }
-
-        public string GetAdress(string name)
-        {
-            return _sheet.Cells[2, 1, 8, 13].FirstOrDefault(c => c.Text == name).Address;
         }
 
         public IEnumerable<Accident> AdvSearch(SearchModel searchParameters)
@@ -48,7 +29,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
             else if (searchParameters.InitialDate.HasValue || searchParameters.FinalDate.HasValue)
             {
                 string initialDate = searchParameters.InitialDate.HasValue ? searchParameters.InitialDate.Value.ToString(@"dd/MM/yyyy") : new DateTime(GetDate(5).Year, 01, 01).ToString(@"dd/MM/yyyy");
-                string finalDate = searchParameters.FinalDate.HasValue ? searchParameters.FinalDate.Value.ToString(@"dd/MM/yyyy") : new DateTime(GetDate(TotalEntries + 4).Year, 12, 31).ToString(@"dd/MM/yyyy");
+                string finalDate = searchParameters.FinalDate.HasValue ? searchParameters.FinalDate.Value.ToString(@"dd/MM/yyyy") : new DateTime(GetDate(LastRow).Year, 12, 31).ToString(@"dd/MM/yyyy");
 
                 filters.Add(19, initialDate + " " + finalDate);
             }
@@ -72,7 +53,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
 
         private IEnumerable<int> GetRows(Dictionary<int, string> rowFilters)
         {
-            int searchCount = TotalEntries + 4;
+            int searchCount = LastRow;
             int startingRow = 5;
 
             if (rowFilters.ContainsKey(20))
@@ -153,15 +134,15 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
         {
             if (accidentClass.HasValue)
             {
-                return AccidentType.Típicos;
+                return (AccidentType)1;
             }
             else if (_sheet.Cells[row, 15].Text.ToLower() == "x" || _sheet.Cells[row, 16].Text.ToLower() == "x")
             {
-                return AccidentType.Trajeto;
+                return (AccidentType)2;
             }
             else
             {
-                return AccidentType.Equiparados;
+                return (AccidentType)3;
             }
 
         }
@@ -195,33 +176,17 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
             yield return yearColumn.LastIndexOf(year_2.ToString()) + 5;
         }
 
-        public IEnumerable<string> GetYearsColumn()
-        {
-            foreach (var cell in _sheet.Cells[5, 21, TotalEntries + 4, 21])
-            {
-                yield return cell.Text;
-            }
-        }
-
-        public IEnumerable<string> GetSectorsColumn()
-        {
-            foreach (var cell in _sheet.Cells[5, 3, TotalEntries + 4, 3])
-            {
-                if (cell.Text.Trim() != "") yield return cell.Text;
-            }
-        }
-
-        public int GetDaysInterval(string target, int searchColumn, int typeAsInt)
+        public int GetDaysIntervalOLD(string target, int searchColumn, int typeAsInt)
         {
             int aux = -1;
             DateTime? date = null;
 
-            var result = _sheet.Cells[5, searchColumn, TotalEntries + 4, searchColumn].Where(c => c.Text.Contains(target) && GetAccidentClass(c.Start.Row).HasValue && GetAccidentClass(c.Start.Row).Value >= typeAsInt)
+            var result = _sheet.Cells[5, searchColumn, LastRow, searchColumn].Where(c => c.Text.Contains(target.Trim()) && GetAccidentClass(c.Start.Row).HasValue && GetAccidentClass(c.Start.Row).Value >= typeAsInt)
                                                                                       .LastOrDefault();
 
             if (result != null) date = GetDate(result.Start.Row);
 
-            //for (int i = TotalEntries + 4; i > 5; i--)
+            //for (int i = LastRow; i > 5; i--)
             //{
             //    if (_sheet.Cells[i, searchColumn].Text == target)
             //    {
@@ -240,6 +205,22 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
             aux = diff.Days - 1;
             return aux;
         }
+
+        public Accident GetLastAccident(string target, int searchColumn, int typeAsInt)
+        {
+            Accident aux = null;
+            var result = _sheet.Cells[5, searchColumn, LastRow, searchColumn].Where(c => c.Text.Contains(target.Trim()) && GetAccidentClass(c.Start.Row).HasValue && GetAccidentClass(c.Start.Row).Value >= typeAsInt)
+                                                                                      .LastOrDefault();
+
+            if (result != null)
+            {
+                int selectedRow = result.Start.Row;
+                aux = RowDeserialize(selectedRow);
+                aux.Description = _sheet.Cells[selectedRow, 27].Text;
+            }
+            return aux;
+        }
+
         #region Unused ParseDate method
         //private DateTime ParseDate(string dateAsString, int yearNum)
         //{
@@ -254,7 +235,7 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
         //        {
         //            aux = new DateTime(GetDate(5).Year, 01, 01);
         //        }
-        //        else aux = GetDate(TotalEntries + 4);
+        //        else aux = GetDate(LastRow);
 
         //        return aux;
         //    }

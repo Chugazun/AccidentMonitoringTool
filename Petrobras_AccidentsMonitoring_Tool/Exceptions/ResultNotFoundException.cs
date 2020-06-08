@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Petrobras_AccidentMonitoring_Tool_Console.Exceptions
+namespace Petrobras_AccidentsMonitoring_Tool.Exceptions
 {
     class ResultNotFoundException : Exception
     {

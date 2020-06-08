@@ -1,6 +1,9 @@
 ﻿using OfficeOpenXml;
-using Petrobras_AccidentMonitoring_Tool_Console.Services;
+using Petrobras_AccidentsMonitoring_Tool.Entities;
+using Petrobras_AccidentsMonitoring_Tool.Services;
+using Petrobras_AccidentsMonitoring_Tool.Utils;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -10,6 +13,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
     {
         private string[] _sectors;
         private string _accidentType;
+        private List<Accident> _accidents;
 
         public DaysMonitoringScreen()
         {
@@ -25,19 +29,30 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private void DaysMonitoringScreen_Load(object sender, EventArgs e)
         {
             lblTitle.Text += $" ({_accidentType})";
+            _accidents = new List<Accident>();
             using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev6.xlsx")))
             {
                 var _sheet = project.Workbook.Worksheets[0];
-                SearchService searchService = new SearchService(_sheet);                
+                SearchService searchService = new SearchService(_sheet);
 
                 foreach (string sector in _sectors)
                 {
-                    int result = searchService.GetDaysInterval(sector, 3, ConvertAccidentType(_accidentType));
-                    if (result != -1)
+                    //int result = searchService.GetDaysIntervalOLD(sector, 3, ConvertAccidentType(_accidentType));
+                    //if (result != -1)
+                    //{
+                    //    listAccidents.Items.Add($"- {sector}: {result} dias. ({Utilities.ConvertToDate(result).ToString("dd/MM/yyyy")})");
+                    //}
+                    //else
+                    //{
+                    //    listAccidents.Items.Add($"- {sector}: Nenhum acidente encontrado.");
+                    //}
+                    Accident aux = searchService.GetLastAccident(sector, 3, ConvertAccidentType(_accidentType));
+                    _accidents.Add(aux);
+                    if(aux != null)
                     {
-                        listAccidents.Items.Add($"- {sector}: {result} dias. ({ConvertToDate(result).ToString("dd/MM/yyyy")})");
-                    }
-                    else
+                        int result = Utilities.GetDaysInterval(aux.Date.Value);
+                        listAccidents.Items.Add($"- {sector}: {result} dias. ({Utilities.ConvertToDate(result).ToString("dd/MM/yyyy")})");
+                    } else
                     {
                         listAccidents.Items.Add($"- {sector}: Nenhum acidente encontrado.");
                     }
@@ -45,15 +60,19 @@ namespace Petrobras_AccidentsMonitoring_Tool
             }
         }
 
-        private DateTime ConvertToDate(int days)
-        {
-            TimeSpan t = new TimeSpan(days + 1, 0, 0, 0, 0);
-            return DateTime.Now.Subtract(t);            
-        }
-
         private int ConvertAccidentType(string typeAsString)
         {
             return typeAsString == "TAR" ? 2 : 0;
+        }
+
+        private void listAccidents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = listAccidents.SelectedIndex;
+            if(_accidents[index] != null)
+            {
+                AccidentDetailsScreen accidentDetailsScreen = new AccidentDetailsScreen(_accidents[index]);
+                accidentDetailsScreen.Show();
+            }
         }
     }
 }

@@ -1,13 +1,11 @@
-﻿using Petrobras_AccidentMonitoring_Tool_Console.Entities;
-using Petrobras_AccidentMonitoring_Tool_Console.Services;
+﻿using Petrobras_AccidentsMonitoring_Tool.Entities;
+using Petrobras_AccidentsMonitoring_Tool.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -62,7 +60,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 statChart.Series[seriesName].Points[i].Label = $"{item} ({(item / (double)TotalValue * 100).ToString("0.0")}%)";
                 statChart.Series[seriesName].Points[i].LegendText = Stats[i].StatTag + ": " + item;
             }
-        }        
+        }
 
         private void statChart_MouseClick(object sender, MouseEventArgs e)
         {
@@ -82,6 +80,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private string GetTotalStats()
         {
             StringBuilder sb = new StringBuilder();
+
+            #region Old Group printing logic
             //var selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Típicos");
             //if (selectedGroup != null) sb.AppendLine($"- Típicos: {selectedGroup.Count()}");
 
@@ -90,6 +90,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
             //selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Equiparados");
             //if (selectedGroup != null) sb.AppendLine($"- Equiparados: {selectedGroup.Count()}");
+            #endregion
 
             foreach (var type in ResultGroup)
             {

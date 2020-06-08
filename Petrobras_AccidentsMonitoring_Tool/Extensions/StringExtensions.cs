@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Petrobras_AccidentMonitoring_Tool_Console.Extensions
+namespace Petrobras_AccidentsMonitoring_Tool.Extensions
 {
     static class StringExtensions
     {

@@ -8,8 +8,8 @@ namespace Petrobras_AccidentsMonitoring_Tool.Enums
 {
     public enum AccidentType : int
     {
-        Típicos = 1,
+        Típico = 1,
         Trajeto = 2,
-        Equiparados = 3
+        Equiparado = 3
     }
 }

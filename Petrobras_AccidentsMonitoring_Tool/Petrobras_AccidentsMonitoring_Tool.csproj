@@ -54,6 +54,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccidentAdditionScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccidentAdditionScreen.Designer.cs">
+      <DependentUpon>AccidentAdditionScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccidentDetailsScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccidentDetailsScreen.Designer.cs">
+      <DependentUpon>AccidentDetailsScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChartScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,7 +101,9 @@
     <Compile Include="RatioChartScreen.Designer.cs">
       <DependentUpon>RatioChartScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\ManagementService.cs" />
     <Compile Include="Services\SearchService.cs" />
+    <Compile Include="Services\SheetService.cs" />
     <Compile Include="Services\StatsCalculator.cs" />
     <Compile Include="StatsSelector.cs">
       <SubType>Form</SubType>
@@ -104,6 +118,12 @@
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\Utilities.cs" />
+    <EmbeddedResource Include="AccidentAdditionScreen.resx">
+      <DependentUpon>AccidentAdditionScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccidentDetailsScreen.resx">
+      <DependentUpon>AccidentDetailsScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChartScreen.resx">
       <DependentUpon>ChartScreen.cs</DependentUpon>
     </EmbeddedResource>

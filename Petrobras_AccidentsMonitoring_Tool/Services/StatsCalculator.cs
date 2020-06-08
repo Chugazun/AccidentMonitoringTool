@@ -1,12 +1,12 @@
-﻿using Petrobras_AccidentMonitoring_Tool_Console.Entities;
-using Petrobras_AccidentMonitoring_Tool_Console.Utils;
+﻿using Petrobras_AccidentsMonitoring_Tool.Entities;
+using Petrobras_AccidentsMonitoring_Tool.Utils;
 using Petrobras_AccidentsMonitoring_Tool.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Petrobras_AccidentMonitoring_Tool_Console.Services
+namespace Petrobras_AccidentsMonitoring_Tool.Services
 {
     class StatsCalculator
     {
@@ -42,17 +42,23 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Services
 
         public static IEnumerable<IGrouping<string, Accident>> GetByAccidentType(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.GroupBy(a => a.AccidentType.ToString()).OrderByDescending(s => s.Count());
+            return totalAccidents.Select(a => new
+            {
+                AccidentTypeGroup = Utilities.GetTypeGroup(a.AccidentType),
+                SelectedAccident = a
+            }).GroupBy(x => x.AccidentTypeGroup, a => a.SelectedAccident)
+              .OrderByDescending(s => s.Count());
+            //return totalAccidents.GroupBy(a => a.AccidentType.ToString()).OrderByDescending(s => s.Count());
         }
 
         public static IEnumerable<Accident> TOR(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.Where(a => a.AccidentType == AccidentType.Típicos);
+            return totalAccidents.Where(a => a.AccidentType == AccidentType.Típico);
         }
 
         public static IEnumerable<Accident> TAR(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.Where(a => a.AccidentType == AccidentType.Típicos && a.Class >= 2);
+            return totalAccidents.Where(a => a.AccidentType == AccidentType.Típico && a.Class >= 2);
         }
 
         #region unused GetAmounts Method

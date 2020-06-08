@@ -1,7 +1,7 @@
 ﻿using OfficeOpenXml;
-using Petrobras_AccidentMonitoring_Tool_Console.Entities;
-using Petrobras_AccidentMonitoring_Tool_Console.Exceptions;
-using Petrobras_AccidentMonitoring_Tool_Console.Services;
+using Petrobras_AccidentsMonitoring_Tool.Entities;
+using Petrobras_AccidentsMonitoring_Tool.Exceptions;
+using Petrobras_AccidentsMonitoring_Tool.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,6 +53,17 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 GetSheetSectors(_search.GetSectorsColumn().GroupBy(c => c).Select(g => g.Key).OrderBy(s => s));
                 comboSector_1.Items.AddRange(_sectors.Prepend("RNEST").ToArray());
                 comboSector_1.SelectedIndex = 0;
+            }
+
+            using (var projectTest = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\sheetbak.xlsx")))
+            {
+                var sheetBak = projectTest.Workbook.Worksheets[0];
+                //sheetBak.Cells["AA78"].Value = sheetBak.Cells["AA76"].Value;
+                //sheetBak.Cells[76, 1, 76, 31].Copy(sheetBak.Cells[77, 1, 77, 31]);
+                //sheetBak.Row(77).CustomHeight = false;
+                ManagementService managementService = new ManagementService(sheetBak);
+                managementService.CreateRow();
+                projectTest.Save();
             }
 
             comboType.Items.AddRange(new string[] { "TAR", "TOR" });
@@ -217,10 +228,12 @@ namespace Petrobras_AccidentsMonitoring_Tool
             comboSector.BringToFront();
 
             btnAdd.Location = new Point(210, btnAdd.Location.Y + 30);
-            if(currentTag - 1 != 1)
+            if (currentTag - 1 != 1)
             {
                 btnRemove.Location = new Point(245, btnAdd.Location.Y);
-            } else {
+            }
+            else
+            {
                 btnRemove.Visible = true;
             }
             currentTag++;
@@ -235,10 +248,11 @@ namespace Petrobras_AccidentsMonitoring_Tool
             panDays.Controls.Remove(lastLabel);
 
             btnAdd.Location = new Point(210, btnAdd.Location.Y - 30);
-            if(currentTag - 1 != 2)
+            if (currentTag - 1 != 2)
             {
                 btnRemove.Location = new Point(245, btnAdd.Location.Y);
-            } else
+            }
+            else
             {
                 btnRemove.Visible = false;
             }
@@ -265,7 +279,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
             btnDays.BackColor = SystemColors.GradientInactiveCaption;
             btnAccidents.BackColor = SystemColors.ControlLight;
             lblToolName.Text = "Monitoramento de Dias";
-        }        
+        }
 
         private void btnAccidents_Click(object sender, EventArgs e)
         {

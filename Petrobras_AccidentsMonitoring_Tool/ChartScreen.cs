@@ -1,5 +1,5 @@
-﻿using Petrobras_AccidentMonitoring_Tool_Console.Entities;
-using Petrobras_AccidentMonitoring_Tool_Console.Services;
+﻿using Petrobras_AccidentsMonitoring_Tool.Entities;
+using Petrobras_AccidentsMonitoring_Tool.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

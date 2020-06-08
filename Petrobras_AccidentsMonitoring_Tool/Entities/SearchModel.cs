@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Petrobras_AccidentMonitoring_Tool_Console.Entities
+namespace Petrobras_AccidentsMonitoring_Tool.Entities
 {
     class SearchModel
     {
@@ -14,7 +14,5 @@ namespace Petrobras_AccidentMonitoring_Tool_Console.Entities
         public string Sector { get; set; }
         public string EmployeeName { get; set; }
         public string InjuryType { get; set; }
-
-
     }
 }

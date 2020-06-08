@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Petrobras_AccidentMonitoring_Tool_Console.Exceptions
+namespace Petrobras_AccidentsMonitoring_Tool.Exceptions
 {
     class AccidentClassException : Exception
     {        

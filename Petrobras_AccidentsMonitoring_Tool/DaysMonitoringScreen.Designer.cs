@@ -41,6 +41,7 @@
             this.listAccidents.Name = "listAccidents";
             this.listAccidents.Size = new System.Drawing.Size(309, 139);
             this.listAccidents.TabIndex = 0;
+            this.listAccidents.SelectedIndexChanged += new System.EventHandler(this.listAccidents_SelectedIndexChanged);
             // 
             // lblTitle
             // 

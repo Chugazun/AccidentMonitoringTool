@@ -61,8 +61,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 //sheetBak.Cells["AA78"].Value = sheetBak.Cells["AA76"].Value;
                 //sheetBak.Cells[76, 1, 76, 31].Copy(sheetBak.Cells[77, 1, 77, 31]);
                 //sheetBak.Row(77).CustomHeight = false;
-                ManagementService managementService = new ManagementService(sheetBak);
-                managementService.CreateRow();
+                ManagementService managementService = new ManagementService(sheetBak);                
                 projectTest.Save();
             }
 

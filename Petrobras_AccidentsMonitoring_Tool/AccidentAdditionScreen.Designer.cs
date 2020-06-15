@@ -30,14 +30,14 @@
         {
             this.lblAccidentInfo = new System.Windows.Forms.Label();
             this.groupAccidentInfo = new System.Windows.Forms.GroupBox();
+            this.comboClass = new System.Windows.Forms.ComboBox();
+            this.hourBox = new System.Windows.Forms.DateTimePicker();
+            this.txtWeekDay = new System.Windows.Forms.TextBox();
+            this.dateTimeBox = new System.Windows.Forms.DateTimePicker();
             this.lblBodyPart = new System.Windows.Forms.Label();
             this.lblPlace = new System.Windows.Forms.Label();
             this.lblWeekDay = new System.Windows.Forms.Label();
-            this.txtWeekDay = new System.Windows.Forms.TextBox();
             this.lblDate = new System.Windows.Forms.Label();
-            this.txtDate = new System.Windows.Forms.TextBox();
-            this.txtTime = new System.Windows.Forms.TextBox();
-            this.txtClass = new System.Windows.Forms.TextBox();
             this.txtBodyPart = new System.Windows.Forms.TextBox();
             this.txtPlace = new System.Windows.Forms.TextBox();
             this.lblTime = new System.Windows.Forms.Label();
@@ -56,9 +56,8 @@
             this.lblSector = new System.Windows.Forms.Label();
             this.txtJobRole = new System.Windows.Forms.TextBox();
             this.lblJobRole = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupAccidentInfo.SuspendLayout();
             this.groupGenInfo.SuspendLayout();
             this.SuspendLayout();
@@ -75,17 +74,15 @@
             // 
             // groupAccidentInfo
             // 
-            this.groupAccidentInfo.Controls.Add(this.comboBox1);
-            this.groupAccidentInfo.Controls.Add(this.dateTimePicker2);
+            this.groupAccidentInfo.Controls.Add(this.label1);
+            this.groupAccidentInfo.Controls.Add(this.comboClass);
+            this.groupAccidentInfo.Controls.Add(this.hourBox);
             this.groupAccidentInfo.Controls.Add(this.txtWeekDay);
-            this.groupAccidentInfo.Controls.Add(this.dateTimePicker1);
+            this.groupAccidentInfo.Controls.Add(this.dateTimeBox);
             this.groupAccidentInfo.Controls.Add(this.lblBodyPart);
             this.groupAccidentInfo.Controls.Add(this.lblPlace);
             this.groupAccidentInfo.Controls.Add(this.lblWeekDay);
             this.groupAccidentInfo.Controls.Add(this.lblDate);
-            this.groupAccidentInfo.Controls.Add(this.txtDate);
-            this.groupAccidentInfo.Controls.Add(this.txtTime);
-            this.groupAccidentInfo.Controls.Add(this.txtClass);
             this.groupAccidentInfo.Controls.Add(this.txtBodyPart);
             this.groupAccidentInfo.Controls.Add(this.txtPlace);
             this.groupAccidentInfo.Controls.Add(this.lblTime);
@@ -102,6 +99,60 @@
             this.groupAccidentInfo.Size = new System.Drawing.Size(936, 403);
             this.groupAccidentInfo.TabIndex = 2;
             this.groupAccidentInfo.TabStop = false;
+            // 
+            // comboClass
+            // 
+            this.comboClass.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboClass.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboClass.BackColor = System.Drawing.SystemColors.Window;
+            this.comboClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboClass.FormattingEnabled = true;
+            this.comboClass.Items.AddRange(new object[] {
+            "",
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.comboClass.Location = new System.Drawing.Point(699, 30);
+            this.comboClass.Name = "comboClass";
+            this.comboClass.Size = new System.Drawing.Size(39, 24);
+            this.comboClass.TabIndex = 21;
+            // 
+            // hourBox
+            // 
+            this.hourBox.CustomFormat = "HH:mm";
+            this.hourBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hourBox.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.hourBox.Location = new System.Drawing.Point(560, 30);
+            this.hourBox.Name = "hourBox";
+            this.hourBox.ShowUpDown = true;
+            this.hourBox.Size = new System.Drawing.Size(64, 24);
+            this.hourBox.TabIndex = 7;
+            this.hourBox.Value = new System.DateTime(2020, 6, 10, 14, 36, 0, 0);
+            // 
+            // txtWeekDay
+            // 
+            this.txtWeekDay.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtWeekDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtWeekDay.Location = new System.Drawing.Point(351, 30);
+            this.txtWeekDay.Name = "txtWeekDay";
+            this.txtWeekDay.ReadOnly = true;
+            this.txtWeekDay.Size = new System.Drawing.Size(69, 24);
+            this.txtWeekDay.TabIndex = 6;
+            // 
+            // dateTimeBox
+            // 
+            this.dateTimeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimeBox.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimeBox.Location = new System.Drawing.Point(126, 30);
+            this.dateTimeBox.Name = "dateTimeBox";
+            this.dateTimeBox.Size = new System.Drawing.Size(95, 24);
+            this.dateTimeBox.TabIndex = 5;
+            this.dateTimeBox.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dateTimeBox.ValueChanged += new System.EventHandler(this.dateTimeBox_ValueChanged);
             // 
             // lblBodyPart
             // 
@@ -133,17 +184,6 @@
             this.lblWeekDay.TabIndex = 0;
             this.lblWeekDay.Text = "Dia da Semana:";
             // 
-            // txtWeekDay
-            // 
-            this.txtWeekDay.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtWeekDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWeekDay.Location = new System.Drawing.Point(351, 30);
-            this.txtWeekDay.Name = "txtWeekDay";
-            this.txtWeekDay.ReadOnly = true;
-            this.txtWeekDay.Size = new System.Drawing.Size(69, 24);
-            this.txtWeekDay.TabIndex = 6;
-            this.txtWeekDay.Text = "Domingo";
-            // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
@@ -153,41 +193,6 @@
             this.lblDate.Size = new System.Drawing.Size(48, 18);
             this.lblDate.TabIndex = 0;
             this.lblDate.Text = "Data:";
-            // 
-            // txtDate
-            // 
-            this.txtDate.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDate.Location = new System.Drawing.Point(230, 144);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.ReadOnly = true;
-            this.txtDate.Size = new System.Drawing.Size(83, 24);
-            this.txtDate.TabIndex = 20;
-            this.txtDate.Text = "18/12/1994";
-            // 
-            // txtTime
-            // 
-            this.txtTime.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTime.Location = new System.Drawing.Point(645, 121);
-            this.txtTime.Name = "txtTime";
-            this.txtTime.ReadOnly = true;
-            this.txtTime.Size = new System.Drawing.Size(48, 24);
-            this.txtTime.TabIndex = 20;
-            this.txtTime.Text = "00:00";
-            this.txtTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtClass
-            // 
-            this.txtClass.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClass.Location = new System.Drawing.Point(795, 33);
-            this.txtClass.Name = "txtClass";
-            this.txtClass.ReadOnly = true;
-            this.txtClass.Size = new System.Drawing.Size(24, 24);
-            this.txtClass.TabIndex = 8;
-            this.txtClass.Text = "0";
-            this.txtClass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtBodyPart
             // 
@@ -320,6 +325,7 @@
             // 
             this.txtCompany.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCompany.ForeColor = System.Drawing.SystemColors.WindowText;
             this.txtCompany.Location = new System.Drawing.Point(126, 30);
             this.txtCompany.Name = "txtCompany";
             this.txtCompany.Size = new System.Drawing.Size(294, 24);
@@ -373,52 +379,33 @@
             this.lblJobRole.TabIndex = 0;
             this.lblJobRole.Text = "Cargo:";
             // 
-            // dateTimePicker1
+            // button1
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(126, 30);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(95, 24);
-            this.dateTimePicker1.TabIndex = 5;
-            this.dateTimePicker1.Value = new System.DateTime(2020, 6, 8, 16, 48, 38, 0);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(435, 603);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(90, 38);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Confirmar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // dateTimePicker2
+            // label1
             // 
-            this.dateTimePicker2.CustomFormat = "HH:mm";
-            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(560, 30);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.ShowUpDown = true;
-            this.dateTimePicker2.Size = new System.Drawing.Size(64, 24);
-            this.dateTimePicker2.TabIndex = 7;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "",
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"});
-            this.comboBox1.Location = new System.Drawing.Point(699, 30);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(39, 24);
-            this.comboBox1.TabIndex = 21;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(562, 159);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 16);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "*(opcional)";
             // 
             // AccidentAdditionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 658);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblAccidentInfo);
             this.Controls.Add(this.groupAccidentInfo);
             this.Controls.Add(this.lblGenInfo);
@@ -426,6 +413,7 @@
             this.Name = "AccidentAdditionScreen";
             this.Text = "Adicionar Acidente";
             this.Load += new System.EventHandler(this.AccidentAdditionScreen_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.AccidentAdditionScreen_Paint);
             this.groupAccidentInfo.ResumeLayout(false);
             this.groupAccidentInfo.PerformLayout();
             this.groupGenInfo.ResumeLayout(false);
@@ -443,9 +431,6 @@
         private System.Windows.Forms.Label lblWeekDay;
         private System.Windows.Forms.TextBox txtWeekDay;
         private System.Windows.Forms.Label lblDate;
-        private System.Windows.Forms.TextBox txtDate;
-        private System.Windows.Forms.TextBox txtTime;
-        private System.Windows.Forms.TextBox txtClass;
         private System.Windows.Forms.TextBox txtBodyPart;
         private System.Windows.Forms.TextBox txtPlace;
         private System.Windows.Forms.Label lblTime;
@@ -464,8 +449,10 @@
         private System.Windows.Forms.Label lblSector;
         private System.Windows.Forms.TextBox txtJobRole;
         private System.Windows.Forms.Label lblJobRole;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DateTimePicker dateTimeBox;
+        private System.Windows.Forms.DateTimePicker hourBox;
+        private System.Windows.Forms.ComboBox comboClass;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
     }
 }

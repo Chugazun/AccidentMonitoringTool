@@ -17,22 +17,24 @@ namespace Petrobras_AccidentsMonitoring_Tool
 {
     public partial class AccidentAdditionScreen : Form
     {
-        public AccidentAdditionScreen()
+
+        private readonly MainMenu _mainMenu;
+
+        public AccidentAdditionScreen(MainMenu mainMenu)
         {
             InitializeComponent();
+            _mainMenu = mainMenu;
         }
-
-        private bool focus = false;
 
         private void AccidentAdditionScreen_Load(object sender, EventArgs e)
         {
             ScreenSetup();
-
         }
 
         private void ScreenSetup()
         {
             dateTimeBox.Value = DateTime.Today;
+            comboClass.SelectedIndex = 0;
         }
 
         private string GetWeekDay()
@@ -47,9 +49,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
             txtWeekDay.Text = GetWeekDay();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            focus = true;
             if (VerifyRequiredControls())
             {
                 using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\sheetbak.xlsx")))
@@ -74,43 +75,24 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
                     managementService.AddAccident(accident);
                     project.Save();
+                    _mainMenu.Show();
+                    Dispose();
                 }
             }
             else
             {
-                //MessageBox.Show("Todos os campos não opcionais devem ser preenchidos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Todos os campos não opcionais devem ser preenchidos", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private bool VerifyRequiredControls()
         {
             int txtBoxCount = groupGenInfo.Controls.OfType<TextBox>().Where(tb => tb.Text.Trim() == "").Count() + groupAccidentInfo.Controls.OfType<TextBox>().Where(tb => tb.Text.Trim() == "").Count();
-            if (comboClass.SelectedIndex != 0 && txtBoxCount == 0) return true;
+            if (comboClass.SelectedIndex != 0 && txtBoxCount == 1) return true;
             else
             {
                 txtDescription.Text = txtBoxCount.ToString();
                 return false;
-            }
-        }
-
-        private void AccidentAdditionScreen_Paint(object sender, PaintEventArgs e)
-        {
-            if (focus)
-            {
-                PaintBorders(groupGenInfo.Controls.OfType<TextBox>().Where(tb => tb.Text == ""), e);
-                PaintBorders(groupAccidentInfo.Controls.OfType<TextBox>().Where(tb => tb.Text == ""), e);
-            }
-        }
-
-        private void PaintBorders(IEnumerable<TextBox> textBoxes, PaintEventArgs e)
-        {
-            foreach (TextBox textBox in textBoxes)
-            {
-                textBox.BorderStyle = BorderStyle.None;
-                Pen p = new Pen(Color.Red);
-                Graphics g = e.Graphics;
-                int variance = 1;
-                g.DrawRectangle(p, new Rectangle(textBox.Location.X - variance, textBox.Location.Y - variance, textBox.Width + variance, textBox.Height + variance));
             }
         }
     }

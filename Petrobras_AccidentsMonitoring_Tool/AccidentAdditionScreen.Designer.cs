@@ -30,6 +30,7 @@
         {
             this.lblAccidentInfo = new System.Windows.Forms.Label();
             this.groupAccidentInfo = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.comboClass = new System.Windows.Forms.ComboBox();
             this.hourBox = new System.Windows.Forms.DateTimePicker();
             this.txtWeekDay = new System.Windows.Forms.TextBox();
@@ -48,16 +49,15 @@
             this.lblInjuryType = new System.Windows.Forms.Label();
             this.lblGenInfo = new System.Windows.Forms.Label();
             this.groupGenInfo = new System.Windows.Forms.GroupBox();
-            this.lblName = new System.Windows.Forms.Label();
-            this.lblCompany = new System.Windows.Forms.Label();
             this.txtCompany = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
             this.txtSector = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblSector = new System.Windows.Forms.Label();
             this.txtJobRole = new System.Windows.Forms.TextBox();
             this.lblJobRole = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblCompany = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.groupAccidentInfo.SuspendLayout();
             this.groupGenInfo.SuspendLayout();
             this.SuspendLayout();
@@ -99,6 +99,16 @@
             this.groupAccidentInfo.Size = new System.Drawing.Size(936, 403);
             this.groupAccidentInfo.TabIndex = 2;
             this.groupAccidentInfo.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(562, 159);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 16);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "*(opcional)";
             // 
             // comboClass
             // 
@@ -285,14 +295,14 @@
             // 
             // groupGenInfo
             // 
-            this.groupGenInfo.Controls.Add(this.lblName);
-            this.groupGenInfo.Controls.Add(this.lblCompany);
             this.groupGenInfo.Controls.Add(this.txtCompany);
+            this.groupGenInfo.Controls.Add(this.lblName);
             this.groupGenInfo.Controls.Add(this.txtSector);
             this.groupGenInfo.Controls.Add(this.txtName);
             this.groupGenInfo.Controls.Add(this.lblSector);
             this.groupGenInfo.Controls.Add(this.txtJobRole);
             this.groupGenInfo.Controls.Add(this.lblJobRole);
+            this.groupGenInfo.Controls.Add(this.lblCompany);
             this.groupGenInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupGenInfo.Location = new System.Drawing.Point(12, 37);
             this.groupGenInfo.Margin = new System.Windows.Forms.Padding(0);
@@ -300,26 +310,6 @@
             this.groupGenInfo.Size = new System.Drawing.Size(936, 115);
             this.groupGenInfo.TabIndex = 1;
             this.groupGenInfo.TabStop = false;
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(67, 69);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(58, 18);
-            this.lblName.TabIndex = 0;
-            this.lblName.Text = "Nome:";
-            // 
-            // lblCompany
-            // 
-            this.lblCompany.AutoSize = true;
-            this.lblCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCompany.Location = new System.Drawing.Point(45, 33);
-            this.lblCompany.Name = "lblCompany";
-            this.lblCompany.Size = new System.Drawing.Size(80, 18);
-            this.lblCompany.TabIndex = 0;
-            this.lblCompany.Text = "Empresa:";
             // 
             // txtCompany
             // 
@@ -330,6 +320,16 @@
             this.txtCompany.Name = "txtCompany";
             this.txtCompany.Size = new System.Drawing.Size(294, 24);
             this.txtCompany.TabIndex = 1;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(67, 69);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(58, 18);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "Nome:";
             // 
             // txtSector
             // 
@@ -379,33 +379,33 @@
             this.lblJobRole.TabIndex = 0;
             this.lblJobRole.Text = "Cargo:";
             // 
-            // button1
+            // lblCompany
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(435, 603);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 38);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Confirmar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.lblCompany.AutoSize = true;
+            this.lblCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompany.Location = new System.Drawing.Point(45, 33);
+            this.lblCompany.Name = "lblCompany";
+            this.lblCompany.Size = new System.Drawing.Size(80, 18);
+            this.lblCompany.TabIndex = 0;
+            this.lblCompany.Text = "Empresa:";
             // 
-            // label1
+            // btnAdd
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(562, 159);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 16);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "*(opcional)";
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(435, 603);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(90, 38);
+            this.btnAdd.TabIndex = 6;
+            this.btnAdd.Text = "Confirmar";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // AccidentAdditionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 658);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lblAccidentInfo);
             this.Controls.Add(this.groupAccidentInfo);
             this.Controls.Add(this.lblGenInfo);
@@ -413,7 +413,6 @@
             this.Name = "AccidentAdditionScreen";
             this.Text = "Adicionar Acidente";
             this.Load += new System.EventHandler(this.AccidentAdditionScreen_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.AccidentAdditionScreen_Paint);
             this.groupAccidentInfo.ResumeLayout(false);
             this.groupAccidentInfo.PerformLayout();
             this.groupGenInfo.ResumeLayout(false);
@@ -452,7 +451,7 @@
         private System.Windows.Forms.DateTimePicker dateTimeBox;
         private System.Windows.Forms.DateTimePicker hourBox;
         private System.Windows.Forms.ComboBox comboClass;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label1;
     }
 }

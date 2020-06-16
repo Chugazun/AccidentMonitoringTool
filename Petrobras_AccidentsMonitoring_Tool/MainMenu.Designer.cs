@@ -30,6 +30,8 @@
         {
             System.Windows.Forms.ComboBox comboBox1;
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAddition = new System.Windows.Forms.Button();
+            this.lblCurrentTag = new System.Windows.Forms.Label();
             this.btnDays = new System.Windows.Forms.Button();
             this.btnAccidents = new System.Windows.Forms.Button();
             this.panAccidents = new System.Windows.Forms.Panel();
@@ -54,17 +56,19 @@
             this.lblValue_2_All = new System.Windows.Forms.Label();
             this.lblValue_1_All = new System.Windows.Forms.Label();
             this.lblToolName = new System.Windows.Forms.Label();
-            this.panDays = new System.Windows.Forms.Panel();
+            this.panDaysMain = new System.Windows.Forms.Panel();
+            this.comboType = new System.Windows.Forms.ComboBox();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblType = new System.Windows.Forms.Label();
             this.lblSector_1 = new System.Windows.Forms.Label();
             this.comboSector_1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblCurrentTag = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.comboType = new System.Windows.Forms.ComboBox();
-            this.lblType = new System.Windows.Forms.Label();
+            this.panDaysTotal = new System.Windows.Forms.Panel();
+            this.panAddition = new System.Windows.Forms.Panel();
+            this.btnAdditionScreen = new System.Windows.Forms.Button();
             comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.panAccidents.SuspendLayout();
@@ -72,7 +76,9 @@
             this.groupBox2.SuspendLayout();
             this.panDataMenuYear.SuspendLayout();
             this.panDataMenuAll.SuspendLayout();
-            this.panDays.SuspendLayout();
+            this.panDaysMain.SuspendLayout();
+            this.panDaysTotal.SuspendLayout();
+            this.panAddition.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -87,6 +93,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnAddition);
+            this.groupBox1.Controls.Add(this.lblCurrentTag);
             this.groupBox1.Controls.Add(this.btnDays);
             this.groupBox1.Controls.Add(this.btnAccidents);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -97,6 +105,31 @@
             this.groupBox1.Size = new System.Drawing.Size(163, 554);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // btnAddition
+            // 
+            this.btnAddition.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnAddition.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnAddition.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnAddition.FlatAppearance.BorderSize = 0;
+            this.btnAddition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddition.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAddition.Location = new System.Drawing.Point(6, 106);
+            this.btnAddition.Name = "btnAddition";
+            this.btnAddition.Size = new System.Drawing.Size(157, 41);
+            this.btnAddition.TabIndex = 0;
+            this.btnAddition.Text = "Adicionar Acidente";
+            this.btnAddition.UseVisualStyleBackColor = false;
+            this.btnAddition.Click += new System.EventHandler(this.btnAddition_Click);
+            // 
+            // lblCurrentTag
+            // 
+            this.lblCurrentTag.AutoSize = true;
+            this.lblCurrentTag.Location = new System.Drawing.Point(19, 364);
+            this.lblCurrentTag.Name = "lblCurrentTag";
+            this.lblCurrentTag.Size = new System.Drawing.Size(116, 13);
+            this.lblCurrentTag.TabIndex = 7;
+            this.lblCurrentTag.Text = "Current Tag (DEBUG): ";
             // 
             // btnDays
             // 
@@ -368,24 +401,33 @@
             this.lblToolName.Text = "Monitoramento de Acidentes";
             this.lblToolName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panDays
+            // panDaysMain
             // 
-            this.panDays.AutoScroll = true;
-            this.panDays.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panDays.Controls.Add(this.comboType);
-            this.panDays.Controls.Add(this.btnRemove);
-            this.panDays.Controls.Add(this.btnAdd);
-            this.panDays.Controls.Add(this.label2);
-            this.panDays.Controls.Add(this.lblType);
-            this.panDays.Controls.Add(this.lblSector_1);
-            this.panDays.Controls.Add(comboBox1);
-            this.panDays.Controls.Add(this.comboSector_1);
-            this.panDays.Controls.Add(this.label1);
-            this.panDays.Location = new System.Drawing.Point(229, 63);
-            this.panDays.Name = "panDays";
-            this.panDays.Size = new System.Drawing.Size(280, 288);
-            this.panDays.TabIndex = 6;
-            this.panDays.Visible = false;
+            this.panDaysMain.AutoScroll = true;
+            this.panDaysMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panDaysMain.Controls.Add(this.comboType);
+            this.panDaysMain.Controls.Add(this.btnRemove);
+            this.panDaysMain.Controls.Add(this.btnAdd);
+            this.panDaysMain.Controls.Add(this.label2);
+            this.panDaysMain.Controls.Add(this.lblType);
+            this.panDaysMain.Controls.Add(this.lblSector_1);
+            this.panDaysMain.Controls.Add(comboBox1);
+            this.panDaysMain.Controls.Add(this.comboSector_1);
+            this.panDaysMain.Controls.Add(this.label1);
+            this.panDaysMain.Location = new System.Drawing.Point(15, 10);
+            this.panDaysMain.Name = "panDaysMain";
+            this.panDaysMain.Size = new System.Drawing.Size(280, 288);
+            this.panDaysMain.TabIndex = 6;
+            // 
+            // comboType
+            // 
+            this.comboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboType.FormattingEnabled = true;
+            this.comboType.Location = new System.Drawing.Point(81, 47);
+            this.comboType.Name = "comboType";
+            this.comboType.Size = new System.Drawing.Size(50, 21);
+            this.comboType.TabIndex = 4;
+            this.comboType.Tag = "test";
             // 
             // btnRemove
             // 
@@ -422,6 +464,17 @@
             this.label2.Text = "Setor 10:";
             this.label2.Visible = false;
             // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblType.Location = new System.Drawing.Point(35, 49);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(39, 16);
+            this.lblType.TabIndex = 2;
+            this.lblType.Tag = "";
+            this.lblType.Text = "Tipo:";
+            // 
             // lblSector_1
             // 
             this.lblSector_1.AutoSize = true;
@@ -454,62 +507,60 @@
             this.label1.Text = "Selecione um ou mais Setores";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblCurrentTag
-            // 
-            this.lblCurrentTag.AutoSize = true;
-            this.lblCurrentTag.Location = new System.Drawing.Point(162, 369);
-            this.lblCurrentTag.Name = "lblCurrentTag";
-            this.lblCurrentTag.Size = new System.Drawing.Size(116, 13);
-            this.lblCurrentTag.TabIndex = 7;
-            this.lblCurrentTag.Text = "Current Tag (DEBUG): ";
-            // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(332, 359);
+            this.btnSearch.Location = new System.Drawing.Point(118, 304);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 8;
             this.btnSearch.Text = "Consultar";
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Visible = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // comboType
+            // panDaysTotal
             // 
-            this.comboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboType.FormattingEnabled = true;
-            this.comboType.Location = new System.Drawing.Point(81, 47);
-            this.comboType.Name = "comboType";
-            this.comboType.Size = new System.Drawing.Size(50, 21);
-            this.comboType.TabIndex = 4;
-            this.comboType.Tag = "test";
+            this.panDaysTotal.Controls.Add(this.panDaysMain);
+            this.panDaysTotal.Controls.Add(this.btnSearch);
+            this.panDaysTotal.Location = new System.Drawing.Point(514, 12);
+            this.panDaysTotal.Name = "panDaysTotal";
+            this.panDaysTotal.Size = new System.Drawing.Size(28, 33);
+            this.panDaysTotal.TabIndex = 9;
+            this.panDaysTotal.Visible = false;
             // 
-            // lblType
+            // panAddition
             // 
-            this.lblType.AutoSize = true;
-            this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblType.Location = new System.Drawing.Point(35, 49);
-            this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(39, 16);
-            this.lblType.TabIndex = 2;
-            this.lblType.Tag = "";
-            this.lblType.Text = "Tipo:";
+            this.panAddition.Controls.Add(this.btnAdditionScreen);
+            this.panAddition.Location = new System.Drawing.Point(229, 63);
+            this.panAddition.Name = "panAddition";
+            this.panAddition.Size = new System.Drawing.Size(278, 270);
+            this.panAddition.TabIndex = 10;
+            this.panAddition.Visible = false;
+            // 
+            // btnAdditionScreen
+            // 
+            this.btnAdditionScreen.Location = new System.Drawing.Point(102, 218);
+            this.btnAdditionScreen.Name = "btnAdditionScreen";
+            this.btnAdditionScreen.Size = new System.Drawing.Size(75, 28);
+            this.btnAdditionScreen.TabIndex = 0;
+            this.btnAdditionScreen.Text = "Adicionar";
+            this.btnAdditionScreen.UseVisualStyleBackColor = true;
+            this.btnAdditionScreen.Click += new System.EventHandler(this.btnAdditionScreen_Click);
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 391);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.lblCurrentTag);
-            this.Controls.Add(this.panDays);
+            this.Controls.Add(this.panAddition);
             this.Controls.Add(this.panAccidents);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblToolName);
+            this.Controls.Add(this.panDaysTotal);
             this.Name = "MainMenu";
             this.Text = "Menu Principal";
             this.Load += new System.EventHandler(this.Test_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.panAccidents.ResumeLayout(false);
             this.panAccidents.PerformLayout();
             this.panDataMenuPeriod.ResumeLayout(false);
@@ -520,10 +571,11 @@
             this.panDataMenuYear.PerformLayout();
             this.panDataMenuAll.ResumeLayout(false);
             this.panDataMenuAll.PerformLayout();
-            this.panDays.ResumeLayout(false);
-            this.panDays.PerformLayout();
+            this.panDaysMain.ResumeLayout(false);
+            this.panDaysMain.PerformLayout();
+            this.panDaysTotal.ResumeLayout(false);
+            this.panAddition.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -554,7 +606,7 @@
         private System.Windows.Forms.Label lblValue_2_All;
         private System.Windows.Forms.Label lblValue_1_All;
         private System.Windows.Forms.Label lblToolName;
-        private System.Windows.Forms.Panel panDays;
+        private System.Windows.Forms.Panel panDaysMain;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboSector_1;
         private System.Windows.Forms.Button btnAdd;
@@ -565,5 +617,9 @@
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.ComboBox comboType;
         private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.Button btnAddition;
+        private System.Windows.Forms.Panel panDaysTotal;
+        private System.Windows.Forms.Panel panAddition;
+        private System.Windows.Forms.Button btnAdditionScreen;
     }
 }

@@ -21,6 +21,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private SearchService _search;
         private Func<SearchModel> GetSearchDetails;
         private IEnumerable<string> _years, _sectors;
+        private Button _currentButton;
+        private Panel _currentPanel;
         private bool isLoaded;
         private int currentTag = 2;
 
@@ -61,7 +63,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 //sheetBak.Cells["AA78"].Value = sheetBak.Cells["AA76"].Value;
                 //sheetBak.Cells[76, 1, 76, 31].Copy(sheetBak.Cells[77, 1, 77, 31]);
                 //sheetBak.Row(77).CustomHeight = false;
-                ManagementService managementService = new ManagementService(sheetBak);                
+                ManagementService managementService = new ManagementService(sheetBak);
                 projectTest.Save();
             }
 
@@ -74,6 +76,10 @@ namespace Petrobras_AccidentsMonitoring_Tool
             lblCurrentTag.Text += currentTag;
             panAccidents.Location = new Point(229, 63);
             panAccidents.Size = new Size(278, 270);
+            panDaysTotal.Location = new Point(214, 55);
+            panDaysTotal.Size = new Size(315, 334);
+            _currentButton = btnAccidents;
+            _currentPanel = panAccidents;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -210,7 +216,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 AutoSize = true,
                 Visible = true
             };
-            panDays.Controls.Add(lblSector);
+            panDaysMain.Controls.Add(lblSector);
 
             ComboBox comboSector = new ComboBox()
             {
@@ -223,7 +229,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 Visible = true
             };
             comboSector.Items.AddRange(_sectors.Prepend("RNEST").ToArray());
-            panDays.Controls.Add(comboSector);
+            panDaysMain.Controls.Add(comboSector);
             comboSector.BringToFront();
 
             btnAdd.Location = new Point(210, btnAdd.Location.Y + 30);
@@ -243,8 +249,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             Control lastComboBox = Controls.Find("comboSector_" + (currentTag - 1), true)[0];
             Control lastLabel = Controls.Find("lblSector_" + (currentTag - 1), true)[0];
-            panDays.Controls.Remove(lastComboBox);
-            panDays.Controls.Remove(lastLabel);
+            panDaysMain.Controls.Remove(lastComboBox);
+            panDaysMain.Controls.Remove(lastLabel);
 
             btnAdd.Location = new Point(210, btnAdd.Location.Y - 30);
             if (currentTag - 1 != 2)
@@ -261,7 +267,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string[] searchItems = panDays.Controls.OfType<ComboBox>().Where(c => c.Tag.ToString() == "sector")
+            string[] searchItems = panDaysMain.Controls.OfType<ComboBox>().Where(c => c.Tag.ToString() == "sector")
                                                                       .Select(cb => cb.SelectedItem.ToString())
                                                                       .Reverse()
                                                                       .ToArray();
@@ -270,24 +276,43 @@ namespace Petrobras_AccidentsMonitoring_Tool
             daysMonitoringScreen.Show();
         }
 
+        private void TogglePreviousTool(Button newToolButton, Panel newToolPanel)
+        {
+            _currentButton.BackColor = SystemColors.ControlLight;
+            _currentPanel.Visible = false;
+            _currentButton = newToolButton;
+            _currentPanel = newToolPanel;
+        }
+
         private void btnDays_Click(object sender, EventArgs e)
         {
-            panDays.Visible = true;
-            btnSearch.Visible = true;
-            panAccidents.Visible = false;
+            TogglePreviousTool(btnDays, panDaysTotal);
+            panDaysTotal.Visible = true;
             btnDays.BackColor = SystemColors.GradientInactiveCaption;
-            btnAccidents.BackColor = SystemColors.ControlLight;
             lblToolName.Text = "Monitoramento de Dias";
         }
 
+        private void btnAddition_Click(object sender, EventArgs e)
+        {
+            TogglePreviousTool(btnAddition, panAddition);
+            panAddition.Visible = true;
+            btnAddition.BackColor = SystemColors.GradientInactiveCaption;
+            lblToolName.Text = "Adicionar Novo Acidente";
+        }        
+
         private void btnAccidents_Click(object sender, EventArgs e)
         {
+            TogglePreviousTool(btnAccidents, panAccidents);
             panAccidents.Visible = true;
-            panDays.Visible = false;
-            btnSearch.Visible = false;
-            btnAccidents.BackColor = SystemColors.GradientInactiveCaption;
-            btnDays.BackColor = SystemColors.ControlLight;
+            btnAccidents.BackColor = SystemColors.GradientInactiveCaption;            
             lblToolName.Text = "Monitoramento de Acidentes";
+        }
+
+        private void btnAdditionScreen_Click(object sender, EventArgs e)
+        {
+            AccidentAdditionScreen accidentAdditionScreen = new AccidentAdditionScreen(this);
+            accidentAdditionScreen.Show();
+            Hide();
         }
     }
 }

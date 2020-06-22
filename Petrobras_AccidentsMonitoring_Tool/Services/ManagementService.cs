@@ -32,7 +32,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             _sheet.Cells[LastRow, 24].Value = accident.Place;
             _sheet.Cells[LastRow, 25].Value = accident.InjuryType;
             _sheet.Cells[LastRow, 26].Value = accident.BodyPart;
-            _sheet.Cells[LastRow, 27].Value = _sheet.Cells[LastRow - 1, 27].Value;
+            _sheet.Cells[LastRow, 27].Value = accident.Description;
             _sheet.Row(LastRow).CustomHeight = false;
         }
 

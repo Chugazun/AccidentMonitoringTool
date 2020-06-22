@@ -30,7 +30,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             lblTitle.Text += $" ({_accidentType})";
             _accidents = new List<Accident>();
-            using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev6.xlsx")))
+            using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev8.xlsx")))
             {
                 var _sheet = project.Workbook.Worksheets[0];
                 SearchService searchService = new SearchService(_sheet);

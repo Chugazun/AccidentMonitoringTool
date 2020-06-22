@@ -108,13 +108,13 @@
             // 
             // btnAddition
             // 
-            this.btnAddition.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnAddition.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnAddition.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnAddition.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnAddition.FlatAppearance.BorderSize = 0;
             this.btnAddition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddition.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAddition.Location = new System.Drawing.Point(6, 106);
+            this.btnAddition.Location = new System.Drawing.Point(6, 12);
             this.btnAddition.Name = "btnAddition";
             this.btnAddition.Size = new System.Drawing.Size(157, 41);
             this.btnAddition.TabIndex = 0;
@@ -139,7 +139,7 @@
             this.btnDays.FlatAppearance.BorderSize = 0;
             this.btnDays.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDays.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDays.Location = new System.Drawing.Point(6, 59);
+            this.btnDays.Location = new System.Drawing.Point(6, 106);
             this.btnDays.Name = "btnDays";
             this.btnDays.Size = new System.Drawing.Size(157, 41);
             this.btnDays.TabIndex = 0;
@@ -149,13 +149,13 @@
             // 
             // btnAccidents
             // 
-            this.btnAccidents.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnAccidents.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnAccidents.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnAccidents.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnAccidents.FlatAppearance.BorderSize = 0;
             this.btnAccidents.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAccidents.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAccidents.Location = new System.Drawing.Point(6, 12);
+            this.btnAccidents.Location = new System.Drawing.Point(6, 59);
             this.btnAccidents.Name = "btnAccidents";
             this.btnAccidents.Size = new System.Drawing.Size(157, 41);
             this.btnAccidents.TabIndex = 0;
@@ -177,6 +177,7 @@
             this.panAccidents.Name = "panAccidents";
             this.panAccidents.Size = new System.Drawing.Size(35, 53);
             this.panAccidents.TabIndex = 2;
+            this.panAccidents.Visible = false;
             // 
             // panDataMenuPeriod
             // 
@@ -398,7 +399,7 @@
             this.lblToolName.Name = "lblToolName";
             this.lblToolName.Size = new System.Drawing.Size(241, 29);
             this.lblToolName.TabIndex = 5;
-            this.lblToolName.Text = "Monitoramento de Acidentes";
+            this.lblToolName.Text = "Adicionar novo Acidente";
             this.lblToolName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panDaysMain
@@ -534,7 +535,6 @@
             this.panAddition.Name = "panAddition";
             this.panAddition.Size = new System.Drawing.Size(278, 270);
             this.panAddition.TabIndex = 10;
-            this.panAddition.Visible = false;
             // 
             // btnAdditionScreen
             // 

@@ -26,6 +26,23 @@ namespace Petrobras_AccidentsMonitoring_Tool
             _mainMenu = mainMenu;
         }
 
+        public AccidentAdditionScreen(MainMenu mainMenu, Accident accident) : this(mainMenu)
+        {
+            txtCompany.Text = accident.Company;
+            txtSector.Text = accident.Sector;
+            txtName.Text = accident.EmployeeName;
+            txtJobRole.Text = accident.JobRole;
+            dateTimeBox.Value = accident.Date.Value;
+            txtWeekDay.Text = accident.WeekDay;
+            hourBox.Value.AddHours(accident.Time.Value.Hours);
+            hourBox.Value.AddMinutes(accident.Time.Value.Minutes);
+            comboClass.SelectedIndex = accident.Class.Value + 1;
+            txtPlace.Text = accident.Place;
+            txtBodyPart.Text = accident.BodyPart;
+            txtInjuryType.Text = accident.InjuryType;
+            txtDescription.Text = accident.Description;
+        }
+
         private void AccidentAdditionScreen_Load(object sender, EventArgs e)
         {
             ScreenSetup();
@@ -76,7 +93,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                     managementService.AddAccident(accident);
                     project.Save();
                     _mainMenu.Show();
-                    Dispose();
+                    Close();
                 }
             }
             else
@@ -88,12 +105,17 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private bool VerifyRequiredControls()
         {
             int txtBoxCount = groupGenInfo.Controls.OfType<TextBox>().Where(tb => tb.Text.Trim() == "").Count() + groupAccidentInfo.Controls.OfType<TextBox>().Where(tb => tb.Text.Trim() == "").Count();
-            if (comboClass.SelectedIndex != 0 && txtBoxCount == 1) return true;
+            if (comboClass.SelectedIndex != 0 && txtBoxCount <= 0) return true;
             else
             {
-                txtDescription.Text = txtBoxCount.ToString();
                 return false;
             }
+        }
+
+        private void AccidentAdditionScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _mainMenu.Show();
+            Hide();
         }
     }
 }

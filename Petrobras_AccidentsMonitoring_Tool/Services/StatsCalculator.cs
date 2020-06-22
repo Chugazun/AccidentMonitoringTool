@@ -117,7 +117,11 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
         public static IEnumerable<IGrouping<string, Accident>> GetByHour(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.GroupBy(a => a.Time.Value.Hours.ToString()).OrderByDescending(s => s.Count());
+            return totalAccidents.Select(a => new
+            {
+                FormattedHour = a.Time.Value.Hours.ToString() + ":00",
+                SelectedAccident = a
+            }).GroupBy(x => x.FormattedHour, x => x.SelectedAccident).OrderByDescending(s => s.Count());
         }
 
         public static IEnumerable<IGrouping<string, Accident>> GetByWeekDay(IEnumerable<Accident> totalAccidents)

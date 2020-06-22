@@ -30,7 +30,6 @@
         {
             this.lblAccidentInfo = new System.Windows.Forms.Label();
             this.groupAccidentInfo = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.comboClass = new System.Windows.Forms.ComboBox();
             this.hourBox = new System.Windows.Forms.DateTimePicker();
             this.txtWeekDay = new System.Windows.Forms.TextBox();
@@ -74,7 +73,6 @@
             // 
             // groupAccidentInfo
             // 
-            this.groupAccidentInfo.Controls.Add(this.label1);
             this.groupAccidentInfo.Controls.Add(this.comboClass);
             this.groupAccidentInfo.Controls.Add(this.hourBox);
             this.groupAccidentInfo.Controls.Add(this.txtWeekDay);
@@ -99,16 +97,6 @@
             this.groupAccidentInfo.Size = new System.Drawing.Size(936, 403);
             this.groupAccidentInfo.TabIndex = 2;
             this.groupAccidentInfo.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(562, 159);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 16);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "*(opcional)";
             // 
             // comboClass
             // 
@@ -141,7 +129,7 @@
             this.hourBox.ShowUpDown = true;
             this.hourBox.Size = new System.Drawing.Size(64, 24);
             this.hourBox.TabIndex = 7;
-            this.hourBox.Value = new System.DateTime(2020, 6, 10, 14, 36, 0, 0);
+            this.hourBox.Value = new System.DateTime(2020, 6, 10, 0, 0, 0, 0);
             // 
             // txtWeekDay
             // 
@@ -412,6 +400,7 @@
             this.Controls.Add(this.groupGenInfo);
             this.Name = "AccidentAdditionScreen";
             this.Text = "Adicionar Acidente";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccidentAdditionScreen_FormClosing);
             this.Load += new System.EventHandler(this.AccidentAdditionScreen_Load);
             this.groupAccidentInfo.ResumeLayout(false);
             this.groupAccidentInfo.PerformLayout();
@@ -452,6 +441,5 @@
         private System.Windows.Forms.DateTimePicker hourBox;
         private System.Windows.Forms.ComboBox comboClass;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Label label1;
     }
 }

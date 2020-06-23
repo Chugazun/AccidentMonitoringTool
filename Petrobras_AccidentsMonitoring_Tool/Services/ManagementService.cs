@@ -19,21 +19,35 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
         public void AddAccident(Accident accident)
         {
             CreateRow();
-            _sheet.Cells[LastRow, 1].Value = accident.Company;
-            _sheet.Cells[LastRow, 3].Value = accident.Sector.ToUpper();
-            _sheet.Cells[LastRow, 5].Value = accident.EmployeeName;
-            _sheet.Cells[LastRow, 7].Value = accident.JobRole;
-            _sheet.Cells[LastRow, GetClassPos(accident.Class.Value)].Value = "X";
-            _sheet.Cells[LastRow, 19].Value = accident.Date.Value.Day;
-            _sheet.Cells[LastRow, 20].Value = Utilities.ConvertMonth(accident.Date.Value.Month);
-            _sheet.Cells[LastRow, 21].Value = accident.Date.Value.Year;
-            _sheet.Cells[LastRow, 22].Value = accident.WeekDay;
-            _sheet.Cells[LastRow, 23].Value = accident.Time.Value;
-            _sheet.Cells[LastRow, 24].Value = accident.Place;
-            _sheet.Cells[LastRow, 25].Value = accident.InjuryType;
-            _sheet.Cells[LastRow, 26].Value = accident.BodyPart;
-            _sheet.Cells[LastRow, 27].Value = accident.Description;
-            _sheet.Row(LastRow).CustomHeight = false;
+            RowSerialize(LastRow, accident);
+        }
+
+        public void EditAccident(Accident accident)
+        {
+            int row = accident.ID;
+            ClearClassForEdit(row);
+            RowSerialize(row, accident);
+        }
+
+        private void RowSerialize(int row, Accident accident)
+        {
+            _sheet.Cells[row, 1].Value = accident.Company;
+            _sheet.Cells[row, 3].Value = accident.Sector.ToUpper();
+            _sheet.Cells[row, 5].Value = accident.EmployeeName;
+            _sheet.Cells[row, 7].Value = accident.JobRole;
+            _sheet.Cells[row, GetClassPos(accident.Class.Value)].Value = "X";
+            _sheet.Cells[row, 19].Value = accident.Date.Value.Day;
+            _sheet.Cells[row, 20].Value = Utilities.ConvertMonth(accident.Date.Value.Month);
+            _sheet.Cells[row, 21].Value = accident.Date.Value.Year;
+            _sheet.Cells[row, 22].Value = accident.WeekDay;
+            _sheet.Cells[row, 23].Value = accident.Time.Value;
+            _sheet.Cells[row, 24].Value = accident.Place;
+            _sheet.Cells[row, 25].Value = accident.InjuryType;
+            _sheet.Cells[row, 26].Value = accident.BodyPart;
+            _sheet.Cells[row, 27].Value = accident.Description;
+            _sheet.Cells[row, 28].Value = accident.RTA.ToUpper();
+            _sheet.Cells[row, 30].Value = accident.CAT;
+            _sheet.Row(row).CustomHeight = false;
         }
 
         private void CreateRow()
@@ -41,7 +55,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             var lastRow = _sheet.Cells[LastRow, 1, LastRow, 31];
             var newRow = _sheet.Cells[LastRow + 1, 1, LastRow + 1, 31];
             lastRow.Copy(newRow);
-            newRow.Value = "";            
+            newRow.Value = "";
             TotalEntries++;
             LastRow++;
         }
@@ -49,6 +63,15 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
         private int GetClassPos(int accidentClass)
         {
             return 9 + accidentClass;
+        }
+
+        private void ClearClassForEdit(int row)
+        {
+            int? accidentClass = GetAccidentClass(row);
+            if (accidentClass.HasValue)
+            {
+                _sheet.Cells[row, GetClassPos(accidentClass.Value)].Value = "";
+            }
         }
     }
 }

@@ -99,8 +99,8 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
         private Accident RowDeserialize(int row)
         {
             TimeSpan? time = _sheet.Cells[row, 23].Text != "" ? TimeSpan.Parse(_sheet.Cells[row, 23].Text) : (TimeSpan?)null;
-            Accident result = new Accident()
-            {
+            Accident result = new Accident(row)
+            {                
                 Company = _sheet.Cells[row, 1].Text,
                 Sector = _sheet.Cells[row, 3].Text,
                 Supervisor = _sheet.Cells[row, 4].Text,
@@ -119,16 +119,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             };
             result.AccidentType = GetAccidentType(row, result.Class);
             return result;
-        }
-
-        private int? GetAccidentClass(int row)
-        {
-            for (int i = 9; i < 15; i++)
-            {
-                if (_sheet.Cells[row, i].Text.ToLower() == "x") return i - 9;
-            }
-            return null;
-        }
+        }       
 
         private AccidentType GetAccidentType(int row, int? accidentClass)
         {

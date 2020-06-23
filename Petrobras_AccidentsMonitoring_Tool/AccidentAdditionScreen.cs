@@ -19,6 +19,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
     {
 
         private readonly MainMenu _mainMenu;
+        private bool isEditMode;
+        private int row;
 
         public AccidentAdditionScreen(MainMenu mainMenu)
         {
@@ -28,19 +30,20 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         public AccidentAdditionScreen(MainMenu mainMenu, Accident accident) : this(mainMenu)
         {
+            row = accident.ID;
             txtCompany.Text = accident.Company;
             txtSector.Text = accident.Sector;
             txtName.Text = accident.EmployeeName;
             txtJobRole.Text = accident.JobRole;
             dateTimeBox.Value = accident.Date.Value;
             txtWeekDay.Text = accident.WeekDay;
-            hourBox.Value.AddHours(accident.Time.Value.Hours);
-            hourBox.Value.AddMinutes(accident.Time.Value.Minutes);
+            hourBox.Value = DateTime.Parse($"01/01/1753 {accident.Time.Value.ToString()}");
             comboClass.SelectedIndex = accident.Class.Value + 1;
             txtPlace.Text = accident.Place;
             txtBodyPart.Text = accident.BodyPart;
             txtInjuryType.Text = accident.InjuryType;
-            txtDescription.Text = accident.Description;
+            txtDescription.Text = accident.Description;            
+            isEditMode = true;
         }
 
         private void AccidentAdditionScreen_Load(object sender, EventArgs e)
@@ -50,8 +53,11 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void ScreenSetup()
         {
-            dateTimeBox.Value = DateTime.Today;
-            comboClass.SelectedIndex = 0;
+            if (!isEditMode)
+            {
+                dateTimeBox.Value = DateTime.Today;
+                comboClass.SelectedIndex = 0;
+            }
         }
 
         private string GetWeekDay()
@@ -66,7 +72,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
             txtWeekDay.Text = GetWeekDay();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnConfirm_Click(object sender, EventArgs e)
         {
             if (VerifyRequiredControls())
             {
@@ -74,7 +80,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 {
                     ExcelWorksheet sheet = project.Workbook.Worksheets[0];
                     ManagementService managementService = new ManagementService(sheet);
-                    Accident accident = new Accident()
+                    Accident accident = new Accident(row)
                     {
                         Company = txtCompany.Text,
                         Sector = txtSector.Text,
@@ -87,10 +93,12 @@ namespace Petrobras_AccidentsMonitoring_Tool
                         Place = txtPlace.Text,
                         BodyPart = txtBodyPart.Text,
                         InjuryType = txtInjuryType.Text,
-                        Description = txtDescription.Text
+                        Description = txtDescription.Text,
+                        RTA = txtRTA.Text,
+                        CAT = txtCAT.Text
                     };
-
-                    managementService.AddAccident(accident);
+                    if (!isEditMode) managementService.AddAccident(accident);
+                    else managementService.EditAccident(accident);
                     project.Save();
                     _mainMenu.Show();
                     Close();
@@ -116,6 +124,11 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             _mainMenu.Show();
             Hide();
+        }
+
+        private void hourBox_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

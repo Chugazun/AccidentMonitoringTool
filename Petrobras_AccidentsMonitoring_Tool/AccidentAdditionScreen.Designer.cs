@@ -56,9 +56,17 @@
             this.txtJobRole = new System.Windows.Forms.TextBox();
             this.lblJobRole = new System.Windows.Forms.Label();
             this.lblCompany = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnConfirm = new System.Windows.Forms.Button();
+            this.groupAdditionalInfo = new System.Windows.Forms.GroupBox();
+            this.txtRTA = new System.Windows.Forms.TextBox();
+            this.txtCAT = new System.Windows.Forms.TextBox();
+            this.lblCAT = new System.Windows.Forms.Label();
+            this.lblRTA = new System.Windows.Forms.Label();
+            this.lblAdditionalInfo = new System.Windows.Forms.Label();
+            this.lblOptional = new System.Windows.Forms.Label();
             this.groupAccidentInfo.SuspendLayout();
             this.groupGenInfo.SuspendLayout();
+            this.groupAdditionalInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAccidentInfo
@@ -129,7 +137,8 @@
             this.hourBox.ShowUpDown = true;
             this.hourBox.Size = new System.Drawing.Size(64, 24);
             this.hourBox.TabIndex = 7;
-            this.hourBox.Value = new System.DateTime(2020, 6, 10, 0, 0, 0, 0);
+            this.hourBox.Value = new System.DateTime(2020, 6, 17, 0, 0, 0, 0);
+            this.hourBox.ValueChanged += new System.EventHandler(this.hourBox_ValueChanged);
             // 
             // txtWeekDay
             // 
@@ -240,6 +249,7 @@
             this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.txtDescription.Size = new System.Drawing.Size(824, 198);
             this.txtDescription.TabIndex = 12;
+            this.txtDescription.Text = "original screen size: 976; 697";
             // 
             // txtInjuryType
             // 
@@ -377,26 +387,105 @@
             this.lblCompany.TabIndex = 0;
             this.lblCompany.Text = "Empresa:";
             // 
-            // btnAdd
+            // btnConfirm
             // 
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(435, 603);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(90, 38);
-            this.btnAdd.TabIndex = 6;
-            this.btnAdd.Text = "Confirmar";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirm.Location = new System.Drawing.Point(435, 703);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(90, 38);
+            this.btnConfirm.TabIndex = 6;
+            this.btnConfirm.Text = "Confirmar";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            // 
+            // groupAdditionalInfo
+            // 
+            this.groupAdditionalInfo.Controls.Add(this.txtRTA);
+            this.groupAdditionalInfo.Controls.Add(this.txtCAT);
+            this.groupAdditionalInfo.Controls.Add(this.lblCAT);
+            this.groupAdditionalInfo.Controls.Add(this.lblRTA);
+            this.groupAdditionalInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupAdditionalInfo.Location = new System.Drawing.Point(12, 614);
+            this.groupAdditionalInfo.Margin = new System.Windows.Forms.Padding(0);
+            this.groupAdditionalInfo.Name = "groupAdditionalInfo";
+            this.groupAdditionalInfo.Size = new System.Drawing.Size(936, 77);
+            this.groupAdditionalInfo.TabIndex = 1;
+            this.groupAdditionalInfo.TabStop = false;
+            // 
+            // txtRTA
+            // 
+            this.txtRTA.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtRTA.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRTA.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtRTA.Location = new System.Drawing.Point(102, 30);
+            this.txtRTA.Name = "txtRTA";
+            this.txtRTA.Size = new System.Drawing.Size(294, 24);
+            this.txtRTA.TabIndex = 1;
+            this.txtRTA.Text = "RNEST/PS/SOP 2015/0001A";
+            // 
+            // txtCAT
+            // 
+            this.txtCAT.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtCAT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtCAT.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCAT.Location = new System.Drawing.Point(476, 30);
+            this.txtCAT.Name = "txtCAT";
+            this.txtCAT.Size = new System.Drawing.Size(144, 24);
+            this.txtCAT.TabIndex = 2;
+            this.txtCAT.Text = "2017.277.651-1/01";
+            // 
+            // lblCAT
+            // 
+            this.lblCAT.AutoSize = true;
+            this.lblCAT.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCAT.Location = new System.Drawing.Point(430, 33);
+            this.lblCAT.Name = "lblCAT";
+            this.lblCAT.Size = new System.Drawing.Size(45, 18);
+            this.lblCAT.TabIndex = 0;
+            this.lblCAT.Text = "CAT:";
+            // 
+            // lblRTA
+            // 
+            this.lblRTA.AutoSize = true;
+            this.lblRTA.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRTA.Location = new System.Drawing.Point(56, 33);
+            this.lblRTA.Name = "lblRTA";
+            this.lblRTA.Size = new System.Drawing.Size(45, 18);
+            this.lblRTA.TabIndex = 0;
+            this.lblRTA.Text = "RTA:";
+            // 
+            // lblAdditionalInfo
+            // 
+            this.lblAdditionalInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdditionalInfo.Location = new System.Drawing.Point(0, 599);
+            this.lblAdditionalInfo.Name = "lblAdditionalInfo";
+            this.lblAdditionalInfo.Size = new System.Drawing.Size(200, 18);
+            this.lblAdditionalInfo.TabIndex = 4;
+            this.lblAdditionalInfo.Text = "Informações Adicionais";
+            this.lblAdditionalInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblOptional
+            // 
+            this.lblOptional.AutoSize = true;
+            this.lblOptional.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOptional.Location = new System.Drawing.Point(188, 600);
+            this.lblOptional.Name = "lblOptional";
+            this.lblOptional.Size = new System.Drawing.Size(80, 16);
+            this.lblOptional.TabIndex = 7;
+            this.lblOptional.Text = "*(opcionais)";
             // 
             // AccidentAdditionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 658);
-            this.Controls.Add(this.btnAdd);
+            this.ClientSize = new System.Drawing.Size(960, 753);
+            this.Controls.Add(this.lblOptional);
+            this.Controls.Add(this.lblAdditionalInfo);
+            this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.lblAccidentInfo);
             this.Controls.Add(this.groupAccidentInfo);
             this.Controls.Add(this.lblGenInfo);
+            this.Controls.Add(this.groupAdditionalInfo);
             this.Controls.Add(this.groupGenInfo);
             this.Name = "AccidentAdditionScreen";
             this.Text = "Adicionar Acidente";
@@ -406,7 +495,10 @@
             this.groupAccidentInfo.PerformLayout();
             this.groupGenInfo.ResumeLayout(false);
             this.groupGenInfo.PerformLayout();
+            this.groupAdditionalInfo.ResumeLayout(false);
+            this.groupAdditionalInfo.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -440,6 +532,13 @@
         private System.Windows.Forms.DateTimePicker dateTimeBox;
         private System.Windows.Forms.DateTimePicker hourBox;
         private System.Windows.Forms.ComboBox comboClass;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.GroupBox groupAdditionalInfo;
+        private System.Windows.Forms.TextBox txtRTA;
+        private System.Windows.Forms.TextBox txtCAT;
+        private System.Windows.Forms.Label lblCAT;
+        private System.Windows.Forms.Label lblRTA;
+        private System.Windows.Forms.Label lblAdditionalInfo;
+        private System.Windows.Forms.Label lblOptional;
     }
 }

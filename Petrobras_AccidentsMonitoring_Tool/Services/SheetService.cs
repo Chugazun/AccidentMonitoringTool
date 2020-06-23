@@ -44,5 +44,14 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
                 if (cell.Text.Trim() != "") yield return cell.Text;
             }
         }
+
+        protected int? GetAccidentClass(int row)
+        {
+            for (int i = 9; i < 15; i++)
+            {
+                if (_sheet.Cells[row, i].Text.ToLower() == "x") return i - 9;
+            }
+            return null;
+        }
     }
 }

@@ -314,8 +314,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 var sheet = project.Workbook.Worksheets[0];
                 SearchService search = new SearchService(sheet);
-                Accident accident = search.GetLastAccident("RNEST/PPO/PP", 3, 0);
-                AccidentAdditionScreen accidentAdditionScreen = new AccidentAdditionScreen(this, accident);
+                Accident accident = search.GetLastAccident("RNEST/MA/EE", 3, 0);
+                AccidentAdditionScreen accidentAdditionScreen = new AccidentAdditionScreen(this);
                 accidentAdditionScreen.Show();
                 Hide();
             }            

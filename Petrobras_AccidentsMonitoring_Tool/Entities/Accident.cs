@@ -21,6 +21,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Entities
                 _class = value;
             }
         }
+        public int ID { get; private set; }
         public DateTime? Date { get; set; }
         public TimeSpan? Time { get; set; }
         public string Company { get => _company; set => _company = SetValue(value); }
@@ -38,6 +39,16 @@ namespace Petrobras_AccidentsMonitoring_Tool.Entities
         public string CAT { get => _cat; set => _cat = SetValue(value); }
         public AccidentType AccidentType { get; set; }
         public string Description { get; set; }
+
+        public Accident()
+        {
+
+        }
+
+        public Accident(int id)
+        {
+            ID = id;
+        }
 
         private string SetValue(string input) => !(input == "") ? input.ToLower().ToTitleCase().Trim() : "N/A";
     }

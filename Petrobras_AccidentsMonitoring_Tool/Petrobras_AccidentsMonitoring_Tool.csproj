@@ -66,6 +66,12 @@
     <Compile Include="AccidentDetailsScreen.Designer.cs">
       <DependentUpon>AccidentDetailsScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="AccidentSearchScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccidentSearchScreen.Designer.cs">
+      <DependentUpon>AccidentSearchScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChartScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AccidentDetailsScreen.resx">
       <DependentUpon>AccidentDetailsScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccidentSearchScreen.resx">
+      <DependentUpon>AccidentSearchScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChartScreen.resx">
       <DependentUpon>ChartScreen.cs</DependentUpon>

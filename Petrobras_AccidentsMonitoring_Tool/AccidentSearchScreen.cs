@@ -68,7 +68,10 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 SearchService searchService = new SearchService(sheet);
                 SearchModel searchModel = new SearchModel()
                 {
-                    Sector = "RNEST/OP/UT"
+                    //Company = "Petro",
+                    //EmployeeName = "Jefferson",
+                    //Sector = "RNEST/MA/EE",
+                    //Class = 3
                 };
                 result = searchService.AdvSearch(searchModel);
             }
@@ -80,11 +83,21 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 item.Text = accident.Company;
                 item.SubItems.Add(accident.Sector);
                 item.SubItems.Add(accident.EmployeeName);
+                item.SubItems.Add(accident.Date.Value.ToString(@"dd/MM/yyyy"));
+                string accidentClass = accident.Class.HasValue ? accident.Class.Value.ToString() : accident.AccidentType.ToString();
+                item.SubItems.Add(accidentClass);
+                item.SubItems.Add(accident.InjuryType);
                 listResults.Items.Add(item);
             }
             lblResults.Text += listResults.Items.Count;
             listResults.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            listResults.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
             SetLastColumnToFill(listResults);
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

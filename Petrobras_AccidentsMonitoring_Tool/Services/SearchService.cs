@@ -91,7 +91,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
                     DateTime selectedDate = GetDate(selectedRow.Start.Row);
                     return selectedDate >= initialDate && selectedDate <= finalDate;
                 }
-                else if (selectedRow[selectedRow.Start.Row, filter.Key].Text.ToLower().Trim() != filter.Value.ToString().ToLower()) return false;
+                else if (!selectedRow[selectedRow.Start.Row, filter.Key].Text.ToLower().Trim().Contains(filter.Value.ToString().ToLower())) return false;
             }
             return true;
         }

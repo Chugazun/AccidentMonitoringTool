@@ -18,7 +18,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainMenu());
+            Application.Run(new AccidentSearchScreen());
         }
     }
 }

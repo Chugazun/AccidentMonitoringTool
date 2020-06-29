@@ -18,17 +18,17 @@ namespace Petrobras_AccidentsMonitoring_Tool
     public partial class AccidentAdditionScreen : Form
     {
 
-        private readonly MainMenu _mainMenu;
+        private readonly Form _mainMenu;
         private bool isEditMode;
         private int row;
 
-        public AccidentAdditionScreen(MainMenu mainMenu)
+        public AccidentAdditionScreen(Form mainMenu)
         {
             InitializeComponent();
             _mainMenu = mainMenu;
         }
 
-        public AccidentAdditionScreen(MainMenu mainMenu, Accident accident) : this(mainMenu)
+        public AccidentAdditionScreen(Form mainMenu, Accident accident) : this(mainMenu)
         {
             row = accident.ID;
             txtCompany.Text = accident.Company;

@@ -1,5 +1,6 @@
 ﻿using OfficeOpenXml;
 using Petrobras_AccidentsMonitoring_Tool.Entities;
+using Petrobras_AccidentsMonitoring_Tool.Enums;
 using Petrobras_AccidentsMonitoring_Tool.Exceptions;
 using Petrobras_AccidentsMonitoring_Tool.Services;
 using System;
@@ -92,7 +93,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
                 try
                 {
-                    IEnumerable<Accident> result = _search.AdvSearch(_searchDetails);
+                    IEnumerable<Accident> result = _search.AdvSearch(_searchDetails, ResultType.BasicResult);
                     RatioChartScreen ratioChartScreen = new RatioChartScreen(this)
                     {
                         //Stats = new List<Stats>() { new Stats("TOR", torList), new Stats("TAR", tarList) },

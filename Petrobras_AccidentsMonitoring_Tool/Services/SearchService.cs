@@ -16,7 +16,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
         }
 
-        public IEnumerable<Accident> AdvSearch(SearchModel searchParameters)
+        public IEnumerable<Accident> AdvSearch(SearchModel searchParameters, ResultType resultType)
         {
             Dictionary<int, string> filters = new Dictionary<int, string>();
 
@@ -45,7 +45,8 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
                 List<Accident> result = new List<Accident>();
                 foreach (int row in validRows)
                 {
-                    result.Add(RowDeserialize(row));
+                    if (resultType == 0) result.Add(RowDeserialize(row));
+                    else result.Add(FullRowDeserialize(row));
                 }
                 return result;
             }
@@ -100,7 +101,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
         {
             TimeSpan? time = _sheet.Cells[row, 23].Text != "" ? TimeSpan.Parse(_sheet.Cells[row, 23].Text) : (TimeSpan?)null;
             Accident result = new Accident(row)
-            {                
+            {
                 Company = _sheet.Cells[row, 1].Text,
                 Sector = _sheet.Cells[row, 3].Text,
                 Supervisor = _sheet.Cells[row, 4].Text,
@@ -119,7 +120,14 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             };
             result.AccidentType = GetAccidentType(row, result.Class);
             return result;
-        }       
+        }
+
+        private Accident FullRowDeserialize(int row)
+        {
+            Accident result = RowDeserialize(row);
+            result.Description = _sheet.Cells[row, 27].Text;
+            return result;
+        }
 
         private AccidentType GetAccidentType(int row, int? accidentClass)
         {
@@ -159,7 +167,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
         private IEnumerable<int> GetYearInterval(string dateString_1, string dateString_2)
         {
             int year_1 = DateTime.Parse(dateString_1).Year;
-            int year_2 = DateTime.Parse(dateString_2).Year;
+            int year_2 = Math.Min(DateTime.Parse(dateString_2).Year, GetDate(LastRow).Year);
 
             List<string> yearColumn = GetYearsColumn().ToList();
 

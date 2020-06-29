@@ -89,6 +89,7 @@
     <Compile Include="Entities\Stats.cs" />
     <Compile Include="Enums\AccidentType.cs" />
     <Compile Include="Enums\Months.cs" />
+    <Compile Include="Enums\ResultType.cs" />
     <Compile Include="Exceptions\AccidentClassException.cs" />
     <Compile Include="Exceptions\ResultNotFoundException.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />

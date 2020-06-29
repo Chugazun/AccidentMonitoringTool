@@ -70,7 +70,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
                 try
                 {
-                    IEnumerable<Accident> result = _search.AdvSearch(_searchDetails);
+                    IEnumerable<Accident> result = _search.AdvSearch(_searchDetails, Enums.ResultType.BasicResult);
 
                     
 

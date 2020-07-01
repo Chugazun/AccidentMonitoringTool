@@ -49,7 +49,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private void AccidentSearchScreen_Load(object sender, EventArgs e)
         {
             SetLastColumnToFill(listResults);
-
+            comboType.SelectedIndex = 0;
+            comboClass.SelectedIndex = 0;
         }
 
         private void SetLastColumnToFill(ListView lv)
@@ -93,7 +94,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 listResults.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                 listResults.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                 SetLastColumnToFill(listResults);
-            } catch(ResultNotFoundException exception)
+            }
+            catch (ResultNotFoundException exception)
             {
                 MessageBox.Show(exception.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -143,6 +145,10 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 searchModel.FinalDate = dateBoxExact.Value;
             }
 
+            if (comboType.SelectedIndex == 0) searchModel.Class = comboClass.SelectedIndex > 0 ? (int?)comboClass.SelectedIndex - 1 : null;
+            else if (comboType.SelectedIndex < 3) searchModel.AccidentType = (AccidentType?)Enum.Parse(typeof(AccidentType), comboType.SelectedItem.ToString());
+
+            
             return searchModel;
         }
 
@@ -166,10 +172,16 @@ namespace Petrobras_AccidentsMonitoring_Tool
             return textBox.Text == "" ? null : textBox.Text;
         }
 
-        private void listResults_SelectedIndexChanged(object sender, EventArgs e)
+        private void listResults_ItemClick(object sender, EventArgs e)
         {
             AccidentAdditionScreen accidentAdditionScreen = new AccidentAdditionScreen(this, _results.ElementAt(listResults.SelectedIndices[0]));
             accidentAdditionScreen.Show();
+        }
+
+        private void comboType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboType.SelectedIndex == 0) panClass.Visible = true;
+            else panClass.Visible = false;
         }
     }
 }

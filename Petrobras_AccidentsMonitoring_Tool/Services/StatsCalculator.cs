@@ -145,11 +145,12 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
         public static IEnumerable<IGrouping<string, Accident>> GetByGrade(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.Select(a => new
-            {
-                Grade = a.Class <= 2 ? "Sem afastamento" : "Com afastamento",
-                SelectedAccident = a
-            }).GroupBy(x => x.Grade, x => x.SelectedAccident);
+            //return totalAccidents.Select(a => new
+            //{
+            //    Grade = a.Class <= 2 ? "Sem afastamento" : "Com afastamento",
+            //    SelectedAccident = a
+            //}).GroupBy(x => x.Grade, x => x.SelectedAccident);
+            return totalAccidents.GroupBy(a => a.Grade).OrderBy(s => s.Key);
         }
 
         public static IEnumerable<IGrouping<string, Accident>> GetByPlace(IEnumerable<Accident> totalAccidents)

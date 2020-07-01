@@ -25,6 +25,11 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             if (searchParameters.EmployeeName != null) filters.Add(5, searchParameters.EmployeeName);
             if (searchParameters.InjuryType != null) filters.Add(25, searchParameters.InjuryType);
             if (searchParameters.Class.HasValue) filters.Add(9 + searchParameters.Class.Value, "x");
+            if (searchParameters.AccidentType.HasValue)
+            {
+                int[] col = _accidentTypePos[searchParameters.AccidentType.Value];                
+                filters.Add(col[0], "x");
+            }
             if (searchParameters.Year.HasValue) { filters.Add(20, searchParameters.Year.Value.ToString()); }
             else if (searchParameters.InitialDate.HasValue || searchParameters.FinalDate.HasValue)
             {
@@ -33,6 +38,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
                 filters.Add(19, initialDate + " " + finalDate);
             }
+            
 
             int[] validRows = GetRows(filters).ToArray();
 
@@ -83,7 +89,13 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
         {
             foreach (var filter in rowFilters)
             {
+                //System.Windows.Forms.MessageBox.Show(filter.Key.ToString(), "Erro", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                 if (filter.Key == 20) { return true; }
+                else if (filter.Key == 15 || filter.Key == 17)
+                {                    
+                    var rowId = selectedRow.Start.Row;                    
+                    return selectedRow[rowId, filter.Key, rowId, filter.Key + 1].FirstOrDefault(c => c.Text.Trim().ToLower() == "x") != null;
+                }
                 else if (filter.Key == 19)
                 {
                     string[] dates = filter.Value.Split(' ');
@@ -119,6 +131,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
                 CAT = _sheet.Cells[row, 30].Text
             };
             result.AccidentType = GetAccidentType(row, result.Class);
+            if (result.AccidentType != AccidentType.Típico) result.Grade = GetAccidentGrade(row, result.AccidentType);
             return result;
         }
 
@@ -135,7 +148,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             {
                 return (AccidentType)1;
             }
-            else if (_sheet.Cells[row, 15].Text.ToLower() == "x" || _sheet.Cells[row, 16].Text.ToLower() == "x")
+            else if (_sheet.Cells[row, 15, row, 16].FirstOrDefault(c => c.Text.ToLower() == "x") != null)
             {
                 return (AccidentType)2;
             }
@@ -144,6 +157,14 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
                 return (AccidentType)3;
             }
 
+        }
+
+        private string GetAccidentGrade(int row, AccidentType accidentType)
+        {
+            int[] selectectedColumns = _accidentTypePos[accidentType];
+            var sheetPositions = _sheet.Cells[row, selectectedColumns[0], row, selectectedColumns[1]];
+            if (sheetPositions.First().Text.ToLower() == "x") return "Sem Afastamento";
+            return "Com Afastamento";
         }
 
         private DateTime GetDate(int selectedRow)

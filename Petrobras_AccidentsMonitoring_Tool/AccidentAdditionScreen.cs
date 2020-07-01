@@ -57,6 +57,9 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 dateTimeBox.Value = DateTime.Today;
                 comboClass.SelectedIndex = 0;
+            } else
+            {
+                Text = "Editar Acidente";
             }
         }
 

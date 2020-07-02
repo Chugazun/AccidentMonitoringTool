@@ -45,7 +45,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Entities
         public string RPA { get => _rpa; set => _rpa = SetValue(value); }
         public string CAT { get => _cat; set => _cat = SetValue(value); }
         public string Grade { get; set; }
-        public AccidentType AccidentType { get; set; }
+        public AccidentType? AccidentType { get; set; }
         public string Description { get; set; }
 
         public Accident()

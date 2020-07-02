@@ -2,6 +2,7 @@
 using Petrobras_AccidentsMonitoring_Tool.Entities;
 using Petrobras_AccidentsMonitoring_Tool.Extensions;
 using Petrobras_AccidentsMonitoring_Tool.Services;
+using Petrobras_AccidentsMonitoring_Tool.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,7 +80,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             if (VerifyRequiredControls())
             {
-                using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\sheetbak.xlsx")))
+                using (var project = new ExcelPackage(new FileInfo(FilePath.Test)))
                 {
                     ExcelWorksheet sheet = project.Workbook.Worksheets[0];
                     ManagementService managementService = new ManagementService(sheet);

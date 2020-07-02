@@ -35,7 +35,7 @@
             this.colDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colClass = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colInjury = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnTest = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.lblResults = new System.Windows.Forms.Label();
             this.txtCompany = new System.Windows.Forms.TextBox();
             this.lblCompany = new System.Windows.Forms.Label();
@@ -131,15 +131,15 @@
             // 
             this.colInjury.Text = "Tipo de Lesão";
             // 
-            // btnTest
+            // btnSearch
             // 
-            this.btnTest.Location = new System.Drawing.Point(322, 283);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 23);
-            this.btnTest.TabIndex = 6;
-            this.btnTest.Text = "Test";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            this.btnSearch.Location = new System.Drawing.Point(322, 283);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "Buscar";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lblResults
             // 
@@ -299,6 +299,7 @@
             this.radioInterval.Name = "radioInterval";
             this.radioInterval.Size = new System.Drawing.Size(77, 20);
             this.radioInterval.TabIndex = 10;
+            this.radioInterval.TabStop = true;
             this.radioInterval.Text = "Intervalo";
             this.radioInterval.UseVisualStyleBackColor = true;
             this.radioInterval.CheckedChanged += new System.EventHandler(this.radioInterval_CheckedChanged);
@@ -521,7 +522,7 @@
             this.Controls.Add(this.lblCompany);
             this.Controls.Add(this.lblResults);
             this.Controls.Add(this.btnClearResults);
-            this.Controls.Add(this.btnTest);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.listResults);
             this.Name = "AccidentSearchScreen";
             this.Text = "Buscar Acidentes";
@@ -549,7 +550,7 @@
         private System.Windows.Forms.ColumnHeader colCompany;
         private System.Windows.Forms.ColumnHeader colSector;
         private System.Windows.Forms.ColumnHeader colEmployee;
-        private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label lblResults;
         private System.Windows.Forms.ColumnHeader colDate;
         private System.Windows.Forms.ColumnHeader colClass;

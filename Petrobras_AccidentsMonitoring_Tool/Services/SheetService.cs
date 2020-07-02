@@ -21,6 +21,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             SetTotalEntries();
             LastRow = TotalEntries + 4;
             _accidentTypePos = new Dictionary<AccidentType, int[]>();
+            //_accidentTypePos.Add(AccidentType.Típico, new int[30]);
             _accidentTypePos.Add(AccidentType.Trajeto, new int[] { 15, 16 });
             _accidentTypePos.Add(AccidentType.Equiparado, new int[] { 17, 18 });
         }

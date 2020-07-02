@@ -3,6 +3,7 @@ using Petrobras_AccidentsMonitoring_Tool.Entities;
 using Petrobras_AccidentsMonitoring_Tool.Enums;
 using Petrobras_AccidentsMonitoring_Tool.Exceptions;
 using Petrobras_AccidentsMonitoring_Tool.Services;
+using Petrobras_AccidentsMonitoring_Tool.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,10 +37,12 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             AdjustScreen();
             radioPeriod.Checked = true;
-            using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev8.xlsx")))
+            using (var project = new ExcelPackage(new FileInfo(FilePath.Main)))
             {
                 _sheet = project.Workbook.Worksheets[0];
                 _search = new SearchService(_sheet);
+
+
                 GetSheetYears(_search.GetYearsColumn().GroupBy(c => c).Select(g => g.Key));
                 comboInitialYear.Items.AddRange(_years.Prepend("").ToArray());
                 comboInitialYear.SelectedIndex = 1;

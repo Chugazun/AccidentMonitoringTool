@@ -25,10 +25,11 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             if (searchParameters.EmployeeName != null) filters.Add(5, searchParameters.EmployeeName);
             if (searchParameters.InjuryType != null) filters.Add(25, searchParameters.InjuryType);
             if (searchParameters.Class.HasValue) filters.Add(9 + searchParameters.Class.Value, "x");
-            if (searchParameters.AccidentType.HasValue)
+            else if (searchParameters.AccidentType.HasValue)
             {
-                int[] col = _accidentTypePos[searchParameters.AccidentType.Value];                
-                filters.Add(col[0], "x");
+                //int[] col = _accidentTypePos[searchParameters.AccidentType.Value];                
+                //filters.Add(col[0], "x");
+                filters.Add(15, searchParameters.AccidentType.Value.ToString());
             }
             if (searchParameters.Year.HasValue) { filters.Add(20, searchParameters.Year.Value.ToString()); }
             else if (searchParameters.InitialDate.HasValue || searchParameters.FinalDate.HasValue)
@@ -38,7 +39,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
                 filters.Add(19, initialDate + " " + finalDate);
             }
-            
+
 
             int[] validRows = GetRows(filters).ToArray();
 
@@ -91,10 +92,18 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             {
                 //System.Windows.Forms.MessageBox.Show(filter.Key.ToString(), "Erro", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                 if (filter.Key == 20) { return true; }
-                else if (filter.Key == 15 || filter.Key == 17)
-                {                    
-                    var rowId = selectedRow.Start.Row;                    
-                    return selectedRow[rowId, filter.Key, rowId, filter.Key + 1].FirstOrDefault(c => c.Text.Trim().ToLower() == "x") != null;
+                //else if (filter.Key == 15 || filter.Key == 17)
+                //{                    
+                //    var rowId = selectedRow.Start.Row;                    
+                //    return selectedRow[rowId, filter.Key, rowId, filter.Key + 1].FirstOrDefault(c => c.Text.Trim().ToLower() == "x") != null;
+                //}
+                else if (filter.Key == 15)
+                {
+                    AccidentType? rowAccidentType = GetAccidentType(selectedRow.Start.Row, GetAccidentClass(selectedRow.Start.Row));
+                    AccidentType filterAccidentType;
+                    if (Enum.TryParse(filter.Value, out filterAccidentType)) return rowAccidentType == filterAccidentType;
+
+                    return false;
                 }
                 else if (filter.Key == 19)
                 {
@@ -131,7 +140,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
                 CAT = _sheet.Cells[row, 30].Text
             };
             result.AccidentType = GetAccidentType(row, result.Class);
-            if (result.AccidentType != AccidentType.Típico) result.Grade = GetAccidentGrade(row, result.AccidentType);
+            if (result.AccidentType.HasValue && result.AccidentType.Value != AccidentType.Típico) result.Grade = GetAccidentGrade(row, result.AccidentType.Value);
             return result;
         }
 
@@ -142,7 +151,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             return result;
         }
 
-        private AccidentType GetAccidentType(int row, int? accidentClass)
+        private AccidentType? GetAccidentType(int row, int? accidentClass)
         {
             if (accidentClass.HasValue)
             {
@@ -152,10 +161,11 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             {
                 return (AccidentType)2;
             }
-            else
+            else if (_sheet.Cells[row, 17, row, 18].FirstOrDefault(c => c.Text.ToLower() == "x") != null)
             {
                 return (AccidentType)3;
             }
+            else return null;
 
         }
 

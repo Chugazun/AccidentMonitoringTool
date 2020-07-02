@@ -42,9 +42,9 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
         public static IEnumerable<IGrouping<string, Accident>> GetByAccidentType(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.Select(a => new
+            return totalAccidents.Where(a => a.AccidentType.HasValue).Select(a => new
             {
-                AccidentTypeGroup = Utilities.GetTypeGroup(a.AccidentType),
+                AccidentTypeGroup = Utilities.GetTypeGroup(a.AccidentType.Value),
                 SelectedAccident = a
             }).GroupBy(x => x.AccidentTypeGroup, a => a.SelectedAccident)
               .OrderByDescending(s => s.Count());
@@ -53,12 +53,12 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
         public static IEnumerable<Accident> TOR(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.Where(a => a.AccidentType == AccidentType.Típico);
+            return totalAccidents.Where(a => a.AccidentType.Value == AccidentType.Típico);
         }
 
         public static IEnumerable<Accident> TAR(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.Where(a => a.AccidentType == AccidentType.Típico && a.Class >= 2);
+            return totalAccidents.Where(a => a.AccidentType.Value == AccidentType.Típico && a.Class >= 2);
         }
 
         #region unused GetAmounts Method

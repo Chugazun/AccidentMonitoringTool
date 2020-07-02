@@ -124,6 +124,7 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\FilePath.cs" />
     <Compile Include="Utils\Utilities.cs" />
     <EmbeddedResource Include="AccidentAdditionScreen.resx">
       <DependentUpon>AccidentAdditionScreen.cs</DependentUpon>

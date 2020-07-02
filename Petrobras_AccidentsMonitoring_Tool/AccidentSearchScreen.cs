@@ -3,6 +3,7 @@ using Petrobras_AccidentsMonitoring_Tool.Entities;
 using Petrobras_AccidentsMonitoring_Tool.Enums;
 using Petrobras_AccidentsMonitoring_Tool.Exceptions;
 using Petrobras_AccidentsMonitoring_Tool.Services;
+using Petrobras_AccidentsMonitoring_Tool.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,14 +65,14 @@ namespace Petrobras_AccidentsMonitoring_Tool
             lv.Columns[count - 1].Width = lv.ClientSize.Width - sum;
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             try
             {
                 listResults.Items.Clear();
                 lblResults.Text = "Resultados: ";
 
-                using (var project = new ExcelPackage(new System.IO.FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev8.xlsx")))
+                using (var project = new ExcelPackage(new System.IO.FileInfo(FilePath.Test)))
                 {
                     var sheet = project.Workbook.Worksheets[0];
                     SearchService searchService = new SearchService(sheet);
@@ -105,6 +106,10 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             listResults.Items.Clear();
             lblResults.Text = "Resultados: ";
+            Controls.OfType<TextBox>().ToList().ForEach(tb => tb.Text = "");
+            dateboxInterval_Initial.Value = new DateTime(2014, 1, 1);
+            dateBoxInterval_Final.Value = DateTime.Now;
+            dateBoxYear.Value = DateTime.Now;
         }
 
         private void AddResultToTable(Accident accident)
@@ -145,7 +150,11 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 searchModel.FinalDate = dateBoxExact.Value;
             }
 
-            if (comboType.SelectedIndex == 0) searchModel.Class = comboClass.SelectedIndex > 0 ? (int?)comboClass.SelectedIndex - 1 : null;
+            if (comboType.SelectedIndex == 0)
+            {
+                searchModel.Class = comboClass.SelectedIndex > 0 ? (int?)comboClass.SelectedIndex - 1 : null;
+                searchModel.AccidentType = AccidentType.Típico;
+            }
             else if (comboType.SelectedIndex < 3) searchModel.AccidentType = (AccidentType?)Enum.Parse(typeof(AccidentType), comboType.SelectedItem.ToString());
 
             

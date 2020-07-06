@@ -1,5 +1,6 @@
 ﻿using OfficeOpenXml;
 using Petrobras_AccidentsMonitoring_Tool.Entities;
+using Petrobras_AccidentsMonitoring_Tool.Enums;
 using Petrobras_AccidentsMonitoring_Tool.Utils;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,10 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             _sheet.Cells[row, 3].Value = accident.Sector.ToUpper();
             _sheet.Cells[row, 5].Value = accident.EmployeeName;
             _sheet.Cells[row, 7].Value = accident.JobRole;
-            _sheet.Cells[row, GetClassPos(accident.Class.Value)].Value = "X";
+
+            if (accident.Class.HasValue) _sheet.Cells[row, GetClassPos(accident.Class.Value)].Value = "X";
+            else _sheet.Cells[row, GetTypeGradePos(accident.AccidentType.Value, accident.Grade)].Value = "X";
+
             _sheet.Cells[row, 19].Value = accident.Date.Value.Day;
             _sheet.Cells[row, 20].Value = Utilities.ConvertMonth(accident.Date.Value.Month);
             _sheet.Cells[row, 21].Value = accident.Date.Value.Year;
@@ -65,13 +69,22 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             return 9 + accidentClass;
         }
 
+        private int GetTypeGradePos(AccidentType accidentType, string accidentGrade)
+        {
+            int[] typePos = _accidentTypePos[accidentType];
+            return accidentGrade == "Sem Afastamento" ? typePos[0] : typePos[1];
+        }
+
         private void ClearClassForEdit(int row)
         {
-            int? accidentClass = GetAccidentClass(row);
-            if (accidentClass.HasValue)
-            {
-                _sheet.Cells[row, GetClassPos(accidentClass.Value)].Value = "";
-            }
+            //int? accidentClass = GetAccidentClass(row);
+            //if (accidentClass.HasValue)
+            //{
+            //    _sheet.Cells[row, GetClassPos(accidentClass.Value)].Value = "";
+            //}
+
+            var classPos = _sheet.Cells[row, 9, row, 18].FirstOrDefault(c => c.Text.Trim().ToLower() == "x");
+            if (classPos != null) classPos.Value = "";
         }
     }
 }

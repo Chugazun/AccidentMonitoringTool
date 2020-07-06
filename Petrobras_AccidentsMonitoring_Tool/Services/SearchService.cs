@@ -172,9 +172,9 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
         private string GetAccidentGrade(int row, AccidentType accidentType)
         {
             int[] selectectedColumns = _accidentTypePos[accidentType];
-            var sheetPositions = _sheet.Cells[row, selectectedColumns[0], row, selectectedColumns[1]];
-            if (sheetPositions.First().Text.ToLower() == "x") return "Sem Afastamento";
-            return "Com Afastamento";
+            var sheetPositions = _sheet.Cells[row, selectectedColumns[1], row, selectectedColumns[0]];
+            if (sheetPositions.First().Text.ToLower() == "x") return "Com Afastamento";
+            return "Sem Afastamento";
         }
 
         private DateTime GetDate(int selectedRow)

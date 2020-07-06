@@ -1,5 +1,6 @@
 ﻿using OfficeOpenXml;
 using Petrobras_AccidentsMonitoring_Tool.Entities;
+using Petrobras_AccidentsMonitoring_Tool.Enums;
 using Petrobras_AccidentsMonitoring_Tool.Extensions;
 using Petrobras_AccidentsMonitoring_Tool.Services;
 using Petrobras_AccidentsMonitoring_Tool.Utils;
@@ -39,11 +40,11 @@ namespace Petrobras_AccidentsMonitoring_Tool
             dateTimeBox.Value = accident.Date.Value;
             txtWeekDay.Text = accident.WeekDay;
             hourBox.Value = DateTime.Parse($"01/01/1753 {accident.Time.Value.ToString()}");
-            comboClass.SelectedIndex = accident.Class.Value + 1;
+            SetTypeComboBoxes(accident);
             txtPlace.Text = accident.Place;
             txtBodyPart.Text = accident.BodyPart;
             txtInjuryType.Text = accident.InjuryType;
-            txtDescription.Text = accident.Description;            
+            txtDescription.Text = accident.Description;
             isEditMode = true;
         }
 
@@ -57,10 +58,34 @@ namespace Petrobras_AccidentsMonitoring_Tool
             if (!isEditMode)
             {
                 dateTimeBox.Value = DateTime.Today;
+                comboType.SelectedIndex = 0;
                 comboClass.SelectedIndex = 0;
-            } else
+                comboGrade.SelectedIndex = 0;
+            }
+            else
             {
                 Text = "Editar Acidente";
+            }
+        }
+
+        private void SetTypeComboBoxes(Accident accident)
+        {
+            switch (accident.AccidentType)
+            {
+                case AccidentType.Típico:
+                    comboType.SelectedIndex = 0;                   
+                    comboClass.SelectedIndex = accident.Class.Value + 1;
+                    break;
+
+                case AccidentType.Trajeto:
+                    comboType.SelectedIndex = 1;
+                    comboGrade.SelectedItem = accident.Grade;
+                    break;
+
+                case AccidentType.Equiparado:
+                    comboType.SelectedIndex = 2;
+                    comboGrade.SelectedItem = accident.Grade;
+                    break;
             }
         }
 
@@ -93,7 +118,9 @@ namespace Petrobras_AccidentsMonitoring_Tool
                         Date = dateTimeBox.Value,
                         WeekDay = txtWeekDay.Text,
                         Time = TimeSpan.Parse(hourBox.Value.TimeOfDay.ToString()),
-                        Class = int.Parse(comboClass.SelectedItem.ToString()),
+                        AccidentType = (AccidentType?)Enum.Parse(typeof(AccidentType), comboType.SelectedItem.ToString()),
+                        Class = comboType.SelectedIndex == 0 ? (int?)int.Parse(comboClass.SelectedItem.ToString()) : null,
+                        Grade = comboType.SelectedIndex != 0 ? comboGrade.SelectedItem.ToString() : null,
                         Place = txtPlace.Text,
                         BodyPart = txtBodyPart.Text,
                         InjuryType = txtInjuryType.Text,
@@ -117,11 +144,17 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private bool VerifyRequiredControls()
         {
             int txtBoxCount = groupGenInfo.Controls.OfType<TextBox>().Where(tb => tb.Text.Trim() == "").Count() + groupAccidentInfo.Controls.OfType<TextBox>().Where(tb => tb.Text.Trim() == "").Count();
-            if (comboClass.SelectedIndex != 0 && txtBoxCount <= 0) return true;
+            if (ComboBoxesSelected() && txtBoxCount <= 0) return true;
             else
             {
                 return false;
             }
+        }
+
+        private bool ComboBoxesSelected()
+        {
+            if (comboType.SelectedIndex == 0) return comboClass.SelectedIndex != 0;
+            else return comboGrade.SelectedIndex != 0;
         }
 
         private void AccidentAdditionScreen_FormClosing(object sender, FormClosingEventArgs e)
@@ -133,6 +166,12 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private void hourBox_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboType.SelectedIndex == 0) panClass.BringToFront();
+            else panGrade.BringToFront();
         }
     }
 }

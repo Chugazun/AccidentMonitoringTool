@@ -64,9 +64,17 @@
             this.lblRTA = new System.Windows.Forms.Label();
             this.lblAdditionalInfo = new System.Windows.Forms.Label();
             this.lblOptional = new System.Windows.Forms.Label();
+            this.panClass = new System.Windows.Forms.Panel();
+            this.panGrade = new System.Windows.Forms.Panel();
+            this.lblGrade = new System.Windows.Forms.Label();
+            this.comboGrade = new System.Windows.Forms.ComboBox();
+            this.comboType = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupAccidentInfo.SuspendLayout();
             this.groupGenInfo.SuspendLayout();
             this.groupAdditionalInfo.SuspendLayout();
+            this.panClass.SuspendLayout();
+            this.panGrade.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAccidentInfo
@@ -81,7 +89,8 @@
             // 
             // groupAccidentInfo
             // 
-            this.groupAccidentInfo.Controls.Add(this.comboClass);
+            this.groupAccidentInfo.Controls.Add(this.label1);
+            this.groupAccidentInfo.Controls.Add(this.comboType);
             this.groupAccidentInfo.Controls.Add(this.hourBox);
             this.groupAccidentInfo.Controls.Add(this.txtWeekDay);
             this.groupAccidentInfo.Controls.Add(this.dateTimeBox);
@@ -92,11 +101,12 @@
             this.groupAccidentInfo.Controls.Add(this.txtBodyPart);
             this.groupAccidentInfo.Controls.Add(this.txtPlace);
             this.groupAccidentInfo.Controls.Add(this.lblTime);
-            this.groupAccidentInfo.Controls.Add(this.lblClass);
             this.groupAccidentInfo.Controls.Add(this.txtDescription);
             this.groupAccidentInfo.Controls.Add(this.txtInjuryType);
             this.groupAccidentInfo.Controls.Add(this.lblDescription);
             this.groupAccidentInfo.Controls.Add(this.lblInjuryType);
+            this.groupAccidentInfo.Controls.Add(this.panGrade);
+            this.groupAccidentInfo.Controls.Add(this.panClass);
             this.groupAccidentInfo.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.groupAccidentInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupAccidentInfo.Location = new System.Drawing.Point(12, 181);
@@ -122,7 +132,7 @@
             "3",
             "4",
             "5"});
-            this.comboClass.Location = new System.Drawing.Point(699, 30);
+            this.comboClass.Location = new System.Drawing.Point(69, 3);
             this.comboClass.Name = "comboClass";
             this.comboClass.Size = new System.Drawing.Size(39, 24);
             this.comboClass.TabIndex = 21;
@@ -233,7 +243,7 @@
             // 
             this.lblClass.AutoSize = true;
             this.lblClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClass.Location = new System.Drawing.Point(633, 33);
+            this.lblClass.Location = new System.Drawing.Point(3, 6);
             this.lblClass.Name = "lblClass";
             this.lblClass.Size = new System.Drawing.Size(65, 18);
             this.lblClass.TabIndex = 0;
@@ -249,7 +259,6 @@
             this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.txtDescription.Size = new System.Drawing.Size(824, 198);
             this.txtDescription.TabIndex = 12;
-            this.txtDescription.Text = "original screen size: 976; 697";
             // 
             // txtInjuryType
             // 
@@ -421,7 +430,6 @@
             this.txtRTA.Name = "txtRTA";
             this.txtRTA.Size = new System.Drawing.Size(294, 24);
             this.txtRTA.TabIndex = 1;
-            this.txtRTA.Text = "RNEST/PS/SOP 2015/0001A";
             // 
             // txtCAT
             // 
@@ -432,7 +440,6 @@
             this.txtCAT.Name = "txtCAT";
             this.txtCAT.Size = new System.Drawing.Size(144, 24);
             this.txtCAT.TabIndex = 2;
-            this.txtCAT.Text = "2017.277.651-1/01";
             // 
             // lblCAT
             // 
@@ -474,6 +481,79 @@
             this.lblOptional.TabIndex = 7;
             this.lblOptional.Text = "*(opcionais)";
             // 
+            // panClass
+            // 
+            this.panClass.Controls.Add(this.lblClass);
+            this.panClass.Controls.Add(this.comboClass);
+            this.panClass.Location = new System.Drawing.Point(662, 99);
+            this.panClass.Name = "panClass";
+            this.panClass.Size = new System.Drawing.Size(244, 30);
+            this.panClass.TabIndex = 22;
+            // 
+            // panGrade
+            // 
+            this.panGrade.Controls.Add(this.lblGrade);
+            this.panGrade.Controls.Add(this.comboGrade);
+            this.panGrade.Location = new System.Drawing.Point(662, 99);
+            this.panGrade.Name = "panGrade";
+            this.panGrade.Size = new System.Drawing.Size(244, 30);
+            this.panGrade.TabIndex = 22;
+            // 
+            // lblGrade
+            // 
+            this.lblGrade.AutoSize = true;
+            this.lblGrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGrade.Location = new System.Drawing.Point(3, 6);
+            this.lblGrade.Name = "lblGrade";
+            this.lblGrade.Size = new System.Drawing.Size(50, 18);
+            this.lblGrade.TabIndex = 0;
+            this.lblGrade.Text = "Nível:";
+            // 
+            // comboGrade
+            // 
+            this.comboGrade.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboGrade.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboGrade.BackColor = System.Drawing.SystemColors.Window;
+            this.comboGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboGrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboGrade.FormattingEnabled = true;
+            this.comboGrade.Items.AddRange(new object[] {
+            "",
+            "Sem Afastamento",
+            "Com Afastamento"});
+            this.comboGrade.Location = new System.Drawing.Point(54, 3);
+            this.comboGrade.Name = "comboGrade";
+            this.comboGrade.Size = new System.Drawing.Size(141, 24);
+            this.comboGrade.TabIndex = 21;
+            // 
+            // comboType
+            // 
+            this.comboType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboType.BackColor = System.Drawing.SystemColors.Window;
+            this.comboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboType.FormattingEnabled = true;
+            this.comboType.Items.AddRange(new object[] {
+            "Típico",
+            "Trajeto",
+            "Equiparado"});
+            this.comboType.Location = new System.Drawing.Point(560, 102);
+            this.comboType.Name = "comboType";
+            this.comboType.Size = new System.Drawing.Size(99, 24);
+            this.comboType.TabIndex = 21;
+            this.comboType.SelectedIndexChanged += new System.EventHandler(this.comboType_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(513, 105);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Tipo:";
+            // 
             // AccidentAdditionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -497,6 +577,10 @@
             this.groupGenInfo.PerformLayout();
             this.groupAdditionalInfo.ResumeLayout(false);
             this.groupAdditionalInfo.PerformLayout();
+            this.panClass.ResumeLayout(false);
+            this.panClass.PerformLayout();
+            this.panGrade.ResumeLayout(false);
+            this.panGrade.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -540,5 +624,11 @@
         private System.Windows.Forms.Label lblRTA;
         private System.Windows.Forms.Label lblAdditionalInfo;
         private System.Windows.Forms.Label lblOptional;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboType;
+        private System.Windows.Forms.Panel panGrade;
+        private System.Windows.Forms.Label lblGrade;
+        private System.Windows.Forms.ComboBox comboGrade;
+        private System.Windows.Forms.Panel panClass;
     }
 }

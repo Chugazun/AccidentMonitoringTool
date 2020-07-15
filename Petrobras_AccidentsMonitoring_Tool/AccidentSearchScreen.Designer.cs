@@ -526,6 +526,7 @@
             this.Controls.Add(this.listResults);
             this.Name = "AccidentSearchScreen";
             this.Text = "Buscar Acidentes";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccidentSearchScreen_FormClosing);
             this.Load += new System.EventHandler(this.AccidentSearchScreen_Load);
             this.groupDate.ResumeLayout(false);
             this.groupDate.PerformLayout();

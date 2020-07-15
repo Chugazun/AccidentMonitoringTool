@@ -18,11 +18,17 @@ namespace Petrobras_AccidentsMonitoring_Tool
 {
     public partial class AccidentSearchScreen : Form
     {
+        private readonly MainMenu _mainMenu;
         private IEnumerable<Accident> _results;
 
         public AccidentSearchScreen()
         {
             InitializeComponent();
+        }
+
+        public AccidentSearchScreen(MainMenu mainMenu) : this()
+        {
+            _mainMenu = mainMenu;
         }
 
         private void listView1_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
@@ -72,7 +78,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 listResults.Items.Clear();
                 lblResults.Text = "Resultados: ";
 
-                using (var project = new ExcelPackage(new System.IO.FileInfo(FilePath.Test)))
+                using (var project = new ExcelPackage(new System.IO.FileInfo($@"{Properties.Resources.MainSheet}")))
                 {
                     var sheet = project.Workbook.Worksheets[0];
                     SearchService searchService = new SearchService(sheet);
@@ -95,6 +101,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 listResults.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                 listResults.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                 SetLastColumnToFill(listResults);
+                
             }
             catch (ResultNotFoundException exception)
             {
@@ -185,12 +192,18 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             AccidentAdditionScreen accidentAdditionScreen = new AccidentAdditionScreen(this, _results.ElementAt(listResults.SelectedIndices[0]));
             accidentAdditionScreen.Show();
+            Hide();
         }
 
         private void comboType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboType.SelectedIndex == 0) panClass.Visible = true;
             else panClass.Visible = false;
+        }
+
+        private void AccidentSearchScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _mainMenu.Show();
         }
     }
 }

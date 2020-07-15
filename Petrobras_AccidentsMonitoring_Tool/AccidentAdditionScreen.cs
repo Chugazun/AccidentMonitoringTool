@@ -105,7 +105,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             if (VerifyRequiredControls())
             {
-                using (var project = new ExcelPackage(new FileInfo(FilePath.Test)))
+                using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.BackupSheet}")))
                 {
                     ExcelWorksheet sheet = project.Workbook.Worksheets[0];
                     ManagementService managementService = new ManagementService(sheet);
@@ -159,8 +159,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void AccidentAdditionScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _mainMenu.Show();
-            Hide();
+            _mainMenu.Show();            
         }
 
         private void hourBox_ValueChanged(object sender, EventArgs e)

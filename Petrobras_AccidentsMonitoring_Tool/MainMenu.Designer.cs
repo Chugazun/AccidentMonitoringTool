@@ -68,6 +68,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.panDaysTotal = new System.Windows.Forms.Panel();
             this.panAddition = new System.Windows.Forms.Panel();
+            this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdditionScreen = new System.Windows.Forms.Button();
             comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
@@ -118,7 +119,7 @@
             this.btnAddition.Name = "btnAddition";
             this.btnAddition.Size = new System.Drawing.Size(157, 41);
             this.btnAddition.TabIndex = 0;
-            this.btnAddition.Text = "Adicionar Acidente";
+            this.btnAddition.Text = "Gerenciar Ocorrências";
             this.btnAddition.UseVisualStyleBackColor = false;
             this.btnAddition.Click += new System.EventHandler(this.btnAddition_Click);
             // 
@@ -530,15 +531,26 @@
             // 
             // panAddition
             // 
+            this.panAddition.Controls.Add(this.btnEdit);
             this.panAddition.Controls.Add(this.btnAdditionScreen);
             this.panAddition.Location = new System.Drawing.Point(229, 63);
             this.panAddition.Name = "panAddition";
             this.panAddition.Size = new System.Drawing.Size(278, 270);
             this.panAddition.TabIndex = 10;
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(142, 218);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(75, 29);
+            this.btnEdit.TabIndex = 1;
+            this.btnEdit.Text = "Editar";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click_1);
+            // 
             // btnAdditionScreen
             // 
-            this.btnAdditionScreen.Location = new System.Drawing.Point(102, 218);
+            this.btnAdditionScreen.Location = new System.Drawing.Point(61, 219);
             this.btnAdditionScreen.Name = "btnAdditionScreen";
             this.btnAdditionScreen.Size = new System.Drawing.Size(75, 28);
             this.btnAdditionScreen.TabIndex = 0;
@@ -621,5 +633,6 @@
         private System.Windows.Forms.Panel panDaysTotal;
         private System.Windows.Forms.Panel panAddition;
         private System.Windows.Forms.Button btnAdditionScreen;
+        private System.Windows.Forms.Button btnEdit;
     }
 }

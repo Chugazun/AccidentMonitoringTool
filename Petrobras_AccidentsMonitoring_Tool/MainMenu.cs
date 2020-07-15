@@ -6,7 +6,6 @@ using Petrobras_AccidentsMonitoring_Tool.Services;
 using Petrobras_AccidentsMonitoring_Tool.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -37,7 +36,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             AdjustScreen();
             radioPeriod.Checked = true;
-            using (var project = new ExcelPackage(new FileInfo(FilePath.Main)))
+            using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.MainSheet}")))
             {
                 _sheet = project.Workbook.Worksheets[0];
                 _search = new SearchService(_sheet);
@@ -61,16 +60,6 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 comboSector_1.SelectedIndex = 0;
             }
 
-            using (var projectTest = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\sheetbak.xlsx")))
-            {
-                var sheetBak = projectTest.Workbook.Worksheets[0];
-                //sheetBak.Cells["AA78"].Value = sheetBak.Cells["AA76"].Value;
-                //sheetBak.Cells[76, 1, 76, 31].Copy(sheetBak.Cells[77, 1, 77, 31]);
-                //sheetBak.Row(77).CustomHeight = false;
-                ManagementService managementService = new ManagementService(sheetBak);
-                projectTest.Save();
-            }
-
             comboType.Items.AddRange(new string[] { "TAR", "TOR" });
             comboType.SelectedIndex = 0;
         }
@@ -88,7 +77,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev8.xlsx")))
+            using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.MainSheet}")))
             {
                 _sheet = project.Workbook.Worksheets[0];
                 _search = new SearchService(_sheet);
@@ -271,10 +260,11 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string[] searchItems = panDaysMain.Controls.OfType<ComboBox>().Where(c => c.Tag.ToString() == "sector")
-                                                                      .Select(cb => cb.SelectedItem.ToString())
-                                                                      .Reverse()
-                                                                      .ToArray();
+            string[] searchItems = panDaysMain.Controls.OfType<ComboBox>()
+                                                       .Where(c => c.Tag.ToString() == "sector")
+                                                       .Select(cb => cb.SelectedItem.ToString())
+                                                       .Reverse()
+                                                       .ToArray();
 
             DaysMonitoringScreen daysMonitoringScreen = new DaysMonitoringScreen(searchItems, comboType.SelectedItem.ToString());
             daysMonitoringScreen.Show();
@@ -293,7 +283,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
             TogglePreviousTool(btnDays, panDaysTotal);
             panDaysTotal.Visible = true;
             btnDays.BackColor = SystemColors.GradientInactiveCaption;
-            lblToolName.Text = "Monitoramento de Dias";
+            lblToolName.Text = Properties.Resources.TitleDays;
         }
 
         private void btnAddition_Click(object sender, EventArgs e)
@@ -301,20 +291,27 @@ namespace Petrobras_AccidentsMonitoring_Tool
             TogglePreviousTool(btnAddition, panAddition);
             panAddition.Visible = true;
             btnAddition.BackColor = SystemColors.GradientInactiveCaption;
-            lblToolName.Text = "Adicionar novo Acidente";
-        }        
+            lblToolName.Text = Properties.Resources.TitleManagement;
+        }
 
         private void btnAccidents_Click(object sender, EventArgs e)
         {
             TogglePreviousTool(btnAccidents, panAccidents);
             panAccidents.Visible = true;
-            btnAccidents.BackColor = SystemColors.GradientInactiveCaption;            
-            lblToolName.Text = "Monitoramento de Acidentes";
+            btnAccidents.BackColor = SystemColors.GradientInactiveCaption;
+            lblToolName.Text = Properties.Resources.TitleMonitoring;
+        }
+
+        private void btnEdit_Click_1(object sender, EventArgs e)
+        {
+            AccidentSearchScreen accidentSearchScreen = new AccidentSearchScreen(this);
+            accidentSearchScreen.Show();
+            Hide();
         }
 
         private void btnAdditionScreen_Click(object sender, EventArgs e)
         {
-            using(var project = new ExcelPackage(new FileInfo(@"E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\sheetbak.xlsx")))
+            using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.BackupSheet}")))
             {
                 var sheet = project.Workbook.Worksheets[0];
                 SearchService search = new SearchService(sheet);
@@ -322,7 +319,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 AccidentAdditionScreen accidentAdditionScreen = new AccidentAdditionScreen(this);
                 accidentAdditionScreen.Show();
                 Hide();
-            }            
+            }
         }
     }
 }

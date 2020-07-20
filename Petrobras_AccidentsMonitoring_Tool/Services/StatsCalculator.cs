@@ -4,7 +4,6 @@ using Petrobras_AccidentsMonitoring_Tool.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Petrobras_AccidentsMonitoring_Tool.Services
 {
@@ -15,19 +14,21 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
         static StatsCalculator()
         {
-            functions = new Dictionary<string, Func<IEnumerable<Accident>, IEnumerable<IGrouping<string, Accident>>>>();
-            functions.Add("Total Geral", GetBySelfHired);
-            functions.Add("Empresa", GetByCompany);
-            functions.Add("Setores", GetSectors);
-            functions.Add("Anos", GetByYears);
-            functions.Add("Meses", GetByMonths);
-            functions.Add("Dias da Semana", GetByWeekDay);
-            functions.Add("Horas", GetByHour);
-            functions.Add("Tipos de Lesão", GetByInjure);
-            functions.Add("Locais", GetByPlace);
-            functions.Add("Partes do Corpo", GetByBodyPart);
-            functions.Add("Níveis(Temp)", GetByGrade);
-            functions.Add("Classes", GetByClass);
+            functions = new Dictionary<string, Func<IEnumerable<Accident>, IEnumerable<IGrouping<string, Accident>>>>
+            {
+                { "Total Geral", GetBySelfHired },
+                { "Empresa", GetByCompany },
+                { "Setores", GetSectors },
+                { "Anos", GetByYears },
+                { "Meses", GetByMonths },
+                { "Dias da Semana", GetByWeekDay },
+                { "Horas", GetByHour },
+                { "Tipos de Lesão", GetByInjure },
+                { "Locais", GetByPlace },
+                { "Partes do Corpo", GetByBodyPart },
+                { "Níveis(Temp)", GetByGrade },
+                { "Classes", GetByClass }
+            };
         }
 
         public static Func<IEnumerable<Accident>, IEnumerable<IGrouping<string, Accident>>> GetFunction(string funcName)
@@ -48,7 +49,6 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
                 SelectedAccident = a
             }).GroupBy(x => x.AccidentTypeGroup, a => a.SelectedAccident)
               .OrderByDescending(s => s.Count());
-            //return totalAccidents.GroupBy(a => a.AccidentType.ToString()).OrderByDescending(s => s.Count());
         }
 
         public static IEnumerable<Accident> TOR(IEnumerable<Accident> totalAccidents)
@@ -59,25 +59,6 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
         public static IEnumerable<Accident> TAR(IEnumerable<Accident> totalAccidents)
         {
             return totalAccidents.Where(a => a.AccidentType.Value == AccidentType.Típico && a.Class >= 2);
-        }
-
-        #region unused GetAmounts Method
-        //public static IEnumerable<int> GetAmounts(List<Accident> totalAccidents, params string[] indexes)
-        //{
-        //    foreach (string index in indexes)
-        //    {
-        //        Func<List<Accident>, int> resultFunction = functions[index];
-
-        //        yield return resultFunction(totalAccidents);
-        //    }
-        //    yield return totalAccidents.Count;
-        //    use "GetPercentages()" to get the percentages
-        //}
-        #endregion
-
-        public static double GetPercentages(int total, int value)
-        {
-            return value / (double)total * 100;
         }
 
         public static IEnumerable<Accident> GetByPetrobras(IEnumerable<Accident> totalAccidents)

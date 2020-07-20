@@ -54,34 +54,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccidentAdditionScreen.cs">
+    <Compile Include="Forms\AccidentAdditionScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AccidentAdditionScreen.Designer.cs">
+    <Compile Include="Forms\AccidentAdditionScreen.Designer.cs">
       <DependentUpon>AccidentAdditionScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="AccidentDetailsScreen.cs">
+    <Compile Include="Forms\AccidentDetailsScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AccidentDetailsScreen.Designer.cs">
+    <Compile Include="Forms\AccidentDetailsScreen.Designer.cs">
       <DependentUpon>AccidentDetailsScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="AccidentSearchScreen.cs">
+    <Compile Include="Forms\AccidentSearchScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AccidentSearchScreen.Designer.cs">
+    <Compile Include="Forms\AccidentSearchScreen.Designer.cs">
       <DependentUpon>AccidentSearchScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChartScreen.cs">
+    <Compile Include="Forms\ChartScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChartScreen.Designer.cs">
+    <Compile Include="Forms\ChartScreen.Designer.cs">
       <DependentUpon>ChartScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="DaysMonitoringScreen.cs">
+    <Compile Include="Forms\DaysMonitoringScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DaysMonitoringScreen.Designer.cs">
+    <Compile Include="Forms\DaysMonitoringScreen.Designer.cs">
       <DependentUpon>DaysMonitoringScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\Accident.cs" />
@@ -91,58 +91,48 @@
     <Compile Include="Enums\Months.cs" />
     <Compile Include="Enums\ResultType.cs" />
     <Compile Include="Exceptions\AccidentClassException.cs" />
+    <Compile Include="Exceptions\InvalidDateException.cs" />
     <Compile Include="Exceptions\ResultNotFoundException.cs" />
-    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="AccidentsMonitoringMenu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AccidentsMonitoringMenu.Designer.cs">
-      <DependentUpon>AccidentsMonitoringMenu.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RatioChartScreen.cs">
+    <Compile Include="Forms\RatioChartScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RatioChartScreen.Designer.cs">
+    <Compile Include="Forms\RatioChartScreen.Designer.cs">
       <DependentUpon>RatioChartScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\ManagementService.cs" />
     <Compile Include="Services\SearchService.cs" />
     <Compile Include="Services\SheetService.cs" />
     <Compile Include="Services\StatsCalculator.cs" />
-    <Compile Include="StatsSelector.cs">
+    <Compile Include="Forms\StatsSelector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StatsSelector.Designer.cs">
+    <Compile Include="Forms\StatsSelector.Designer.cs">
       <DependentUpon>StatsSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainMenu.cs">
+    <Compile Include="Forms\MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainMenu.Designer.cs">
+    <Compile Include="Forms\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils\FilePath.cs" />
     <Compile Include="Utils\Utilities.cs" />
-    <EmbeddedResource Include="AccidentAdditionScreen.resx">
+    <EmbeddedResource Include="Forms\AccidentAdditionScreen.resx">
       <DependentUpon>AccidentAdditionScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AccidentDetailsScreen.resx">
+    <EmbeddedResource Include="Forms\AccidentDetailsScreen.resx">
       <DependentUpon>AccidentDetailsScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AccidentSearchScreen.resx">
+    <EmbeddedResource Include="Forms\AccidentSearchScreen.resx">
       <DependentUpon>AccidentSearchScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChartScreen.resx">
+    <EmbeddedResource Include="Forms\ChartScreen.resx">
       <DependentUpon>ChartScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DaysMonitoringScreen.resx">
+    <EmbeddedResource Include="Forms\DaysMonitoringScreen.resx">
       <DependentUpon>DaysMonitoringScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AccidentsMonitoringMenu.resx">
-      <DependentUpon>AccidentsMonitoringMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -154,13 +144,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RatioChartScreen.resx">
+    <EmbeddedResource Include="Forms\RatioChartScreen.resx">
       <DependentUpon>RatioChartScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StatsSelector.resx">
+    <EmbeddedResource Include="Forms\StatsSelector.resx">
       <DependentUpon>StatsSelector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainMenu.resx">
+    <EmbeddedResource Include="Forms\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

@@ -3,15 +3,12 @@ using Petrobras_AccidentsMonitoring_Tool.Entities;
 using Petrobras_AccidentsMonitoring_Tool.Enums;
 using Petrobras_AccidentsMonitoring_Tool.Exceptions;
 using Petrobras_AccidentsMonitoring_Tool.Services;
-using Petrobras_AccidentsMonitoring_Tool.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Petrobras_AccidentsMonitoring_Tool

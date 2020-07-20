@@ -27,8 +27,6 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             if (searchParameters.Class.HasValue) filters.Add(9 + searchParameters.Class.Value, "x");
             else if (searchParameters.AccidentType.HasValue)
             {
-                //int[] col = _accidentTypePos[searchParameters.AccidentType.Value];                
-                //filters.Add(col[0], "x");
                 filters.Add(15, searchParameters.AccidentType.Value.ToString());
             }
             if (searchParameters.Year.HasValue) { filters.Add(20, searchParameters.Year.Value.ToString()); }
@@ -37,9 +35,12 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
                 string initialDate = searchParameters.InitialDate.HasValue ? searchParameters.InitialDate.Value.ToString(@"dd/MM/yyyy") : new DateTime(GetDate(5).Year, 01, 01).ToString(@"dd/MM/yyyy");
                 string finalDate = searchParameters.FinalDate.HasValue ? searchParameters.FinalDate.Value.ToString(@"dd/MM/yyyy") : new DateTime(GetDate(LastRow).Year, 12, 31).ToString(@"dd/MM/yyyy");
 
-                filters.Add(19, initialDate + " " + finalDate);
+                if (DateTime.Parse(initialDate) > DateTime.Parse(finalDate))
+                {
+                    throw new InvalidDateException("Intervalo de datas inválido: Data Inicial maior que Data Final");
+                }
+                else filters.Add(19, initialDate + " " + finalDate);
             }
-
 
             int[] validRows = GetRows(filters).ToArray();
 
@@ -90,13 +91,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
         {
             foreach (var filter in rowFilters)
             {
-                //System.Windows.Forms.MessageBox.Show(filter.Key.ToString(), "Erro", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                 if (filter.Key == 20) { return true; }
-                //else if (filter.Key == 15 || filter.Key == 17)
-                //{                    
-                //    var rowId = selectedRow.Start.Row;                    
-                //    return selectedRow[rowId, filter.Key, rowId, filter.Key + 1].FirstOrDefault(c => c.Text.Trim().ToLower() == "x") != null;
-                //}
                 else if (filter.Key == 15)
                 {
                     AccidentType? rowAccidentType = GetAccidentType(selectedRow.Start.Row, GetAccidentClass(selectedRow.Start.Row));
@@ -157,11 +152,11 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             {
                 return (AccidentType)1;
             }
-            else if (_sheet.Cells[row, 15, row, 16].FirstOrDefault(c => c.Text.ToLower() == "x") != null)
+            else if (_sheet.Cells[row, 15, row, 16].Any(c => c.Text.ToLower() == "x"))
             {
                 return (AccidentType)2;
             }
-            else if (_sheet.Cells[row, 17, row, 18].FirstOrDefault(c => c.Text.ToLower() == "x") != null)
+            else if (_sheet.Cells[row, 17, row, 18].Any(c => c.Text.ToLower() == "x"))
             {
                 return (AccidentType)3;
             }
@@ -204,36 +199,6 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
             yield return yearColumn.IndexOf(year_1.ToString()) + 5;
             yield return yearColumn.LastIndexOf(year_2.ToString()) + 5;
-        }
-
-        public int GetDaysIntervalOLD(string target, int searchColumn, int typeAsInt)
-        {
-            int aux = -1;
-            DateTime? date = null;
-
-            var result = _sheet.Cells[5, searchColumn, LastRow, searchColumn].Where(c => c.Text.Contains(target.Trim()) && GetAccidentClass(c.Start.Row).HasValue && GetAccidentClass(c.Start.Row).Value >= typeAsInt)
-                                                                                      .LastOrDefault();
-
-            if (result != null) date = GetDate(result.Start.Row);
-
-            //for (int i = LastRow; i > 5; i--)
-            //{
-            //    if (_sheet.Cells[i, searchColumn].Text == target)
-            //    {
-            //        int? accidentClass = GetAccidentClass(i);
-            //        if (accidentClass.HasValue && accidentClass.Value >= 2)
-            //        {
-            //            date = GetDate(i);
-            //            break;
-            //        }
-            //    }
-            //}
-            if (!date.HasValue) return aux;
-
-            DateTime currentDay = DateTime.Now;
-            TimeSpan diff = currentDay.Subtract(date.Value);
-            aux = diff.Days - 1;
-            return aux;
         }
 
         public Accident GetLastAccident(string target, int searchColumn, int typeAsInt)

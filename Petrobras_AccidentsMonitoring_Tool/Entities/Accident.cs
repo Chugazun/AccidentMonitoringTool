@@ -2,8 +2,6 @@
 using Petrobras_AccidentsMonitoring_Tool.Extensions;
 using Petrobras_AccidentsMonitoring_Tool.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Petrobras_AccidentsMonitoring_Tool.Entities
 {

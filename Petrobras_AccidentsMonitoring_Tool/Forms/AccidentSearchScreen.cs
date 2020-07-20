@@ -3,15 +3,10 @@ using Petrobras_AccidentsMonitoring_Tool.Entities;
 using Petrobras_AccidentsMonitoring_Tool.Enums;
 using Petrobras_AccidentsMonitoring_Tool.Exceptions;
 using Petrobras_AccidentsMonitoring_Tool.Services;
-using Petrobras_AccidentsMonitoring_Tool.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Petrobras_AccidentsMonitoring_Tool
@@ -83,11 +78,6 @@ namespace Petrobras_AccidentsMonitoring_Tool
                     var sheet = project.Workbook.Worksheets[0];
                     SearchService searchService = new SearchService(sheet);
                     SearchModel searchModel = GetFormInfo();
-                    //SearchModel searchModel = new SearchModel()
-                    //{
-                    //    InitialDate = new DateTime(2014, 1, 1),
-                    //    FinalDate = new DateTime(2020, 10, 25)
-                    //};
 
                     _results = searchService.AdvSearch(searchModel, ResultType.FullResult);
                 }
@@ -101,7 +91,11 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 listResults.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                 listResults.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                 SetLastColumnToFill(listResults);
-                
+
+            }
+            catch (InvalidDateException exception)
+            {
+                MessageBox.Show(exception.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (ResultNotFoundException exception)
             {
@@ -113,7 +107,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             listResults.Items.Clear();
             lblResults.Text = "Resultados: ";
-            Controls.OfType<TextBox>().ToList().ForEach(tb => tb.Text = "");
+            Controls.OfType<TextBox>().ToList().ForEach(tb => tb.Text = "");            
             dateboxInterval_Initial.Value = new DateTime(2014, 1, 1);
             dateBoxInterval_Final.Value = DateTime.Now;
             dateBoxYear.Value = DateTime.Now;
@@ -121,8 +115,10 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void AddResultToTable(Accident accident)
         {
-            ListViewItem item = new ListViewItem();
-            item.Text = accident.Company;
+            ListViewItem item = new ListViewItem
+            {
+                Text = accident.Company
+            };
             item.SubItems.Add(accident.Sector.ToUpper());
             item.SubItems.Add(accident.EmployeeName);
             item.SubItems.Add(accident.Date.Value.ToString(@"dd/MM/yyyy"));
@@ -164,7 +160,6 @@ namespace Petrobras_AccidentsMonitoring_Tool
             }
             else if (comboType.SelectedIndex < 3) searchModel.AccidentType = (AccidentType?)Enum.Parse(typeof(AccidentType), comboType.SelectedItem.ToString());
 
-            
             return searchModel;
         }
 

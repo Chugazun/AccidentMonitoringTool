@@ -77,12 +77,6 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
         private void ClearClassForEdit(int row)
         {
-            //int? accidentClass = GetAccidentClass(row);
-            //if (accidentClass.HasValue)
-            //{
-            //    _sheet.Cells[row, GetClassPos(accidentClass.Value)].Value = "";
-            //}
-
             var classPos = _sheet.Cells[row, 9, row, 18].FirstOrDefault(c => c.Text.Trim().ToLower() == "x");
             if (classPos != null) classPos.Value = "";
         }

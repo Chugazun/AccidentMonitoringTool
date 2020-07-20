@@ -1,10 +1,6 @@
 ﻿using OfficeOpenXml;
 using Petrobras_AccidentsMonitoring_Tool.Enums;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Petrobras_AccidentsMonitoring_Tool.Services
 {
@@ -20,10 +16,11 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
             _sheet = sheet;
             SetTotalEntries();
             LastRow = TotalEntries + 4;
-            _accidentTypePos = new Dictionary<AccidentType, int[]>();
-            //_accidentTypePos.Add(AccidentType.Típico, new int[30]);
-            _accidentTypePos.Add(AccidentType.Trajeto, new int[] { 16, 15 });
-            _accidentTypePos.Add(AccidentType.Equiparado, new int[] { 18, 17 });
+            _accidentTypePos = new Dictionary<AccidentType, int[]>
+            {
+                { AccidentType.Trajeto, new int[] { 16, 15 } },
+                { AccidentType.Equiparado, new int[] { 18, 17 } }
+            };
         }
 
         private void SetTotalEntries()

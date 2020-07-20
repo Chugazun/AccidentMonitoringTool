@@ -1,13 +1,8 @@
 ﻿using Petrobras_AccidentsMonitoring_Tool.Entities;
-using Petrobras_AccidentsMonitoring_Tool.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -34,14 +29,14 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
             statChart.ChartAreas.Add(new ChartArea());
 
-            statChart.Legends.Add("MyLegend");
+            statChart.Legends.Add("ChartInfo");
             statChart.Legends[0].LegendStyle = LegendStyle.Table;
             statChart.Legends[0].Docking = Docking.Bottom;
             statChart.Legends[0].Alignment = StringAlignment.Center;
             statChart.Legends[0].Title = $"Dados por {Title} ({StatTag})";
             statChart.Legends[0].BorderColor = Color.Black;
 
-            string seriesName = "Test";
+            string seriesName = "ResultChart";
             statChart.Series.Add(seriesName);
 
             statChart.Series[seriesName].ChartType = SeriesChartType.Pie;
@@ -66,7 +61,6 @@ namespace Petrobras_AccidentsMonitoring_Tool
             HitTestResult hit = statChart.HitTest(e.X, e.Y, ChartElementType.DataPoint);
             if (hit.PointIndex >= 0 && hit.Series != null)
             {
-                DataPoint dp = statChart.Series[0].Points[hit.PointIndex];
                 Stats resultStats = new Stats(ResultGroup.ElementAt(hit.PointIndex).Key, ResultGroup.ElementAt(hit.PointIndex));
 
                 StatsSelector statsSelector = new StatsSelector(Title, resultStats);

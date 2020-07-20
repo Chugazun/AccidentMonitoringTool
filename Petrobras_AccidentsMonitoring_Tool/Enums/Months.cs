@@ -1,5 +1,4 @@
-﻿
-namespace Petrobras_AccidentsMonitoring_Tool.Enums
+﻿namespace Petrobras_AccidentsMonitoring_Tool.Enums
 {
     enum Months : int
     {

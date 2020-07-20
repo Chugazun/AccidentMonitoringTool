@@ -38,14 +38,14 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
             statChart.ChartAreas.Add(new ChartArea());
 
-            statChart.Legends.Add("MyLegend");
+            statChart.Legends.Add("RatioChartLegend");
             statChart.Legends[0].LegendStyle = LegendStyle.Table;
             statChart.Legends[0].Docking = Docking.Bottom;
             statChart.Legends[0].Alignment = StringAlignment.Center;
             statChart.Legends[0].Title = "Dados por Taxa";
             statChart.Legends[0].BorderColor = Color.Black;
 
-            string seriesName = "Test";
+            string seriesName = "RatioResultChart";
             statChart.Series.Add(seriesName);
 
             statChart.Series[seriesName].ChartType = SeriesChartType.Pie;
@@ -80,17 +80,6 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private string GetTotalStats()
         {
             StringBuilder sb = new StringBuilder();
-
-            #region Old Group printing logic
-            //var selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Típicos");
-            //if (selectedGroup != null) sb.AppendLine($"- Típicos: {selectedGroup.Count()}");
-
-            //selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Trajeto");
-            //if (selectedGroup != null) sb.AppendLine($"- Trajeto: {selectedGroup.Count()}");
-
-            //selectedGroup = ResultGroup.FirstOrDefault(g => g.Key == "Equiparados");
-            //if (selectedGroup != null) sb.AppendLine($"- Equiparados: {selectedGroup.Count()}");
-            #endregion
 
             foreach (var type in ResultGroup)
             {

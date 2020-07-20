@@ -36,16 +36,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 SearchService searchService = new SearchService(_sheet);
 
                 foreach (string sector in _sectors)
-                {
-                    //int result = searchService.GetDaysIntervalOLD(sector, 3, ConvertAccidentType(_accidentType));
-                    //if (result != -1)
-                    //{
-                    //    listAccidents.Items.Add($"- {sector}: {result} dias. ({Utilities.ConvertToDate(result).ToString("dd/MM/yyyy")})");
-                    //}
-                    //else
-                    //{
-                    //    listAccidents.Items.Add($"- {sector}: Nenhum acidente encontrado.");
-                    //}
+                {                    
                     Accident aux = searchService.GetLastAccident(sector, 3, ConvertAccidentType(_accidentType));
                     _accidents.Add(aux);
                     if(aux != null)

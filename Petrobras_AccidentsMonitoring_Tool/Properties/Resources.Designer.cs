@@ -61,7 +61,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\sheetbak.xlsx.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a ../../repos/sheetbak.xlsx.
         /// </summary>
         internal static string BackupSheet {
             get {
@@ -70,7 +70,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev8.xlsx.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a ../../repos/ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev8.xlsx.
         /// </summary>
         internal static string MainSheet {
             get {

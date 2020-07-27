@@ -72,8 +72,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 listResults.Items.Clear();
                 lblResults.Text = "Resultados: ";
-
-                using (var project = new ExcelPackage(new System.IO.FileInfo($@"{Properties.Resources.MainSheet}")))
+                
+                using (var project = new ExcelPackage(new System.IO.FileInfo($@"{Properties.Resources.BackupSheet}")))
                 {
                     var sheet = project.Workbook.Worksheets[0];
                     SearchService searchService = new SearchService(sheet);

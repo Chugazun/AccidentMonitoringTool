@@ -131,6 +131,7 @@
             this.lblCurrentTag.Size = new System.Drawing.Size(116, 13);
             this.lblCurrentTag.TabIndex = 7;
             this.lblCurrentTag.Text = "Current Tag (DEBUG): ";
+            this.lblCurrentTag.Visible = false;
             // 
             // btnDays
             // 
@@ -540,7 +541,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(142, 218);
+            this.btnEdit.Location = new System.Drawing.Point(142, 136);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 29);
             this.btnEdit.TabIndex = 1;
@@ -550,7 +551,7 @@
             // 
             // btnAdditionScreen
             // 
-            this.btnAdditionScreen.Location = new System.Drawing.Point(61, 219);
+            this.btnAdditionScreen.Location = new System.Drawing.Point(61, 137);
             this.btnAdditionScreen.Name = "btnAdditionScreen";
             this.btnAdditionScreen.Size = new System.Drawing.Size(75, 28);
             this.btnAdditionScreen.TabIndex = 0;

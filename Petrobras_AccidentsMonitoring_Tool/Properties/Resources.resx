@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BackupSheet" xml:space="preserve">
-    <value>E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\sheetbak.xlsx</value>
+    <value>../../repos/sheetbak.xlsx</value>
     <comment>Backup Sheet file path</comment>
   </data>
   <data name="MainSheet" xml:space="preserve">
-    <value>E:\Stuff\Studies\c#\Petrobras_AccidentMonitoring_Tool_Console\Petrobras_AccidentMonitoring_Tool_Console\repos\ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev8.xlsx</value>
+    <value>../../repos/ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev8.xlsx</value>
     <comment>Main Sheet file path</comment>
   </data>
   <data name="TitleDays" xml:space="preserve">

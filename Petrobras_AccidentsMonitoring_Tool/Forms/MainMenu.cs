@@ -63,7 +63,9 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void AdjustScreen()
         {
-            lblCurrentTag.Text += currentTag;
+            //Current Tag Label initial value
+            //lblCurrentTag.Text += currentTag;
+
             panAccidents.Location = new Point(229, 63);
             panAccidents.Size = new Size(278, 270);
             panDaysTotal.Location = new Point(214, 55);
@@ -231,8 +233,10 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 btnRemove.Visible = true;
             }
-            currentTag++;
-            lblCurrentTag.Text = "Current Tag (DEBUG): " + currentTag;
+            #region Current Tag Label for Debugging
+            //currentTag++;
+            //lblCurrentTag.Text = "Current Tag (DEBUG): " + currentTag;
+            #endregion
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -251,8 +255,10 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 btnRemove.Visible = false;
             }
-            currentTag--;
-            lblCurrentTag.Text = "Current Tag (DEBUG): " + currentTag;
+            #region Current Tag Label for Debugging
+            //currentTag--;
+            //lblCurrentTag.Text = "Current Tag (DEBUG): " + currentTag;
+            #endregion
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

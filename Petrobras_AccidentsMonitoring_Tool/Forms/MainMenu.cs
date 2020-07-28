@@ -29,6 +29,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
             InitializeComponent();
         }
 
+        #region Main Menu Code
+
         private void Test_Load(object sender, EventArgs e)
         {
             AdjustScreen();
@@ -37,7 +39,6 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 _sheet = project.Workbook.Worksheets[0];
                 _search = new SearchService(_sheet);
-
 
                 GetSheetYears(_search.GetYearsColumn().GroupBy(c => c).Select(g => g.Key));
                 comboInitialYear.Items.AddRange(_years.Prepend("").ToArray());
@@ -60,7 +61,6 @@ namespace Petrobras_AccidentsMonitoring_Tool
             comboType.Items.AddRange(new string[] { "TAR", "TOR" });
             comboType.SelectedIndex = 0;
         }
-
         private void AdjustScreen()
         {
             //Current Tag Label initial value
@@ -74,7 +74,43 @@ namespace Petrobras_AccidentsMonitoring_Tool
             _currentPanel = panAddition;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnDays_Click(object sender, EventArgs e)
+        {
+            TogglePreviousTool(btnDays, panDaysTotal);
+            panDaysTotal.Visible = true;
+            btnDays.BackColor = SystemColors.GradientInactiveCaption;
+            lblToolName.Text = Properties.Resources.TitleDays;
+        }
+
+        private void btnAddition_Click(object sender, EventArgs e)
+        {
+            TogglePreviousTool(btnAddition, panAddition);
+            panAddition.Visible = true;
+            btnAddition.BackColor = SystemColors.GradientInactiveCaption;
+            lblToolName.Text = Properties.Resources.TitleManagement;
+        }
+
+        private void btnAccidents_Click(object sender, EventArgs e)
+        {
+            TogglePreviousTool(btnAccidents, panAccidents);
+            panAccidents.Visible = true;
+            btnAccidents.BackColor = SystemColors.GradientInactiveCaption;
+            lblToolName.Text = Properties.Resources.TitleMonitoring;
+        }
+
+        private void TogglePreviousTool(Button newToolButton, Panel newToolPanel)
+        {
+            _currentButton.BackColor = SystemColors.ControlLight;
+            _currentPanel.Visible = false;
+            _currentButton = newToolButton;
+            _currentPanel = newToolPanel;
+        }
+
+        #endregion
+
+        #region Accident Monitoring Tool Code
+
+        private void btnChart_Click(object sender, EventArgs e)
         {
             using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.MainSheet}")))
             {
@@ -137,15 +173,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
             _years = aux;
         }
 
-        private void GetSheetSectors(IEnumerable<string> sectors)
-        {
-            List<string> aux = new List<string>();
-            foreach (string item in sectors)
-            {
-                aux.Add(item);
-            }
-            _sectors = aux;
-        }
+        #region Radio Buttons Logic
 
         private void radioPeriod_CheckedChanged(object sender, EventArgs e)
         {
@@ -194,6 +222,23 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 panDataMenuAll.Visible = false;
             }
+        }
+
+        #endregion
+
+        // endregion for Monitoring Tool
+        #endregion
+
+        #region Days Monitoring Tool Code
+
+        private void GetSheetSectors(IEnumerable<string> sectors)
+        {
+            List<string> aux = new List<string>();
+            foreach (string item in sectors)
+            {
+                aux.Add(item);
+            }
+            _sectors = aux;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -273,37 +318,9 @@ namespace Petrobras_AccidentsMonitoring_Tool
             daysMonitoringScreen.Show();
         }
 
-        private void TogglePreviousTool(Button newToolButton, Panel newToolPanel)
-        {
-            _currentButton.BackColor = SystemColors.ControlLight;
-            _currentPanel.Visible = false;
-            _currentButton = newToolButton;
-            _currentPanel = newToolPanel;
-        }
+        #endregion
 
-        private void btnDays_Click(object sender, EventArgs e)
-        {
-            TogglePreviousTool(btnDays, panDaysTotal);
-            panDaysTotal.Visible = true;
-            btnDays.BackColor = SystemColors.GradientInactiveCaption;
-            lblToolName.Text = Properties.Resources.TitleDays;
-        }
-
-        private void btnAddition_Click(object sender, EventArgs e)
-        {
-            TogglePreviousTool(btnAddition, panAddition);
-            panAddition.Visible = true;
-            btnAddition.BackColor = SystemColors.GradientInactiveCaption;
-            lblToolName.Text = Properties.Resources.TitleManagement;
-        }
-
-        private void btnAccidents_Click(object sender, EventArgs e)
-        {
-            TogglePreviousTool(btnAccidents, panAccidents);
-            panAccidents.Visible = true;
-            btnAccidents.BackColor = SystemColors.GradientInactiveCaption;
-            lblToolName.Text = Properties.Resources.TitleMonitoring;
-        }
+        #region Accident Management Tool Code
 
         private void btnEdit_Click_1(object sender, EventArgs e)
         {
@@ -314,15 +331,11 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void btnAdditionScreen_Click(object sender, EventArgs e)
         {
-            using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.BackupSheet}")))
-            {
-                var sheet = project.Workbook.Worksheets[0];
-                SearchService search = new SearchService(sheet);
-                Accident accident = search.GetLastAccident("RNEST/MA/EE", 3, 0);
-                AccidentAdditionScreen accidentAdditionScreen = new AccidentAdditionScreen(this);
-                accidentAdditionScreen.Show();
-                Hide();
-            }
+            AccidentManagementScreen accidentAdditionScreen = new AccidentManagementScreen(this);
+            accidentAdditionScreen.Show();
+            Hide();
         }
+
+        #endregion
     }
 }

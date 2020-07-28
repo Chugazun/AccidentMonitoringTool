@@ -26,7 +26,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
             _mainMenu = mainMenu;
         }
 
-        private void listView1_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        private void listResults_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
             e.Graphics.FillRectangle(SystemBrushes.Menu, e.Bounds);
             e.Graphics.DrawRectangle(SystemPens.GradientInactiveCaption,
@@ -38,12 +38,12 @@ namespace Petrobras_AccidentsMonitoring_Tool
             TextRenderer.DrawText(e.Graphics, text, listResults.Font, e.Bounds, Color.Black, cFlag);
         }
 
-        private void listView1_DrawItem(object sender, DrawListViewItemEventArgs e)
+        private void listResults_DrawItem(object sender, DrawListViewItemEventArgs e)
         {
             e.DrawDefault = true;
         }
 
-        private void listView1_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        private void listResults_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
             e.DrawDefault = true;
         }
@@ -73,7 +73,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 listResults.Items.Clear();
                 lblResults.Text = "Resultados: ";
                 
-                using (var project = new ExcelPackage(new System.IO.FileInfo($@"{Properties.Resources.BackupSheet}")))
+                using (var project = new ExcelPackage(new System.IO.FileInfo($@"{Properties.Resources.MainSheet}")))
                 {
                     var sheet = project.Workbook.Worksheets[0];
                     SearchService searchService = new SearchService(sheet);
@@ -185,7 +185,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void listResults_ItemClick(object sender, EventArgs e)
         {
-            AccidentAdditionScreen accidentAdditionScreen = new AccidentAdditionScreen(this, _results.ElementAt(listResults.SelectedIndices[0]));
+            AccidentManagementScreen accidentAdditionScreen = new AccidentManagementScreen(this, _results.ElementAt(listResults.SelectedIndices[0]));
             accidentAdditionScreen.Show();
             Hide();
         }

@@ -1,6 +1,6 @@
 ﻿namespace Petrobras_AccidentsMonitoring_Tool
 {
-    partial class AccidentAdditionScreen
+    partial class AccidentManagementScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,8 @@
         {
             this.lblAccidentInfo = new System.Windows.Forms.Label();
             this.groupAccidentInfo = new System.Windows.Forms.GroupBox();
-            this.comboClass = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboType = new System.Windows.Forms.ComboBox();
             this.hourBox = new System.Windows.Forms.DateTimePicker();
             this.txtWeekDay = new System.Windows.Forms.TextBox();
             this.dateTimeBox = new System.Windows.Forms.DateTimePicker();
@@ -41,11 +42,16 @@
             this.txtBodyPart = new System.Windows.Forms.TextBox();
             this.txtPlace = new System.Windows.Forms.TextBox();
             this.lblTime = new System.Windows.Forms.Label();
-            this.lblClass = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.txtInjuryType = new System.Windows.Forms.TextBox();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblInjuryType = new System.Windows.Forms.Label();
+            this.panGrade = new System.Windows.Forms.Panel();
+            this.lblGrade = new System.Windows.Forms.Label();
+            this.comboGrade = new System.Windows.Forms.ComboBox();
+            this.panClass = new System.Windows.Forms.Panel();
+            this.lblClass = new System.Windows.Forms.Label();
+            this.comboClass = new System.Windows.Forms.ComboBox();
             this.lblGenInfo = new System.Windows.Forms.Label();
             this.groupGenInfo = new System.Windows.Forms.GroupBox();
             this.txtCompany = new System.Windows.Forms.TextBox();
@@ -64,17 +70,11 @@
             this.lblRTA = new System.Windows.Forms.Label();
             this.lblAdditionalInfo = new System.Windows.Forms.Label();
             this.lblOptional = new System.Windows.Forms.Label();
-            this.panClass = new System.Windows.Forms.Panel();
-            this.panGrade = new System.Windows.Forms.Panel();
-            this.lblGrade = new System.Windows.Forms.Label();
-            this.comboGrade = new System.Windows.Forms.ComboBox();
-            this.comboType = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupAccidentInfo.SuspendLayout();
+            this.panGrade.SuspendLayout();
+            this.panClass.SuspendLayout();
             this.groupGenInfo.SuspendLayout();
             this.groupAdditionalInfo.SuspendLayout();
-            this.panClass.SuspendLayout();
-            this.panGrade.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAccidentInfo
@@ -116,26 +116,33 @@
             this.groupAccidentInfo.TabIndex = 2;
             this.groupAccidentInfo.TabStop = false;
             // 
-            // comboClass
+            // label1
             // 
-            this.comboClass.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboClass.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboClass.BackColor = System.Drawing.SystemColors.Window;
-            this.comboClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboClass.FormattingEnabled = true;
-            this.comboClass.Items.AddRange(new object[] {
-            "",
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"});
-            this.comboClass.Location = new System.Drawing.Point(69, 3);
-            this.comboClass.Name = "comboClass";
-            this.comboClass.Size = new System.Drawing.Size(39, 24);
-            this.comboClass.TabIndex = 21;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(513, 105);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Tipo:";
+            // 
+            // comboType
+            // 
+            this.comboType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboType.BackColor = System.Drawing.SystemColors.Window;
+            this.comboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboType.FormattingEnabled = true;
+            this.comboType.Items.AddRange(new object[] {
+            "Típico",
+            "Trajeto",
+            "Equiparado"});
+            this.comboType.Location = new System.Drawing.Point(560, 102);
+            this.comboType.Name = "comboType";
+            this.comboType.Size = new System.Drawing.Size(99, 24);
+            this.comboType.TabIndex = 21;
+            this.comboType.SelectedIndexChanged += new System.EventHandler(this.comboType_SelectedIndexChanged);
             // 
             // hourBox
             // 
@@ -148,7 +155,6 @@
             this.hourBox.Size = new System.Drawing.Size(64, 24);
             this.hourBox.TabIndex = 7;
             this.hourBox.Value = new System.DateTime(2020, 6, 17, 0, 0, 0, 0);
-            this.hourBox.ValueChanged += new System.EventHandler(this.hourBox_ValueChanged);
             // 
             // txtWeekDay
             // 
@@ -239,16 +245,6 @@
             this.lblTime.TabIndex = 0;
             this.lblTime.Text = "Horário:";
             // 
-            // lblClass
-            // 
-            this.lblClass.AutoSize = true;
-            this.lblClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClass.Location = new System.Drawing.Point(3, 6);
-            this.lblClass.Name = "lblClass";
-            this.lblClass.Size = new System.Drawing.Size(65, 18);
-            this.lblClass.TabIndex = 0;
-            this.lblClass.Text = "Classe:";
-            // 
             // txtDescription
             // 
             this.txtDescription.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -289,6 +285,82 @@
             this.lblInjuryType.Size = new System.Drawing.Size(59, 18);
             this.lblInjuryType.TabIndex = 0;
             this.lblInjuryType.Text = "Lesão:";
+            // 
+            // panGrade
+            // 
+            this.panGrade.Controls.Add(this.lblGrade);
+            this.panGrade.Controls.Add(this.comboGrade);
+            this.panGrade.Location = new System.Drawing.Point(662, 99);
+            this.panGrade.Name = "panGrade";
+            this.panGrade.Size = new System.Drawing.Size(244, 30);
+            this.panGrade.TabIndex = 22;
+            // 
+            // lblGrade
+            // 
+            this.lblGrade.AutoSize = true;
+            this.lblGrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGrade.Location = new System.Drawing.Point(3, 6);
+            this.lblGrade.Name = "lblGrade";
+            this.lblGrade.Size = new System.Drawing.Size(50, 18);
+            this.lblGrade.TabIndex = 0;
+            this.lblGrade.Text = "Nível:";
+            // 
+            // comboGrade
+            // 
+            this.comboGrade.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboGrade.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboGrade.BackColor = System.Drawing.SystemColors.Window;
+            this.comboGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboGrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboGrade.FormattingEnabled = true;
+            this.comboGrade.Items.AddRange(new object[] {
+            "",
+            "Sem Afastamento",
+            "Com Afastamento"});
+            this.comboGrade.Location = new System.Drawing.Point(54, 3);
+            this.comboGrade.Name = "comboGrade";
+            this.comboGrade.Size = new System.Drawing.Size(141, 24);
+            this.comboGrade.TabIndex = 21;
+            // 
+            // panClass
+            // 
+            this.panClass.Controls.Add(this.lblClass);
+            this.panClass.Controls.Add(this.comboClass);
+            this.panClass.Location = new System.Drawing.Point(662, 99);
+            this.panClass.Name = "panClass";
+            this.panClass.Size = new System.Drawing.Size(244, 30);
+            this.panClass.TabIndex = 22;
+            // 
+            // lblClass
+            // 
+            this.lblClass.AutoSize = true;
+            this.lblClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClass.Location = new System.Drawing.Point(3, 6);
+            this.lblClass.Name = "lblClass";
+            this.lblClass.Size = new System.Drawing.Size(65, 18);
+            this.lblClass.TabIndex = 0;
+            this.lblClass.Text = "Classe:";
+            // 
+            // comboClass
+            // 
+            this.comboClass.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboClass.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboClass.BackColor = System.Drawing.SystemColors.Window;
+            this.comboClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboClass.FormattingEnabled = true;
+            this.comboClass.Items.AddRange(new object[] {
+            "",
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.comboClass.Location = new System.Drawing.Point(69, 3);
+            this.comboClass.Name = "comboClass";
+            this.comboClass.Size = new System.Drawing.Size(39, 24);
+            this.comboClass.TabIndex = 21;
             // 
             // lblGenInfo
             // 
@@ -481,79 +553,6 @@
             this.lblOptional.TabIndex = 7;
             this.lblOptional.Text = "*(opcionais)";
             // 
-            // panClass
-            // 
-            this.panClass.Controls.Add(this.lblClass);
-            this.panClass.Controls.Add(this.comboClass);
-            this.panClass.Location = new System.Drawing.Point(662, 99);
-            this.panClass.Name = "panClass";
-            this.panClass.Size = new System.Drawing.Size(244, 30);
-            this.panClass.TabIndex = 22;
-            // 
-            // panGrade
-            // 
-            this.panGrade.Controls.Add(this.lblGrade);
-            this.panGrade.Controls.Add(this.comboGrade);
-            this.panGrade.Location = new System.Drawing.Point(662, 99);
-            this.panGrade.Name = "panGrade";
-            this.panGrade.Size = new System.Drawing.Size(244, 30);
-            this.panGrade.TabIndex = 22;
-            // 
-            // lblGrade
-            // 
-            this.lblGrade.AutoSize = true;
-            this.lblGrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGrade.Location = new System.Drawing.Point(3, 6);
-            this.lblGrade.Name = "lblGrade";
-            this.lblGrade.Size = new System.Drawing.Size(50, 18);
-            this.lblGrade.TabIndex = 0;
-            this.lblGrade.Text = "Nível:";
-            // 
-            // comboGrade
-            // 
-            this.comboGrade.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboGrade.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboGrade.BackColor = System.Drawing.SystemColors.Window;
-            this.comboGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboGrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboGrade.FormattingEnabled = true;
-            this.comboGrade.Items.AddRange(new object[] {
-            "",
-            "Sem Afastamento",
-            "Com Afastamento"});
-            this.comboGrade.Location = new System.Drawing.Point(54, 3);
-            this.comboGrade.Name = "comboGrade";
-            this.comboGrade.Size = new System.Drawing.Size(141, 24);
-            this.comboGrade.TabIndex = 21;
-            // 
-            // comboType
-            // 
-            this.comboType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboType.BackColor = System.Drawing.SystemColors.Window;
-            this.comboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboType.FormattingEnabled = true;
-            this.comboType.Items.AddRange(new object[] {
-            "Típico",
-            "Trajeto",
-            "Equiparado"});
-            this.comboType.Location = new System.Drawing.Point(560, 102);
-            this.comboType.Name = "comboType";
-            this.comboType.Size = new System.Drawing.Size(99, 24);
-            this.comboType.TabIndex = 21;
-            this.comboType.SelectedIndexChanged += new System.EventHandler(this.comboType_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(513, 105);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tipo:";
-            // 
             // AccidentAdditionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -573,14 +572,14 @@
             this.Load += new System.EventHandler(this.AccidentAdditionScreen_Load);
             this.groupAccidentInfo.ResumeLayout(false);
             this.groupAccidentInfo.PerformLayout();
+            this.panGrade.ResumeLayout(false);
+            this.panGrade.PerformLayout();
+            this.panClass.ResumeLayout(false);
+            this.panClass.PerformLayout();
             this.groupGenInfo.ResumeLayout(false);
             this.groupGenInfo.PerformLayout();
             this.groupAdditionalInfo.ResumeLayout(false);
             this.groupAdditionalInfo.PerformLayout();
-            this.panClass.ResumeLayout(false);
-            this.panClass.PerformLayout();
-            this.panGrade.ResumeLayout(false);
-            this.panGrade.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

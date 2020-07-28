@@ -11,20 +11,20 @@ using System.Windows.Forms;
 
 namespace Petrobras_AccidentsMonitoring_Tool
 {
-    public partial class AccidentAdditionScreen : Form
+    public partial class AccidentManagementScreen : Form
     {
 
         private readonly Form _mainMenu;
         private readonly bool isEditMode;
         private readonly int row;
 
-        public AccidentAdditionScreen(Form mainMenu)
+        public AccidentManagementScreen(Form mainMenu)
         {
             InitializeComponent();
             _mainMenu = mainMenu;
         }
 
-        public AccidentAdditionScreen(Form mainMenu, Accident accident) : this(mainMenu)
+        public AccidentManagementScreen(Form mainMenu, Accident accident) : this(mainMenu)
         {
             row = accident.ID;
             txtCompany.Text = accident.Company;
@@ -99,7 +99,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             if (VerifyRequiredControls())
             {
-                using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.BackupSheet}")))
+                using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.MainSheet}")))
                 {
                     ExcelWorksheet sheet = project.Workbook.Worksheets[0];
                     ManagementService managementService = new ManagementService(sheet);
@@ -154,11 +154,6 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private void AccidentAdditionScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
             _mainMenu.Show();            
-        }
-
-        private void hourBox_ValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void comboType_SelectedIndexChanged(object sender, EventArgs e)

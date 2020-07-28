@@ -101,9 +101,9 @@
             this.listResults.TabStop = false;
             this.listResults.UseCompatibleStateImageBehavior = false;
             this.listResults.View = System.Windows.Forms.View.Details;
-            this.listResults.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.listView1_DrawColumnHeader);
-            this.listResults.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.listView1_DrawItem);
-            this.listResults.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.listView1_DrawSubItem);
+            this.listResults.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.listResults_DrawColumnHeader);
+            this.listResults.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.listResults_DrawItem);
+            this.listResults.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.listResults_DrawSubItem);
             this.listResults.Click += new System.EventHandler(this.listResults_ItemClick);
             // 
             // colCompany

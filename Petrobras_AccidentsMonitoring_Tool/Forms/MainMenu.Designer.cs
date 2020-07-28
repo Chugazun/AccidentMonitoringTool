@@ -297,7 +297,7 @@
             this.btnCreateChart.TabIndex = 10;
             this.btnCreateChart.Text = "Gerar Gráfico";
             this.btnCreateChart.UseVisualStyleBackColor = true;
-            this.btnCreateChart.Click += new System.EventHandler(this.button1_Click);
+            this.btnCreateChart.Click += new System.EventHandler(this.btnChart_Click);
             // 
             // panDataMenuYear
             // 

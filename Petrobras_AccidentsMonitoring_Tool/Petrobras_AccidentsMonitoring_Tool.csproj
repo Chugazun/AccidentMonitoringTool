@@ -54,11 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\AccidentAdditionScreen.cs">
+    <Compile Include="Forms\AccidentManagementScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AccidentAdditionScreen.Designer.cs">
-      <DependentUpon>AccidentAdditionScreen.cs</DependentUpon>
+    <Compile Include="Forms\AccidentManagementScreen.Designer.cs">
+      <DependentUpon>AccidentManagementScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AccidentDetailsScreen.cs">
       <SubType>Form</SubType>
@@ -119,8 +119,8 @@
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\Utilities.cs" />
-    <EmbeddedResource Include="Forms\AccidentAdditionScreen.resx">
-      <DependentUpon>AccidentAdditionScreen.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\AccidentManagementScreen.resx">
+      <DependentUpon>AccidentManagementScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AccidentDetailsScreen.resx">
       <DependentUpon>AccidentDetailsScreen.cs</DependentUpon>

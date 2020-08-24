@@ -48,7 +48,7 @@
             "Tipos de Lesão",
             "Locais",
             "Partes do Corpo",
-            "Níveis (Temp)",
+            "Classificação",
             "Classes"});
             this.chkBoxStats.Location = new System.Drawing.Point(48, 65);
             this.chkBoxStats.Name = "chkBoxStats";

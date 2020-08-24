@@ -118,12 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BackupSheet" xml:space="preserve">
-    <value>../../repos/sheetbak.xlsx</value>
+    <value>../../repos/ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev8 - BKP.xlsx</value>
     <comment>Backup Sheet file path</comment>
   </data>
   <data name="MainSheet" xml:space="preserve">
     <value>../../repos/ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev8.xlsx</value>
     <comment>Main Sheet file path</comment>
+  </data>
+  <data name="TempSheetDELETE" xml:space="preserve">
+    <value>../../repos/sheetbak.xlsx</value>
   </data>
   <data name="TitleDays" xml:space="preserve">
     <value>Monitoramento de Dias</value>

@@ -34,8 +34,10 @@ namespace Petrobras_AccidentsMonitoring_Tool
         private void Test_Load(object sender, EventArgs e)
         {
             AdjustScreen();
+            Properties.Settings.Default.CurrentSheet = Properties.Resources.MainSheet;
+            Properties.Settings.Default.Save();
             radioPeriod.Checked = true;
-            using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.MainSheet}")))
+            using (var project = new ExcelPackage(new FileInfo($@"{Properties.Settings.Default.CurrentSheet}")))
             {
                 _sheet = project.Workbook.Worksheets[0];
                 _search = new SearchService(_sheet);
@@ -112,11 +114,11 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void btnChart_Click(object sender, EventArgs e)
         {
-            using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.MainSheet}")))
+            using (var project = new ExcelPackage(new FileInfo($@"{Properties.Settings.Default.CurrentSheet}")))
             {
                 _sheet = project.Workbook.Worksheets[0];
                 _search = new SearchService(_sheet);
-                SearchModel _searchDetails = GetSearchDetails();
+                SearchModel _searchDetails = GetSearchDetails();                
 
                 try
                 {
@@ -124,7 +126,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
                     RatioChartScreen ratioChartScreen = new RatioChartScreen(this)
                     {
                         //Stats = new List<Stats>() { new Stats("TOR", torList), new Stats("TAR", tarList) },
-                        ResultGroup = StatsCalculator.GetByAccidentType(result),
+                        //ResultGroup = StatsCalculator.GetByAccidentType(result),
+                        Result = result,
                         TotalValue = result.Count()
                     };
 

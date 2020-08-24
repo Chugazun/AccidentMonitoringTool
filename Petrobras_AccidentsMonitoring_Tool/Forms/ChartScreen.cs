@@ -22,6 +22,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void ChartScreen_Load(object sender, EventArgs e)
         {
+            //470; 488 original size
             statChart.Series.Clear();
             statChart.Legends.Clear();
             statChart.ChartAreas.Clear();
@@ -40,13 +41,22 @@ namespace Petrobras_AccidentsMonitoring_Tool
             statChart.Series.Add(seriesName);
 
             statChart.Series[seriesName].ChartType = SeriesChartType.Pie;
+            //statChart.Series[seriesName].IsValueShownAsLabel = true;
+            //string[] x = ResultGroup.Select(g => g.Key).ToArray();
+            //int[] y = ResultGroup.Select(g => g.Count()).ToArray();
 
+            //statChart.Series[seriesName].Points.DataBindXY(x, y);
+
+            //statChart.ChartAreas[0].AxisX.LabelStyle.Angle = 60;
+            //statChart.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Consolas", 9f);
+            //statChart.ChartAreas[0].AxisX.Interval = 1;
+            //statChart.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
             for (int i = 0; i < ResultGroup.Count(); i++)
             {
                 int item = ResultGroup.ElementAt(i).Count();
                 if (item > 0)
                 {
-                    statChart.Series[seriesName].Points.AddXY(item, item);
+                    statChart.Series[seriesName].Points.AddXY(ResultGroup.ElementAt(i).Key, item);
                     statChart.Series[seriesName].Points[i].Label = $"{item} ({(item / (double)TotalValue * 100).ToString("0.0")}%)";
                     statChart.Series[seriesName].Points[i].LegendText = ResultGroup.ElementAt(i).Key + ": " + item;
                 }

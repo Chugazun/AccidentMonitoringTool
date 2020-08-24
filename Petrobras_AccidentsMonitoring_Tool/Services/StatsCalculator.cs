@@ -26,7 +26,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
                 { "Tipos de Lesão", GetByInjure },
                 { "Locais", GetByPlace },
                 { "Partes do Corpo", GetByBodyPart },
-                { "Níveis(Temp)", GetByGrade },
+                { "Classificação", GetByGrade },
                 { "Classes", GetByClass }
             };
         }
@@ -38,7 +38,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
         public static IEnumerable<string> GetKeys()
         {
-            return functions.Keys.Select(k => k);
+            return functions.Keys;
         }
 
         public static IEnumerable<IGrouping<string, Accident>> GetByAccidentType(IEnumerable<Accident> totalAccidents)
@@ -58,7 +58,29 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
 
         public static IEnumerable<Accident> TAR(IEnumerable<Accident> totalAccidents)
         {
-            return totalAccidents.Where(a => a.AccidentType.Value == AccidentType.Típico && a.Class >= 2);
+            return totalAccidents.Where(a => a.AccidentType.HasValue && a.AccidentType.Value == AccidentType.Típico && a.Class >= 2);
+        }
+
+        public static IGrouping<string, Accident> GetByTOR(IEnumerable<Accident> totalAccidents)
+        {
+            return totalAccidents.Where(a => a.AccidentType.HasValue).Select(a => new
+            {
+                Ratio = a.AccidentType.Value == AccidentType.Típico ? "TOR" : "Others",
+                SelectedAccident = a
+            }).GroupBy(x => x.Ratio, x => x.SelectedAccident)
+              .OrderByDescending(a => a.Key)
+              .First();
+        }
+
+        public static IGrouping<string, Accident> GetByTAR(IEnumerable<Accident> totalAccidents)
+        {
+            return totalAccidents.Where(a => a.AccidentType.HasValue).Select(a => new
+            {
+                Ratio = a.AccidentType.Value == AccidentType.Típico && a.Class >= 2 ? "TAR" : "Others",
+                SelectedAccident = a
+            }).GroupBy(x => x.Ratio, x => x.SelectedAccident)
+              .OrderByDescending(a => a.Key)
+              .First();
         }
 
         public static IEnumerable<Accident> GetByPetrobras(IEnumerable<Accident> totalAccidents)

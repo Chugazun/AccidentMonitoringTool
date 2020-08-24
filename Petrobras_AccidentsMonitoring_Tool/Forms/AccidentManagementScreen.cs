@@ -99,7 +99,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             if (VerifyRequiredControls())
             {
-                using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.MainSheet}")))
+                using (var project = new ExcelPackage(new FileInfo($@"{Properties.Settings.Default.CurrentSheet}")))
                 {
                     ExcelWorksheet sheet = project.Workbook.Worksheets[0];
                     ManagementService managementService = new ManagementService(sheet);

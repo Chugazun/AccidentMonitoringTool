@@ -11,7 +11,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
         /// </summary>
         [STAThread]
         static void Main()
-        {
+        {            
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

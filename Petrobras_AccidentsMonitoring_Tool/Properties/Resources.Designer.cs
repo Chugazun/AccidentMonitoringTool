@@ -61,7 +61,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a ../../repos/sheetbak.xlsx.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a ../../repos/ACOMPANHAMENTO DE ACIDENTES 2020_PAINEL_PROJETO_rev8 - BKP.xlsx.
         /// </summary>
         internal static string BackupSheet {
             get {
@@ -75,6 +75,15 @@ namespace Petrobras_AccidentsMonitoring_Tool.Properties {
         internal static string MainSheet {
             get {
                 return ResourceManager.GetString("MainSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a ../../repos/sheetbak.xlsx.
+        /// </summary>
+        internal static string TempSheetDELETE {
+            get {
+                return ResourceManager.GetString("TempSheetDELETE", resourceCulture);
             }
         }
         

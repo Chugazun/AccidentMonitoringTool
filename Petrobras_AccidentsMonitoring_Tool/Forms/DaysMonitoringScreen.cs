@@ -30,7 +30,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             lblTitle.Text += $" ({_accidentType})";
             _accidents = new List<Accident>();
-            using (var project = new ExcelPackage(new FileInfo($@"{Properties.Resources.MainSheet}")))
+            using (var project = new ExcelPackage(new FileInfo($@"{Properties.Settings.Default.CurrentSheet}")))
             {
                 var _sheet = project.Workbook.Worksheets[0];
                 SearchService searchService = new SearchService(_sheet);

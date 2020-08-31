@@ -14,8 +14,6 @@ namespace Petrobras_AccidentsMonitoring_Tool
     public partial class RatioChartScreen : Form
     {
         private MainMenu _mainMenu;
-        public Stats[][] Stats { get; set; }
-        public IEnumerable<IGrouping<string, Accident>> ResultGroup { get; set; }
         public IEnumerable<Accident> Result { get; set; }
         public Dictionary<string, IEnumerable<IGrouping<string, Accident>>> ResultLists { get; set; }
         public int TotalValue { get; set; }
@@ -51,6 +49,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
             statChart.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Consolas", 9f);
             statChart.ChartAreas[0].AxisX.Interval = 1;
             statChart.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
+            statChart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
         }
 
         private void RatioChartScreen_Load(object sender, EventArgs e)
@@ -106,16 +105,12 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             HitTestResult hit = statChart.HitTest(e.X, e.Y, ChartElementType.DataPoint);
             if (hit.PointIndex >= 0 && hit.Series != null)
-            {              
+            {
 
                 Stats resultStats = GetStats(hit.Series.Name, hit.PointIndex);
 
                 StatsSelector statsSelector = new StatsSelector(hit.Series.Name, resultStats);
                 statsSelector.Show();
-            }
-            else
-            {
-                lblTotal.Text = "";
             }
         }
         private string GetTotalStats()

@@ -33,9 +33,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void Test_Load(object sender, EventArgs e)
         {
-            AdjustScreen();
-            Properties.Settings.Default.CurrentSheet = Properties.Resources.MainSheet;
-            Properties.Settings.Default.Save();
+            AdjustScreen();            
             radioPeriod.Checked = true;
             using (var project = new ExcelPackage(new FileInfo($@"{Properties.Settings.Default.CurrentSheet}")))
             {

@@ -51,16 +51,6 @@ namespace Petrobras_AccidentsMonitoring_Tool.Services
               .OrderByDescending(s => s.Count());
         }
 
-        public static IEnumerable<Accident> TOR(IEnumerable<Accident> totalAccidents)
-        {
-            return totalAccidents.Where(a => a.AccidentType.Value == AccidentType.Típico);
-        }
-
-        public static IEnumerable<Accident> TAR(IEnumerable<Accident> totalAccidents)
-        {
-            return totalAccidents.Where(a => a.AccidentType.HasValue && a.AccidentType.Value == AccidentType.Típico && a.Class >= 2);
-        }
-
         public static IGrouping<string, Accident> GetByTOR(IEnumerable<Accident> totalAccidents)
         {
             return totalAccidents.Where(a => a.AccidentType.HasValue).Select(a => new

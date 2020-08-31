@@ -45,13 +45,13 @@
             this.statChart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.statChart.Legends.Add(legend1);
-            this.statChart.Location = new System.Drawing.Point(12, 35);
+            this.statChart.Location = new System.Drawing.Point(12, 78);
             this.statChart.Name = "statChart";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.statChart.Series.Add(series1);
-            this.statChart.Size = new System.Drawing.Size(773, 442);
+            this.statChart.Size = new System.Drawing.Size(773, 438);
             this.statChart.TabIndex = 1;
             this.statChart.Text = "Gráfico";
             this.statChart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.statChart_MouseClick);
@@ -63,7 +63,7 @@
             this.lblTotal.Location = new System.Drawing.Point(12, 9);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.lblTotal.Size = new System.Drawing.Size(773, 34);
+            this.lblTotal.Size = new System.Drawing.Size(773, 82);
             this.lblTotal.TabIndex = 2;
             this.lblTotal.Text = "Total: ";
             // 
@@ -76,13 +76,12 @@
             this.lblTotalPerType.Name = "lblTotalPerType";
             this.lblTotalPerType.Size = new System.Drawing.Size(0, 13);
             this.lblTotalPerType.TabIndex = 2;
-            this.lblTotalPerType.Visible = false;
             // 
             // RatioChartScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 489);
+            this.ClientSize = new System.Drawing.Size(797, 528);
             this.Controls.Add(this.lblTotalPerType);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.statChart);

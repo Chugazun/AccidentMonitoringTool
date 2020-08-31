@@ -490,7 +490,7 @@
             this.groupAdditionalInfo.Margin = new System.Windows.Forms.Padding(0);
             this.groupAdditionalInfo.Name = "groupAdditionalInfo";
             this.groupAdditionalInfo.Size = new System.Drawing.Size(936, 77);
-            this.groupAdditionalInfo.TabIndex = 1;
+            this.groupAdditionalInfo.TabIndex = 3;
             this.groupAdditionalInfo.TabStop = false;
             // 
             // txtRTA
@@ -501,7 +501,7 @@
             this.txtRTA.Location = new System.Drawing.Point(102, 30);
             this.txtRTA.Name = "txtRTA";
             this.txtRTA.Size = new System.Drawing.Size(294, 24);
-            this.txtRTA.TabIndex = 1;
+            this.txtRTA.TabIndex = 15;
             // 
             // txtCAT
             // 
@@ -511,7 +511,7 @@
             this.txtCAT.Location = new System.Drawing.Point(476, 30);
             this.txtCAT.Name = "txtCAT";
             this.txtCAT.Size = new System.Drawing.Size(144, 24);
-            this.txtCAT.TabIndex = 2;
+            this.txtCAT.TabIndex = 16;
             // 
             // lblCAT
             // 
@@ -553,7 +553,7 @@
             this.lblOptional.TabIndex = 7;
             this.lblOptional.Text = "*(opcionais)";
             // 
-            // AccidentAdditionScreen
+            // AccidentManagementScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -566,7 +566,7 @@
             this.Controls.Add(this.lblGenInfo);
             this.Controls.Add(this.groupAdditionalInfo);
             this.Controls.Add(this.groupGenInfo);
-            this.Name = "AccidentAdditionScreen";
+            this.Name = "AccidentManagementScreen";
             this.Text = "Adicionar Acidente";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccidentAdditionScreen_FormClosing);
             this.Load += new System.EventHandler(this.AccidentAdditionScreen_Load);

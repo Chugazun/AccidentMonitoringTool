@@ -39,6 +39,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
             txtBodyPart.Text = accident.BodyPart;
             txtInjuryType.Text = accident.InjuryType;
             txtDescription.Text = accident.Description;
+            txtRTA.Text = accident.RTA != "N/A" ? accident.RTA : "";
+            txtCAT.Text = accident.CAT != "N/A" ? accident.CAT : "";
             isEditMode = true;
         }
 

@@ -33,8 +33,25 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void Test_Load(object sender, EventArgs e)
         {
-            AdjustScreen();            
+            AdjustScreen();
             radioPeriod.Checked = true;
+            try
+            {
+                LoadForm();
+            }
+            catch (ArgumentException)
+            {
+                Properties.Settings.Default.CurrentSheet = Properties.Resources.MainSheet;
+                Properties.Settings.Default.Save();
+                LoadForm();
+            }
+
+            comboType.Items.AddRange(new string[] { "TAR", "TOR" });
+            comboType.SelectedIndex = 0;
+        }
+
+        private void LoadForm()
+        {
             using (var project = new ExcelPackage(new FileInfo($@"{Properties.Settings.Default.CurrentSheet}")))
             {
                 _sheet = project.Workbook.Worksheets[0];
@@ -54,22 +71,22 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 isLoaded = true;
 
                 GetSheetSectors(_search.GetSectorsColumn().GroupBy(c => c).Select(g => g.Key).OrderBy(s => s));
-                comboSector_1.Items.AddRange(_sectors.Prepend("RNEST").ToArray());
-                comboSector_1.SelectedIndex = 0;
+                comboSector_1.Items.AddRange(_sectors.Prepend("VISÃO GERAL").ToArray());
+                comboSector_1.SelectedIndex = 3;
             }
-
-            comboType.Items.AddRange(new string[] { "TAR", "TOR" });
-            comboType.SelectedIndex = 0;
         }
+
         private void AdjustScreen()
         {
-            //Current Tag Label initial value
-            //lblCurrentTag.Text += currentTag;
+            //Current Tag Label initial value            
+            lblCurrentTag.Text += currentTag;
 
             panAccidents.Location = new Point(229, 63);
             panAccidents.Size = new Size(278, 270);
             panDaysTotal.Location = new Point(214, 55);
             panDaysTotal.Size = new Size(315, 334);
+            WindowState = FormWindowState.Maximized;
+            groupSideBar.Size = new Size(groupSideBar.Width, Size.Height);
             _currentButton = btnAddition;
             _currentPanel = panAddition;
         }
@@ -116,19 +133,18 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 _sheet = project.Workbook.Worksheets[0];
                 _search = new SearchService(_sheet);
-                SearchModel _searchDetails = GetSearchDetails();                
+                SearchModel _searchDetails = GetSearchDetails();
 
                 try
                 {
                     IEnumerable<Accident> result = _search.AdvSearch(_searchDetails, ResultType.BasicResult);
-                    RatioChartScreen ratioChartScreen = new RatioChartScreen(this)
+                    RatioChartScreen ratioChartScreen = new RatioChartScreen(this, Convert.ToInt32(groupChkBox.Controls.OfType<RadioButton>().First(rb => rb.Checked).Tag))
                     {
                         //Stats = new List<Stats>() { new Stats("TOR", torList), new Stats("TAR", tarList) },
                         //ResultGroup = StatsCalculator.GetByAccidentType(result),
                         Result = result,
                         TotalValue = result.Count()
                     };
-
                     ratioChartScreen.Show();
                     WindowState = FormWindowState.Minimized;
 
@@ -280,7 +296,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 btnRemove.Visible = true;
             }
             #region Current Tag Label for Debugging
-            //currentTag++;
+            currentTag++;
             //lblCurrentTag.Text = "Current Tag (DEBUG): " + currentTag;
             #endregion
         }
@@ -302,21 +318,31 @@ namespace Petrobras_AccidentsMonitoring_Tool
                 btnRemove.Visible = false;
             }
             #region Current Tag Label for Debugging
-            //currentTag--;
+            currentTag--;
             //lblCurrentTag.Text = "Current Tag (DEBUG): " + currentTag;
             #endregion
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string[] searchItems = panDaysMain.Controls.OfType<ComboBox>()
-                                                       .Where(c => c.Tag.ToString() == "sector")
-                                                       .Select(cb => cb.SelectedItem.ToString())
-                                                       .Reverse()
-                                                       .ToArray();
+            string[] searchItems = GetSearchItems();
 
             DaysMonitoringScreen daysMonitoringScreen = new DaysMonitoringScreen(searchItems, comboType.SelectedItem.ToString());
             daysMonitoringScreen.Show();
+        }
+
+        private string[] GetSearchItems()
+        {
+            if (comboSector_1.SelectedIndex == 0)
+            {
+                lblCurrentTag.Text = "check";
+                return _sectors.Except(_sectors.Where(s => s.Contains("SISA"))).ToArray();
+            }
+            return panDaysMain.Controls.OfType<ComboBox>()
+                                       .Where(c => c.Tag.ToString() == "sector")
+                                       .Select(cb => cb.SelectedItem.ToString())
+                                       .Reverse()
+                                       .ToArray();
         }
 
         #endregion

@@ -79,6 +79,7 @@
             // 
             // lblAccidentInfo
             // 
+            this.lblAccidentInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblAccidentInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAccidentInfo.Location = new System.Drawing.Point(6, 167);
             this.lblAccidentInfo.Name = "lblAccidentInfo";
@@ -89,6 +90,7 @@
             // 
             // groupAccidentInfo
             // 
+            this.groupAccidentInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupAccidentInfo.Controls.Add(this.label1);
             this.groupAccidentInfo.Controls.Add(this.comboType);
             this.groupAccidentInfo.Controls.Add(this.hourBox);
@@ -364,6 +366,7 @@
             // 
             // lblGenInfo
             // 
+            this.lblGenInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblGenInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGenInfo.Location = new System.Drawing.Point(6, 23);
             this.lblGenInfo.Name = "lblGenInfo";
@@ -374,6 +377,7 @@
             // 
             // groupGenInfo
             // 
+            this.groupGenInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupGenInfo.Controls.Add(this.txtCompany);
             this.groupGenInfo.Controls.Add(this.lblName);
             this.groupGenInfo.Controls.Add(this.txtSector);
@@ -470,6 +474,7 @@
             // 
             // btnConfirm
             // 
+            this.btnConfirm.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirm.Location = new System.Drawing.Point(435, 703);
             this.btnConfirm.Name = "btnConfirm";
@@ -481,6 +486,7 @@
             // 
             // groupAdditionalInfo
             // 
+            this.groupAdditionalInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupAdditionalInfo.Controls.Add(this.txtRTA);
             this.groupAdditionalInfo.Controls.Add(this.txtCAT);
             this.groupAdditionalInfo.Controls.Add(this.lblCAT);
@@ -535,6 +541,7 @@
             // 
             // lblAdditionalInfo
             // 
+            this.lblAdditionalInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblAdditionalInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdditionalInfo.Location = new System.Drawing.Point(0, 599);
             this.lblAdditionalInfo.Name = "lblAdditionalInfo";
@@ -545,6 +552,7 @@
             // 
             // lblOptional
             // 
+            this.lblOptional.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblOptional.AutoSize = true;
             this.lblOptional.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOptional.Location = new System.Drawing.Point(188, 600);
@@ -568,6 +576,7 @@
             this.Controls.Add(this.groupGenInfo);
             this.Name = "AccidentManagementScreen";
             this.Text = "Adicionar Acidente";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccidentAdditionScreen_FormClosing);
             this.Load += new System.EventHandler(this.AccidentAdditionScreen_Load);
             this.groupAccidentInfo.ResumeLayout(false);

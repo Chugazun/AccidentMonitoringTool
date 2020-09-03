@@ -63,6 +63,7 @@
             // 
             // groupGenInfo
             // 
+            this.groupGenInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupGenInfo.Controls.Add(this.lblName);
             this.groupGenInfo.Controls.Add(this.lblCompany);
             this.groupGenInfo.Controls.Add(this.txtCompany);
@@ -166,6 +167,7 @@
             // 
             // lblGenInfo
             // 
+            this.lblGenInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblGenInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGenInfo.Location = new System.Drawing.Point(6, 23);
             this.lblGenInfo.Name = "lblGenInfo";
@@ -176,6 +178,7 @@
             // 
             // groupAccidentInfo
             // 
+            this.groupAccidentInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupAccidentInfo.Controls.Add(this.lblBodyPart);
             this.groupAccidentInfo.Controls.Add(this.lblPlace);
             this.groupAccidentInfo.Controls.Add(this.lblWeekDay);
@@ -375,6 +378,7 @@
             // 
             // lblAccidentInfo
             // 
+            this.lblAccidentInfo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblAccidentInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAccidentInfo.Location = new System.Drawing.Point(6, 167);
             this.lblAccidentInfo.Name = "lblAccidentInfo";
@@ -395,6 +399,7 @@
             this.Controls.Add(this.groupGenInfo);
             this.Name = "AccidentDetailsScreen";
             this.Text = "Detalhes do Acidente";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AccidentDetailsScreen_Load);
             this.groupGenInfo.ResumeLayout(false);
             this.groupGenInfo.PerformLayout();

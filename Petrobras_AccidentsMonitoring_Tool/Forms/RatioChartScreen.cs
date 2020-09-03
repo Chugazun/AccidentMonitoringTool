@@ -14,18 +14,24 @@ namespace Petrobras_AccidentsMonitoring_Tool
     public partial class RatioChartScreen : Form
     {
         private MainMenu _mainMenu;
+        private int _functionID;
         public IEnumerable<Accident> Result { get; set; }
         public Dictionary<string, IEnumerable<IGrouping<string, Accident>>> ResultLists { get; set; }
+        public Dictionary<int, string> FuncName { get; set; }
         public int TotalValue { get; set; }
 
-        public RatioChartScreen()
+        private RatioChartScreen()
         {
             InitializeComponent();
         }
 
-        public RatioChartScreen(MainMenu mainMenu) : this()
+        public RatioChartScreen(MainMenu mainMenu, int functionID) : this()
         {
+            _functionID = functionID;
             _mainMenu = mainMenu;
+            FuncName = new Dictionary<int, string>();
+            FuncName.Add(1, "Anos");
+            FuncName.Add(2, "Meses");
         }
 
         private void ChartSetup()
@@ -73,20 +79,21 @@ namespace Petrobras_AccidentsMonitoring_Tool
             IGrouping<string, Accident> torList = StatsCalculator.GetByTOR(Result);
             IGrouping<string, Accident> tarList = StatsCalculator.GetByTAR(Result);
 
+            var func = StatsCalculator.GetFunction(FuncName[_functionID]);
 
-            var resultsByMonth = StatsCalculator.GetByMonths(torList);
-            string[] x = resultsByMonth.Select(g => g.Key).Prepend("Total").ToArray();
-            int[] y = resultsByMonth.Select(g => g.Count()).Prepend(torList.Count()).ToArray();
+            var resultsByFunc = func(torList);
+            string[] x = resultsByFunc.Select(g => g.Key).Prepend("Total").ToArray();
+            int[] y = resultsByFunc.Select(g => g.Count()).Prepend(torList.Count()).ToArray();
 
             statChart.Series[torSeriesName].Points.DataBindXY(x, y);
 
-            var resultsByMonthTar = StatsCalculator.GetByMonths(tarList);
-            string[] xt = resultsByMonthTar.Select(g => g.Key).Prepend("Total").ToArray();
-            int[] yt = resultsByMonthTar.Select(g => g.Count()).Prepend(tarList.Count()).ToArray();
+            var resultsByFuncTar = func(tarList);
+            string[] xt = resultsByFuncTar.Select(g => g.Key).Prepend("Total").ToArray();
+            int[] yt = resultsByFuncTar.Select(g => g.Count()).Prepend(tarList.Count()).ToArray();
 
             ResultLists = new Dictionary<string, IEnumerable<IGrouping<string, Accident>>>();
-            ResultLists.Add(torSeriesName, resultsByMonth.Prepend(torList));
-            ResultLists.Add(tarSeriesName, resultsByMonthTar.Prepend(tarList));
+            ResultLists.Add(torSeriesName, resultsByFunc.Prepend(torList));
+            ResultLists.Add(tarSeriesName, resultsByFuncTar.Prepend(tarList));
 
             statChart.Series[tarSeriesName].Points.DataBindXY(xt, yt);
 

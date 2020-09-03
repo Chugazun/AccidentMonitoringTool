@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.ComboBox comboBox1;
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupSideBar = new System.Windows.Forms.GroupBox();
             this.btnAddition = new System.Windows.Forms.Button();
             this.lblCurrentTag = new System.Windows.Forms.Label();
             this.btnDays = new System.Windows.Forms.Button();
@@ -40,7 +40,7 @@
             this.comboInitialYear = new System.Windows.Forms.ComboBox();
             this.lblValue_2 = new System.Windows.Forms.Label();
             this.lblValue_1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupChkBox = new System.Windows.Forms.GroupBox();
             this.radioAll = new System.Windows.Forms.RadioButton();
             this.radioYear = new System.Windows.Forms.RadioButton();
             this.radioPeriod = new System.Windows.Forms.RadioButton();
@@ -71,10 +71,10 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdditionScreen = new System.Windows.Forms.Button();
             comboBox1 = new System.Windows.Forms.ComboBox();
-            this.groupBox1.SuspendLayout();
+            this.groupSideBar.SuspendLayout();
             this.panAccidents.SuspendLayout();
             this.panDataMenuPeriod.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupChkBox.SuspendLayout();
             this.panDataMenuYear.SuspendLayout();
             this.panDataMenuAll.SuspendLayout();
             this.panDaysMain.SuspendLayout();
@@ -92,20 +92,20 @@
             comboBox1.Tag = "";
             comboBox1.Visible = false;
             // 
-            // groupBox1
+            // groupSideBar
             // 
-            this.groupBox1.Controls.Add(this.btnAddition);
-            this.groupBox1.Controls.Add(this.lblCurrentTag);
-            this.groupBox1.Controls.Add(this.btnDays);
-            this.groupBox1.Controls.Add(this.btnAccidents);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox1.Location = new System.Drawing.Point(-7, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(163, 554);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
+            this.groupSideBar.Controls.Add(this.btnAddition);
+            this.groupSideBar.Controls.Add(this.lblCurrentTag);
+            this.groupSideBar.Controls.Add(this.btnDays);
+            this.groupSideBar.Controls.Add(this.btnAccidents);
+            this.groupSideBar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupSideBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.groupSideBar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupSideBar.Location = new System.Drawing.Point(-7, 0);
+            this.groupSideBar.Name = "groupSideBar";
+            this.groupSideBar.Size = new System.Drawing.Size(163, 554);
+            this.groupSideBar.TabIndex = 1;
+            this.groupSideBar.TabStop = false;
             // 
             // btnAddition
             // 
@@ -131,7 +131,6 @@
             this.lblCurrentTag.Size = new System.Drawing.Size(116, 13);
             this.lblCurrentTag.TabIndex = 7;
             this.lblCurrentTag.Text = "Current Tag (DEBUG): ";
-            this.lblCurrentTag.Visible = false;
             // 
             // btnDays
             // 
@@ -169,7 +168,7 @@
             // 
             this.panAccidents.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panAccidents.Controls.Add(this.panDataMenuPeriod);
-            this.panAccidents.Controls.Add(this.groupBox2);
+            this.panAccidents.Controls.Add(this.groupChkBox);
             this.panAccidents.Controls.Add(this.lblNoResults);
             this.panAccidents.Controls.Add(this.btnCreateChart);
             this.panAccidents.Controls.Add(this.panDataMenuYear);
@@ -232,16 +231,16 @@
             this.lblValue_1.TabIndex = 1;
             this.lblValue_1.Text = "De:";
             // 
-            // groupBox2
+            // groupChkBox
             // 
-            this.groupBox2.Controls.Add(this.radioAll);
-            this.groupBox2.Controls.Add(this.radioYear);
-            this.groupBox2.Controls.Add(this.radioPeriod);
-            this.groupBox2.Location = new System.Drawing.Point(3, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(272, 44);
-            this.groupBox2.TabIndex = 11;
-            this.groupBox2.TabStop = false;
+            this.groupChkBox.Controls.Add(this.radioAll);
+            this.groupChkBox.Controls.Add(this.radioYear);
+            this.groupChkBox.Controls.Add(this.radioPeriod);
+            this.groupChkBox.Location = new System.Drawing.Point(3, 3);
+            this.groupChkBox.Name = "groupChkBox";
+            this.groupChkBox.Size = new System.Drawing.Size(272, 44);
+            this.groupChkBox.TabIndex = 11;
+            this.groupChkBox.TabStop = false;
             // 
             // radioAll
             // 
@@ -250,6 +249,7 @@
             this.radioAll.Name = "radioAll";
             this.radioAll.Size = new System.Drawing.Size(100, 17);
             this.radioAll.TabIndex = 6;
+            this.radioAll.Tag = "1";
             this.radioAll.Text = "Todo o Período";
             this.radioAll.UseVisualStyleBackColor = true;
             this.radioAll.CheckedChanged += new System.EventHandler(this.radioAll_CheckedChanged);
@@ -261,6 +261,7 @@
             this.radioYear.Name = "radioYear";
             this.radioYear.Size = new System.Drawing.Size(63, 17);
             this.radioYear.TabIndex = 6;
+            this.radioYear.Tag = "2";
             this.radioYear.Text = "Por Ano";
             this.radioYear.UseVisualStyleBackColor = true;
             this.radioYear.CheckedChanged += new System.EventHandler(this.radioYear_CheckedChanged);
@@ -273,6 +274,7 @@
             this.radioPeriod.Name = "radioPeriod";
             this.radioPeriod.Size = new System.Drawing.Size(82, 17);
             this.radioPeriod.TabIndex = 5;
+            this.radioPeriod.Tag = "1";
             this.radioPeriod.Text = "Por Período";
             this.radioPeriod.UseVisualStyleBackColor = true;
             this.radioPeriod.CheckedChanged += new System.EventHandler(this.radioPeriod_CheckedChanged);
@@ -522,9 +524,10 @@
             // 
             // panDaysTotal
             // 
+            this.panDaysTotal.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panDaysTotal.Controls.Add(this.panDaysMain);
             this.panDaysTotal.Controls.Add(this.btnSearch);
-            this.panDaysTotal.Location = new System.Drawing.Point(514, 12);
+            this.panDaysTotal.Location = new System.Drawing.Point(531, 14);
             this.panDaysTotal.Name = "panDaysTotal";
             this.panDaysTotal.Size = new System.Drawing.Size(28, 33);
             this.panDaysTotal.TabIndex = 9;
@@ -532,6 +535,7 @@
             // 
             // panAddition
             // 
+            this.panAddition.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panAddition.Controls.Add(this.btnEdit);
             this.panAddition.Controls.Add(this.btnAdditionScreen);
             this.panAddition.Location = new System.Drawing.Point(229, 63);
@@ -566,20 +570,20 @@
             this.ClientSize = new System.Drawing.Size(581, 391);
             this.Controls.Add(this.panAddition);
             this.Controls.Add(this.panAccidents);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.lblToolName);
             this.Controls.Add(this.panDaysTotal);
+            this.Controls.Add(this.groupSideBar);
+            this.Controls.Add(this.lblToolName);
             this.Name = "MainMenu";
             this.Text = "Menu Principal";
             this.Load += new System.EventHandler(this.Test_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupSideBar.ResumeLayout(false);
+            this.groupSideBar.PerformLayout();
             this.panAccidents.ResumeLayout(false);
             this.panAccidents.PerformLayout();
             this.panDataMenuPeriod.ResumeLayout(false);
             this.panDataMenuPeriod.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupChkBox.ResumeLayout(false);
+            this.groupChkBox.PerformLayout();
             this.panDataMenuYear.ResumeLayout(false);
             this.panDataMenuYear.PerformLayout();
             this.panDataMenuAll.ResumeLayout(false);
@@ -594,7 +598,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupSideBar;
         private System.Windows.Forms.Button btnDays;
         private System.Windows.Forms.Button btnAccidents;
         private System.Windows.Forms.Panel panAccidents;
@@ -603,7 +607,7 @@
         private System.Windows.Forms.ComboBox comboInitialYear;
         private System.Windows.Forms.Label lblValue_2;
         private System.Windows.Forms.Label lblValue_1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupChkBox;
         private System.Windows.Forms.RadioButton radioAll;
         private System.Windows.Forms.RadioButton radioYear;
         private System.Windows.Forms.RadioButton radioPeriod;

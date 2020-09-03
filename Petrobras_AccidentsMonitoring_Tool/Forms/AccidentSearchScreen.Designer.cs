@@ -79,6 +79,7 @@
             // 
             // listResults
             // 
+            this.listResults.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.listResults.AutoArrange = false;
             this.listResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colCompany,
@@ -133,6 +134,7 @@
             // 
             // btnSearch
             // 
+            this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnSearch.Location = new System.Drawing.Point(322, 283);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
@@ -143,6 +145,7 @@
             // 
             // lblResults
             // 
+            this.lblResults.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblResults.AutoSize = true;
             this.lblResults.Location = new System.Drawing.Point(20, 296);
             this.lblResults.Name = "lblResults";
@@ -152,6 +155,7 @@
             // 
             // txtCompany
             // 
+            this.txtCompany.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtCompany.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompany.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -162,6 +166,7 @@
             // 
             // lblCompany
             // 
+            this.lblCompany.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblCompany.AutoSize = true;
             this.lblCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompany.Location = new System.Drawing.Point(25, 63);
@@ -172,6 +177,7 @@
             // 
             // lblSector
             // 
+            this.lblSector.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblSector.AutoSize = true;
             this.lblSector.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSector.Location = new System.Drawing.Point(322, 63);
@@ -182,6 +188,7 @@
             // 
             // txtSector
             // 
+            this.txtSector.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtSector.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtSector.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtSector.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -193,6 +200,7 @@
             // 
             // lblName
             // 
+            this.lblName.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.Location = new System.Drawing.Point(506, 63);
@@ -203,6 +211,7 @@
             // 
             // txtName
             // 
+            this.txtName.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtName.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -213,6 +222,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(331, 20);
@@ -223,6 +233,7 @@
             // 
             // lblInjury
             // 
+            this.lblInjury.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblInjury.AutoSize = true;
             this.lblInjury.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInjury.Location = new System.Drawing.Point(44, 97);
@@ -233,6 +244,7 @@
             // 
             // txtInjury
             // 
+            this.txtInjury.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtInjury.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtInjury.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInjury.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -253,6 +265,7 @@
             // 
             // groupDate
             // 
+            this.groupDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupDate.Controls.Add(this.radioExactDate);
             this.groupDate.Controls.Add(this.radioYear);
             this.groupDate.Controls.Add(this.radioInterval);
@@ -418,6 +431,7 @@
             // 
             // btnClearResults
             // 
+            this.btnClearResults.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnClearResults.Location = new System.Drawing.Point(403, 283);
             this.btnClearResults.Name = "btnClearResults";
             this.btnClearResults.Size = new System.Drawing.Size(75, 23);
@@ -428,6 +442,7 @@
             // 
             // groupType
             // 
+            this.groupType.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupType.Controls.Add(this.panClass);
             this.groupType.Controls.Add(this.comboType);
             this.groupType.Controls.Add(this.lblType);
@@ -526,6 +541,7 @@
             this.Controls.Add(this.listResults);
             this.Name = "AccidentSearchScreen";
             this.Text = "Buscar Acidentes";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccidentSearchScreen_FormClosing);
             this.Load += new System.EventHandler(this.AccidentSearchScreen_Load);
             this.groupDate.ResumeLayout(false);

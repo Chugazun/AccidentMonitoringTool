@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Petrobras_AccidentsMonitoring_Tool", "Petrobras_AccidentsMonitoring_Tool\Petrobras_AccidentsMonitoring_Tool.csproj", "{C33DBB9D-BF52-45DB-A232-6130DEB004CE}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{4194CA54-F00B-4DC4-9E0F-DFB02C048455}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{C33DBB9D-BF52-45DB-A232-6130DEB004CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C33DBB9D-BF52-45DB-A232-6130DEB004CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C33DBB9D-BF52-45DB-A232-6130DEB004CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4194CA54-F00B-4DC4-9E0F-DFB02C048455}.Debug|Any CPU.ActiveCfg = Debug
+		{4194CA54-F00B-4DC4-9E0F-DFB02C048455}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

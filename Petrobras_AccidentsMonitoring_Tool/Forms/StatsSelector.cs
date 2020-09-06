@@ -50,5 +50,12 @@ namespace Petrobras_AccidentsMonitoring_Tool
             }
             Close();
         }
+
+        private void btnList_Click(object sender, EventArgs e)
+        {
+            AccidentSearchScreen accidentSearchScreen = new AccidentSearchScreen(_stats.resultList.ToArray());
+            accidentSearchScreen.Show();
+            Close();
+        }
     }
 }

@@ -149,7 +149,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void RatioChartScreen_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _mainMenu.WindowState = FormWindowState.Normal;
+            _mainMenu.WindowState = FormWindowState.Maximized;
         }
     }
 }

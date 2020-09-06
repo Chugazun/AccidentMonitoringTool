@@ -26,6 +26,13 @@ namespace Petrobras_AccidentsMonitoring_Tool
             _mainMenu = mainMenu;
         }
 
+        public AccidentSearchScreen(IEnumerable<Accident> results) : this()
+        {
+            _results = results;
+            AddResultToTable(_results.ToArray());
+            ResizeList();
+        }
+
         private void listResults_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
             e.Graphics.FillRectangle(SystemBrushes.Menu, e.Bounds);
@@ -72,7 +79,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
             {
                 listResults.Items.Clear();
                 lblResults.Text = "Resultados: ";
-                
+
                 using (var project = new ExcelPackage(new System.IO.FileInfo($@"{Properties.Settings.Default.CurrentSheet}")))
                 {
                     var sheet = project.Workbook.Worksheets[0];
@@ -82,16 +89,8 @@ namespace Petrobras_AccidentsMonitoring_Tool
                     _results = searchService.AdvSearch(searchModel, ResultType.FullResult);
                 }
 
-                foreach (Accident accident in _results)
-                {
-                    AddResultToTable(accident);
-                }
-
-                lblResults.Text += listResults.Items.Count;
-                listResults.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                listResults.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                SetLastColumnToFill(listResults);
-
+                AddResultToTable(_results.ToArray());
+                ResizeList();
             }
             catch (InvalidDateException exception)
             {
@@ -107,25 +106,36 @@ namespace Petrobras_AccidentsMonitoring_Tool
         {
             listResults.Items.Clear();
             lblResults.Text = "Resultados: ";
-            Controls.OfType<TextBox>().ToList().ForEach(tb => tb.Text = "");            
+            Controls.OfType<TextBox>().ToList().ForEach(tb => tb.Text = "");
             dateboxInterval_Initial.Value = new DateTime(2014, 1, 1);
             dateBoxInterval_Final.Value = DateTime.Now;
             dateBoxYear.Value = DateTime.Now;
         }
 
-        private void AddResultToTable(Accident accident)
+        private void AddResultToTable(params Accident[] accidents)
         {
-            ListViewItem item = new ListViewItem
+            foreach (Accident accident in accidents)
             {
-                Text = accident.Company
-            };
-            item.SubItems.Add(accident.Sector.ToUpper());
-            item.SubItems.Add(accident.EmployeeName);
-            item.SubItems.Add(accident.Date.Value.ToString(@"dd/MM/yyyy"));
-            string accidentClass = accident.Class.HasValue ? accident.Class.Value.ToString() : accident.AccidentType.ToString();
-            item.SubItems.Add(accidentClass);
-            item.SubItems.Add(accident.InjuryType);
-            listResults.Items.Add(item);
+                ListViewItem item = new ListViewItem
+                {
+                    Text = accident.Company
+                };
+                item.SubItems.Add(accident.Sector.ToUpper());
+                item.SubItems.Add(accident.EmployeeName);
+                item.SubItems.Add(accident.Date.Value.ToString(@"dd/MM/yyyy"));
+                string accidentClass = accident.Class.HasValue ? accident.Class.Value.ToString() : accident.AccidentType.ToString();
+                item.SubItems.Add(accidentClass);
+                item.SubItems.Add(accident.InjuryType);
+                listResults.Items.Add(item);
+            }
+        }
+
+        private void ResizeList()
+        {
+            lblResults.Text += listResults.Items.Count;
+            listResults.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            listResults.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+            SetLastColumnToFill(listResults);
         }
 
         private SearchModel GetFormInfo()
@@ -198,7 +208,7 @@ namespace Petrobras_AccidentsMonitoring_Tool
 
         private void AccidentSearchScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _mainMenu.Show();
+            if(_mainMenu != null) _mainMenu.Show();
         }
     }
 }

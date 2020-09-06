@@ -24,7 +24,7 @@ namespace Petrobras_AccidentsMonitoring_Tool.Entities
         public DateTime? Date { get; set; }
         public TimeSpan? Time { get; set; }
         public string Company { get => _company; set => _company = SetValue(value); }
-        public string Sector { get => _sector; set => _sector = SetValue(value); }
+        public string Sector { get => _sector; set => _sector = SetValue(value).ToUpper(); }
         public string Supervisor { get => _supervisor; set => _supervisor = SetValue(value); }
         public string EmployeeName { get => _employeeName; set => _employeeName = SetValue(value); }
         public string JobRole { get => _jobRole; set => _jobRole = SetValue(value); }

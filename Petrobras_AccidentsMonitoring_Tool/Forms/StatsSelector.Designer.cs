@@ -31,6 +31,7 @@
             this.chkBoxStats = new System.Windows.Forms.CheckedListBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnGenerateChart = new System.Windows.Forms.Button();
+            this.btnList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // chkBoxStats
@@ -67,7 +68,7 @@
             // 
             // btnGenerateChart
             // 
-            this.btnGenerateChart.Location = new System.Drawing.Point(66, 296);
+            this.btnGenerateChart.Location = new System.Drawing.Point(66, 283);
             this.btnGenerateChart.Name = "btnGenerateChart";
             this.btnGenerateChart.Size = new System.Drawing.Size(108, 28);
             this.btnGenerateChart.TabIndex = 2;
@@ -75,11 +76,22 @@
             this.btnGenerateChart.UseVisualStyleBackColor = true;
             this.btnGenerateChart.Click += new System.EventHandler(this.btnGenerateChart_Click);
             // 
+            // btnList
+            // 
+            this.btnList.Location = new System.Drawing.Point(66, 317);
+            this.btnList.Name = "btnList";
+            this.btnList.Size = new System.Drawing.Size(108, 28);
+            this.btnList.TabIndex = 2;
+            this.btnList.Text = "Listar Ocorrências";
+            this.btnList.UseVisualStyleBackColor = true;
+            this.btnList.Click += new System.EventHandler(this.btnList_Click);
+            // 
             // StatsSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 351);
+            this.ClientSize = new System.Drawing.Size(240, 374);
+            this.Controls.Add(this.btnList);
             this.Controls.Add(this.btnGenerateChart);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.chkBoxStats);
@@ -97,5 +109,6 @@
         private System.Windows.Forms.CheckedListBox chkBoxStats;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnGenerateChart;
+        private System.Windows.Forms.Button btnList;
     }
 }
